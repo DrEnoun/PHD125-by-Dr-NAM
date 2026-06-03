@@ -1,0 +1,2272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#7B1C1C">
+<meta name="description" content="PHD125 Pharmaceutical Organic Chemistry – Interactive Tutorial Answer Scheme">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="#" id="manifest-placeholder">
+<title>PHD125 · Answer Scheme</title>
+<style>
+:root{
+  --maroon:#7B1C1C;--maroon-dark:#5A1414;--maroon-light:#A52828;
+  --gold:#C8960C;--gold-light:#F0B429;
+  --bg:#F4F4F6;--surface:#FFFFFF;--surface2:#F8F8FA;
+  --border:#E2E2E8;--border-light:#EEEEEE;
+  --text:#1A1A2E;--text2:#555566;--text3:#888899;
+  --green:#2E7D32;--green-bg:#F0F7F0;
+  --blue:#1565C0;--blue-bg:#EEF2FF;
+  --amber:#E65100;--amber-bg:#FFF8E1;
+  --sidebar-w:285px;--topbar-h:60px;
+  --radius:8px;--shadow:0 2px 12px rgba(0,0,0,.08);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.14);--transition:0.2s ease;
+}
+[data-theme="dark"]{
+  --bg:#0F0F17;--surface:#1A1A28;--surface2:#22223A;
+  --border:#2A2A40;--border-light:#333348;
+  --text:#E8E8F0;--text2:#A0A0C0;--text3:#666688;
+  --green-bg:#0A2010;--blue-bg:#0A1030;--amber-bg:#201500;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;color:var(--text);
+  background:var(--bg);line-height:1.6;transition:background var(--transition),color var(--transition);}
+
+/* Layout */
+#app{display:flex;height:100vh;overflow:hidden;}
+
+/* Sidebar */
+#sidebar{width:var(--sidebar-w);flex-shrink:0;background:var(--maroon-dark);color:white;
+  display:flex;flex-direction:column;overflow:hidden;transition:transform var(--transition);
+  position:relative;z-index:100;}
+#sidebar-header{padding:18px 16px 14px;background:linear-gradient(135deg,var(--maroon-dark),#3A0A0A);
+  border-bottom:1px solid rgba(255,255,255,.1);flex-shrink:0;}
+#sidebar-header .course-code{font-size:11px;font-weight:700;letter-spacing:.15em;
+  color:var(--gold-light);text-transform:uppercase;margin-bottom:2px;}
+#sidebar-header h1{font-size:14px;font-weight:700;color:white;line-height:1.3;}
+#sidebar-header .sub{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px;}
+#tutorial-selector{padding:10px 12px;background:rgba(0,0,0,.2);
+  border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0;}
+#tutorial-selector label{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.1em;
+  text-transform:uppercase;display:block;margin-bottom:5px;}
+#tutorial-select{width:100%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+  color:white;border-radius:6px;padding:6px 10px;font-size:12px;cursor:pointer;appearance:none;}
+#progress-wrap{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0;}
+#progress-label{display:flex;justify-content:space-between;font-size:11px;
+  color:rgba(255,255,255,.55);margin-bottom:5px;}
+#progress-bar-bg{height:5px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;}
+#progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));
+  border-radius:3px;transition:width .4s ease;width:0%;}
+#nav-tree{flex:1;overflow-y:auto;padding:8px 0;}
+#nav-tree::-webkit-scrollbar{width:4px;}
+#nav-tree::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px;}
+.nav-section{margin:2px 0;}
+.nav-section-btn{width:100%;background:none;border:none;color:rgba(255,255,255,.8);
+  text-align:left;padding:9px 16px;font-size:12px;font-weight:600;cursor:pointer;
+  display:flex;align-items:center;gap:8px;transition:background var(--transition);}
+.nav-section-btn:hover{background:rgba(255,255,255,.08);}
+.nav-section-btn.active{color:var(--gold-light);background:rgba(200,150,12,.15);}
+.nav-section-btn .chev{margin-left:auto;font-size:10px;transition:transform var(--transition);}
+.nav-section-btn.open .chev{transform:rotate(90deg);}
+.nav-items{display:none;}
+.nav-items.open{display:block;}
+.nav-item{width:100%;background:none;border:none;color:rgba(255,255,255,.55);
+  text-align:left;padding:6px 16px 6px 36px;font-size:11.5px;cursor:pointer;
+  display:flex;align-items:center;gap:6px;transition:all var(--transition);}
+.nav-item:hover{color:white;background:rgba(255,255,255,.05);}
+.nav-item.active{color:var(--gold-light);}
+.nav-item .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);
+  margin-left:auto;opacity:0;flex-shrink:0;}
+.nav-item.done .dot{opacity:1;}
+#sidebar-footer{padding:10px 12px;border-top:1px solid rgba(255,255,255,.1);
+  flex-shrink:0;display:flex;gap:6px;}
+.sb-btn{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.7);border-radius:6px;padding:6px 4px;font-size:11px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:3px;
+  transition:all var(--transition);}
+.sb-btn:hover{background:rgba(255,255,255,.15);color:white;}
+
+/* Main */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+#topbar{height:var(--topbar-h);background:var(--surface);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;padding:0 20px;flex-shrink:0;box-shadow:var(--shadow);}
+#menu-toggle{background:none;border:none;cursor:pointer;padding:6px;color:var(--text2);
+  font-size:18px;display:none;}
+#search-wrap{flex:1;max-width:480px;position:relative;}
+#search-input{width:100%;padding:8px 36px;border:1.5px solid var(--border);border-radius:20px;
+  font-size:13px;background:var(--bg);color:var(--text);outline:none;
+  transition:border-color var(--transition);}
+#search-input:focus{border-color:var(--maroon);}
+#search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text3);}
+#search-clear{position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;color:var(--text3);display:none;font-size:16px;}
+.topbar-right{display:flex;align-items:center;gap:8px;margin-left:auto;}
+.act-btn{background:none;border:1.5px solid var(--border);border-radius:8px;padding:6px 10px;
+  font-size:12px;cursor:pointer;color:var(--text2);display:flex;align-items:center;gap:4px;
+  transition:all var(--transition);}
+.act-btn:hover{border-color:var(--maroon);color:var(--maroon);}
+
+/* Filter bar */
+#filter-bar{padding:10px 20px;background:var(--surface);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;overflow-x:auto;flex-shrink:0;}
+#filter-bar::-webkit-scrollbar{height:0;}
+.chip{padding:4px 12px;border-radius:14px;font-size:12px;font-weight:600;
+  border:1.5px solid var(--border);background:var(--surface2);color:var(--text2);
+  cursor:pointer;white-space:nowrap;transition:all var(--transition);flex-shrink:0;}
+.chip:hover{border-color:var(--maroon);color:var(--maroon);}
+.chip.active{background:var(--maroon);color:white;border-color:var(--maroon);}
+.chip-sep{width:1px;height:20px;background:var(--border);flex-shrink:0;}
+
+/* Content */
+#content{flex:1;overflow-y:auto;padding:20px;}
+#content::-webkit-scrollbar{width:6px;}
+#content::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+/* Section heading */
+.sec-head{display:flex;align-items:center;gap:10px;margin:0 0 16px;
+  padding-bottom:10px;border-bottom:2px solid var(--maroon);}
+.sec-icon{width:34px;height:34px;border-radius:8px;background:var(--maroon);
+  display:flex;align-items:center;justify-content:center;color:white;
+  font-size:16px;flex-shrink:0;}
+.sec-head h2{font-size:16px;font-weight:700;color:var(--maroon);}
+.sec-head .qc{margin-left:auto;font-size:11px;color:var(--text3);
+  background:var(--surface2);padding:3px 8px;border-radius:10px;}
+
+/* Question cards */
+.qcard{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);
+  margin-bottom:12px;overflow:hidden;transition:box-shadow var(--transition),border-color var(--transition);}
+.qcard:hover{box-shadow:var(--shadow);}
+.qcard.done{border-color:var(--green);}
+.qcard.done .qhead{background:var(--green-bg);}
+.qhead{padding:12px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:10px;
+  background:var(--surface);transition:background var(--transition);user-select:none;}
+.qhead:hover{background:var(--surface2);}
+.qnum{min-width:28px;height:28px;border-radius:6px;background:var(--maroon);color:white;
+  font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;}
+.qcard.done .qnum{background:var(--green);}
+.qtitle{flex:1;}
+.qlabel{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:2px;}
+.qtext{font-size:13px;color:var(--text);line-height:1.5;}
+.qmeta{display:flex;align-items:center;gap:5px;margin-top:5px;flex-wrap:wrap;}
+.qtag{font-size:10px;padding:2px 7px;border-radius:8px;font-weight:600;}
+.tag-aldehyde{background:#BBDEFB;color:#0D47A1;}
+.tag-ketone{background:#E1BEE7;color:#4A148C;}
+.tag-acid{background:#C8E6C9;color:#1B5E20;}
+.tag-ester{background:#FFE0B2;color:#E65100;}
+.tag-amide{background:#F3E5F5;color:#6A1B9A;}
+.tag-amine{background:#E0F2F1;color:#004D40;}
+.tag-reaction{background:#FFF9C4;color:#827717;}
+.tag-mechanism{background:#E8EAF6;color:#283593;}
+.tag-naming{background:#FCE4EC;color:#880E4F;}
+.tag-identification{background:#E8F5E9;color:#1B5E20;}
+.tag-synthesis{background:#FFF3E0;color:#E65100;}
+.tag-drawing{background:#F3E5F5;color:#4A148C;}
+.tag-exam{background:#FFCDD2;color:#B71C1C;}
+.examyr{font-size:10px;background:var(--amber-bg);color:var(--amber);
+  border:1px solid var(--amber);border-radius:8px;padding:1px 7px;font-weight:700;}
+.qactions{display:flex;align-items:center;gap:5px;flex-shrink:0;}
+.toggle-btn{background:none;border:none;cursor:pointer;font-size:18px;color:var(--text3);
+  transition:transform var(--transition);padding:2px;}
+.qcard.open .toggle-btn{transform:rotate(180deg);}
+.done-btn{background:none;border:1.5px solid var(--border);border-radius:6px;width:26px;
+  height:26px;cursor:pointer;font-size:14px;display:flex;align-items:center;
+  justify-content:center;transition:all var(--transition);}
+.done-btn:hover{border-color:var(--green);color:var(--green);}
+.qcard.done .done-btn{background:var(--green);border-color:var(--green);color:white;}
+
+/* Answer panel */
+.qanswer{display:none;padding:0 16px 14px;border-top:1px solid var(--border-light);}
+.qcard.open .qanswer{display:block;}
+.answer-inner{padding-top:12px;}
+
+/* Answer components */
+.ans-box{background:var(--green-bg);border-left:3px solid var(--green);
+  padding:8px 12px;border-radius:4px;font-size:13px;margin:6px 0;}
+.note-box{background:var(--amber-bg);border-left:3px solid var(--gold);
+  padding:8px 12px;border-radius:4px;font-size:12.5px;margin:6px 0;}
+.eq-box{background:var(--blue-bg);border-left:3px solid var(--blue);
+  padding:8px 12px;border-radius:4px;font-family:'Courier New',monospace;
+  font-size:12px;margin:6px 0;line-height:2;overflow-x:auto;white-space:pre-wrap;}
+.pharma-box{background:linear-gradient(135deg,#FFF3E0,#FFF8E1);
+  border:1px solid var(--gold);border-radius:6px;padding:8px 12px;font-size:12px;margin:8px 0;}
+.ans-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0;}
+.ans-table th{background:var(--maroon);color:white;padding:5px 8px;text-align:left;font-weight:600;}
+.ans-table td{padding:5px 8px;border-bottom:1px solid var(--border-light);vertical-align:top;}
+.ans-table tr:nth-child(even) td{background:var(--surface2);}
+.diag-row{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0;align-items:flex-start;}
+.diag-card{background:var(--surface2);border:1.5px solid var(--border);border-radius:6px;
+  padding:8px 10px 6px;text-align:center;flex-shrink:0;}
+.diag-card .dn{font-size:8.5pt;font-weight:700;color:var(--maroon);margin-top:5px;line-height:1.3;}
+.diag-card .df{font-size:7.5pt;color:var(--text3);margin-top:2px;font-family:monospace;}
+.diag-card .db{display:inline-block;font-size:8pt;padding:2px 6px;border-radius:8px;
+  margin-top:3px;font-weight:700;}
+.mech-wrap{margin:8px 0;}
+.mech-step{display:flex;gap:10px;align-items:flex-start;padding:7px;
+  background:var(--surface2);border-radius:5px;margin-bottom:5px;font-size:12.5px;}
+.mstep{min-width:22px;height:22px;border-radius:50%;background:var(--maroon);
+  color:white;display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:700;flex-shrink:0;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:6px 0;}
+.info-card{background:var(--surface2);border:1px solid var(--border);
+  border-radius:5px;padding:8px 10px;font-size:12px;}
+.ic-label{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;
+  letter-spacing:.08em;margin-bottom:3px;}
+.ic-val{font-weight:700;color:var(--text);}
+.chem{font-family:'Courier New',monospace;font-size:12px;background:var(--surface2);
+  padding:1px 4px;border-radius:3px;}
+
+/* No results */
+#no-results{display:none;text-align:center;padding:60px 20px;color:var(--text3);}
+
+/* Welcome */
+#welcome{padding:0;max-width:680px;}
+.w-hero{background:linear-gradient(135deg,var(--maroon-dark),var(--maroon));color:white;
+  border-radius:12px;padding:28px;margin-bottom:20px;box-shadow:var(--shadow-lg);}
+.w-hero h2{font-size:22px;margin-bottom:6px;}
+.w-hero .ws{opacity:.75;font-size:14px;}
+.w-badges{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;}
+.w-badge{background:rgba(255,255,255,.15);border-radius:12px;padding:3px 10px;font-size:11px;}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px;}
+.stat-card{background:var(--surface);border:1.5px solid var(--border);border-radius:8px;
+  padding:14px;text-align:center;}
+.stat-card .sn{font-size:28px;font-weight:700;color:var(--maroon);}
+.stat-card .sl{font-size:12px;color:var(--text3);margin-top:2px;}
+.tut-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:20px;}
+.tut-card{background:var(--surface);border:1.5px solid var(--border);border-radius:8px;
+  padding:14px;cursor:pointer;transition:all var(--transition);}
+.tut-card:hover{border-color:var(--maroon);box-shadow:var(--shadow);transform:translateY(-2px);}
+.tut-card .tc{font-size:10px;font-weight:700;color:var(--maroon);letter-spacing:.1em;}
+.tut-card .tt{font-size:13px;font-weight:600;color:var(--text);margin-top:2px;}
+.tut-card .tm{font-size:11px;color:var(--text3);}
+.tut-card .tp{height:4px;background:var(--border);border-radius:2px;margin-top:8px;overflow:hidden;}
+.tut-card .tpf{height:100%;background:var(--maroon);border-radius:2px;}
+.how-box{padding:14px;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;}
+
+/* Mobile */
+@media(max-width:768px){
+  #sidebar{position:fixed;top:0;left:0;height:100%;transform:translateX(-100%);z-index:200;}
+  #sidebar.open{transform:translateX(0);}
+  #menu-toggle{display:flex;}
+  #overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:150;}
+  #overlay.show{display:block;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .grid2,.grid3{grid-template-columns:1fr;}
+  #topbar{padding:0 12px;}
+  #content{padding:12px;}
+  .diag-row{justify-content:center;}
+}
+@media(max-width:480px){.stats-grid{grid-template-columns:1fr;}}
+@media print{
+  #sidebar,#topbar,#filter-bar,.qactions,#menu-toggle{display:none!important;}
+  #main{overflow:visible;}#content{overflow:visible;padding:0;}
+  .qanswer{display:block!important;}
+  .qcard{page-break-inside:avoid;margin-bottom:8px;border:1px solid #ccc;}
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.qcard{animation:fadeIn .18s ease both;}
+</style>
+</head>
+<body>
+<div id="overlay" onclick="closeSidebar()"></div>
+<div id="app">
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<nav id="sidebar">
+  <div id="sidebar-header">
+    <div class="course-code">PHD125</div>
+    <h1>Pharmaceutical<br>Organic Chemistry</h1>
+    <div class="sub">Interactive Answer Scheme · Malaysia</div>
+  </div>
+  <div id="tutorial-selector">
+    <label>Select Tutorial</label>
+    <select id="tutorial-select" onchange="loadTutorial(this.value)"></select>
+  </div>
+  <div id="progress-wrap">
+    <div id="progress-label">
+      <span>Progress</span><span id="prog-text">0 / 0</span>
+    </div>
+    <div id="progress-bar-bg"><div id="progress-bar-fill"></div></div>
+  </div>
+  <div id="nav-tree"></div>
+  <div id="sidebar-footer">
+    <button class="sb-btn" onclick="showWelcome()">🏠</button>
+    <button class="sb-btn" onclick="expandAll()">↕ All</button>
+    <button class="sb-btn" onclick="resetProg()">↺</button>
+    <button class="sb-btn" onclick="toggleTheme()" id="theme-btn">🌙</button>
+    <button class="sb-btn" onclick="window.print()">🖨</button>
+  </div>
+</nav>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<div id="main">
+  <div id="topbar">
+    <button id="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <div id="search-wrap">
+      <span id="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="Search questions, compounds, reactions…"
+        oninput="doSearch(this.value)">
+      <button id="search-clear" onclick="clearSearch()">✕</button>
+    </div>
+    <div class="topbar-right">
+      <button class="act-btn" onclick="window.print()">🖨 Print</button>
+    </div>
+  </div>
+  <div id="filter-bar">
+    <span style="font-size:11px;color:var(--text3);white-space:nowrap;flex-shrink:0;">Filter:</span>
+    <button class="chip active" onclick="setFilter('all',this)">All</button>
+    <div class="chip-sep"></div>
+    <button class="chip" onclick="setFilter('tag:aldehyde',this)">Aldehydes</button>
+    <button class="chip" onclick="setFilter('tag:ketone',this)">Ketones</button>
+    <button class="chip" onclick="setFilter('tag:acid',this)">Carboxylic Acids</button>
+    <button class="chip" onclick="setFilter('tag:ester',this)">Esters</button>
+    <button class="chip" onclick="setFilter('tag:amide',this)">Amides</button>
+    <button class="chip" onclick="setFilter('tag:amine',this)">Amines</button>
+    <div class="chip-sep"></div>
+    <button class="chip" onclick="setFilter('tag:reaction',this)">Reactions</button>
+    <button class="chip" onclick="setFilter('tag:mechanism',this)">Mechanisms</button>
+    <button class="chip" onclick="setFilter('tag:synthesis',this)">Synthesis</button>
+    <button class="chip" onclick="setFilter('tag:exam',this)">📝 Past Exam</button>
+    <button class="chip" onclick="setFilter('undone',this)">⬜ Incomplete</button>
+    <button class="chip" onclick="setFilter('done',this)">✅ Done</button>
+  </div>
+  <div id="content">
+    <div id="welcome"></div>
+    <div id="qcontainer"></div>
+    <div id="no-results">
+      <div style="font-size:48px;">🔍</div>
+      <div style="font-size:15px;font-weight:600;color:var(--text2);margin-top:8px;">No results found</div>
+      <div style="font-size:13px;margin-top:4px;">Try different keywords or clear the filter</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════
+   ANSWER HELPERS — used inside tutorial data below
+════════════════════════════════════════════════════ */
+const R = {
+  ans:   t => `<div class="ans-box">${t}</div>`,
+  note:  t => `<div class="note-box"><strong>📌 Note:</strong> ${t}</div>`,
+  pharma:t => `<div class="pharma-box">⚕️ <strong style="color:var(--amber)">Pharmaceutical note (Malaysia):</strong> ${t}</div>`,
+  eq:    t => `<div class="eq-box">${t}</div>`,
+  mech: steps => `<div class="mech-wrap">${steps.map((s,i)=>`<div class="mech-step"><div class="mstep">${i+1}</div><div>${s}</div></div>`).join('')}</div>`,
+  table:(heads,rows) => `<table class="ans-table"><tr>${heads.map(h=>`<th>${h}</th>`).join('')}</tr>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table>`,
+  grid2: items => `<div class="grid2">${items.map(i=>`<div class="info-card">${i}</div>`).join('')}</div>`,
+  grid3: items => `<div class="grid3">${items.map(i=>`<div class="info-card">${i}</div>`).join('')}</div>`,
+  lbl:  (l,v) => `<div class="ic-label">${l}</div><div class="ic-val">${v}</div>`,
+  diag: items => `<div class="diag-row">${items.map(d=>`
+    <div class="diag-card">
+      <svg viewBox="0 0 ${d.w||120} ${d.h||85}" width="${(d.w||120)-5}" height="${(d.h||85)-5}">${d.svg}</svg>
+      <div class="dn">${d.name}</div>
+      ${d.formula?`<div class="df">${d.formula}</div>`:''}
+      ${d.badge?`<span class="db ${d.bc||''}">${d.badge}</span>`:''}
+    </div>`).join('')}</div>`,
+};
+
+/* ════════════════════════════════════════════════════
+   TUTORIAL DATA — ADD MORE TUTORIALS BELOW
+════════════════════════════════════════════════════ */
+const TUTORIALS = {};
+
+/* ──────────────────────────────────────────────────
+   TUTORIAL 2: Carbonyl Compounds & Related Topics
+────────────────────────────────────────────────── */
+TUTORIALS['t2'] = {
+  id:'t2', code:'PHD125', tutorialNo:2,
+  topicShort:'Carbonyl, Acids, Aldehydes, Ketones, Esters, Amides, Amines',
+  sections:[
+/* ─── SECTION 1: CARBONYL COMPOUNDS ─── */
+{
+  id:'cc', title:'Carbonyl Compounds', shortTitle:'Carbonyl Compounds', icon:'⚗️',
+  questions:[
+    {
+      id:'cc-a', num:'A', type:'Identification', navLabel:'[A] Identify Compounds',
+      question:'Identify the six structures as aldehyde, ketone, or carboxylic acid. State the key feature used to identify each.',
+      searchText:'propanal cyclohexanone acetophenone carboxylic aldehyde ketone identification functional group CHO C=O COOH',
+      tags:['identification','aldehyde','ketone','acid'],
+      answerHTML:`
+        ${R.diag([
+          {svg:`<text x="2" y="52" font-family="Arial" font-size="11" fill="#555">CH₃</text><line x1="26" y1="48" x2="52" y2="30" stroke="#333" stroke-width="1.5"/><line x1="52" y1="30" x2="78" y2="48" stroke="#333" stroke-width="1.5"/><line x1="78" y1="48" x2="78" y2="20" stroke="#333" stroke-width="1.5"/><line x1="81" y1="48" x2="81" y2="20" stroke="#333" stroke-width="1.5"/><text x="74" y="17" font-family="Arial" font-size="12" fill="#C62828">O</text><line x1="78" y1="48" x2="100" y2="62" stroke="#333" stroke-width="1.5"/><text x="101" y="66" font-family="Arial" font-size="11" fill="#777">H</text>`,
+           name:'Propanal',formula:'CH₃CH₂CHO',badge:'Aldehyde',bc:'tag-aldehyde',w:120,h:80},
+          {svg:`<polygon points="60,47 49,66 27,66 16,47 27,28 49,28" fill="none" stroke="#333" stroke-width="1.5"/><line x1="60" y1="47" x2="83" y2="47" stroke="#333" stroke-width="1.5"/><line x1="83" y1="47" x2="83" y2="23" stroke="#333" stroke-width="1.5"/><line x1="86" y1="47" x2="86" y2="23" stroke="#333" stroke-width="1.5"/><text x="79" y="20" font-family="Arial" font-size="11" fill="#C62828">O</text><line x1="83" y1="47" x2="100" y2="60" stroke="#333" stroke-width="1.5"/><text x="99" y="65" font-family="Arial" font-size="10" fill="#C62828">OH</text>`,
+           name:'Cyclohexanecarboxylic acid',formula:'C₆H₁₁COOH',badge:'Carboxylic Acid',bc:'tag-acid',w:120,h:85},
+          {svg:`<polygon points="60,52 49,71 27,71 16,52 27,33 49,33" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="38" cy="52" r="13" fill="none" stroke="#333" stroke-width="1.2"/><line x1="60" y1="52" x2="82" y2="52" stroke="#333" stroke-width="1.5"/><line x1="82" y1="52" x2="82" y2="28" stroke="#333" stroke-width="1.5"/><line x1="85" y1="52" x2="85" y2="28" stroke="#333" stroke-width="1.5"/><text x="78" y="25" font-family="Arial" font-size="12" fill="#C62828">O</text><line x1="82" y1="52" x2="108" y2="52" stroke="#333" stroke-width="1.5"/><text x="109" y="56" font-family="Arial" font-size="11" fill="#555">CH₃</text>`,
+           name:'Acetophenone',formula:'C₆H₅COCH₃',badge:'Ketone',bc:'tag-ketone',w:135,h:88},
+          {svg:`<line x1="47" y1="16" x2="70" y2="30" stroke="#333" stroke-width="1.5"/><line x1="70" y1="30" x2="70" y2="60" stroke="#333" stroke-width="1.5"/><line x1="70" y1="60" x2="47" y2="74" stroke="#333" stroke-width="1.5"/><line x1="47" y1="74" x2="24" y2="60" stroke="#333" stroke-width="1.5"/><line x1="24" y1="60" x2="24" y2="30" stroke="#333" stroke-width="1.5"/><line x1="24" y1="30" x2="47" y2="16" stroke="#333" stroke-width="1.5"/><line x1="47" y1="16" x2="47" y2="3" stroke="#333" stroke-width="1.5"/><line x1="50" y1="16" x2="50" y2="3" stroke="#333" stroke-width="1.5"/><text x="42" y="2" font-family="Arial" font-size="12" fill="#C62828">O</text>`,
+           name:'Cyclohexanone',formula:'Cyclic ketone',badge:'Ketone',bc:'tag-ketone',w:95,h:82},
+          {svg:`<text x="2" y="28" font-family="Arial" font-size="11" fill="#555">CH₃</text><text x="2" y="68" font-family="Arial" font-size="11" fill="#555">CH₃</text><line x1="27" y1="25" x2="52" y2="45" stroke="#333" stroke-width="1.5"/><line x1="27" y1="62" x2="52" y2="45" stroke="#333" stroke-width="1.5"/><line x1="52" y1="45" x2="78" y2="45" stroke="#333" stroke-width="1.5"/><line x1="78" y1="45" x2="78" y2="22" stroke="#333" stroke-width="1.5"/><line x1="81" y1="45" x2="81" y2="22" stroke="#333" stroke-width="1.5"/><text x="74" y="19" font-family="Arial" font-size="12" fill="#C62828">O</text><line x1="78" y1="45" x2="96" y2="58" stroke="#333" stroke-width="1.5"/><text x="95" y="63" font-family="Arial" font-size="10" fill="#C62828">OH</text>`,
+           name:'2-Methylpropanoic acid',formula:'(CH₃)₂CHCOOH',badge:'Carboxylic Acid',bc:'tag-acid',w:120,h:82},
+          {svg:`<text x="2" y="50" font-family="Arial" font-size="11" fill="#555">CH₃</text><line x1="27" y1="46" x2="53" y2="28" stroke="#333" stroke-width="1.5"/><line x1="53" y1="28" x2="53" y2="7" stroke="#333" stroke-width="1.5"/><line x1="56" y1="28" x2="56" y2="7" stroke="#333" stroke-width="1.5"/><text x="49" y="5" font-family="Arial" font-size="12" fill="#C62828">O</text><line x1="53" y1="28" x2="79" y2="46" stroke="#333" stroke-width="1.5"/><line x1="79" y1="46" x2="105" y2="28" stroke="#333" stroke-width="1.5"/><text x="106" y="32" font-family="Arial" font-size="11" fill="#555">CH₃</text>`,
+           name:'Butanone (2-Butanone)',formula:'CH₃COCH₂CH₃',badge:'Ketone',bc:'tag-ketone',w:130,h:65},
+        ])}
+        ${R.note('Aldehyde = –CHO (C=O with H on carbonyl C). Ketone = C=O between two carbon groups. Carboxylic acid = –COOH (C=O and –OH on same C).')}
+      `,
+    },
+    {
+      id:'cc-b1', num:'B1', type:'Nomenclature', navLabel:'[B1] IUPAC Names (a–n)',
+      question:'Name: a) CH₃CH₂CH₂COOH, b) H₃C–C(=O)–OH, c) 4-methylpentanoic acid structure, d) cyclohexane–COOH, e–n) various carbonyl structures.',
+      searchText:'butanoic acid ethanoic IUPAC name carbonyl nomenclature heptanone benzaldehyde cyclopentanone',
+      tags:['naming','acid','aldehyde','ketone'],
+      answerHTML:`
+        ${R.table(['#','Structure','IUPAC Name','Type'],[
+          ['a','<span class="chem">CH₃CH₂CH₂COOH</span>','<strong>Butanoic acid</strong>','<span class="qtag tag-acid">Acid</span>'],
+          ['b','<span class="chem">H₃C–C(=O)–OH</span>','<strong>Ethanoic acid</strong> (acetic acid)','<span class="qtag tag-acid">Acid</span>'],
+          ['c','Branched 5C + COOH (CH₃ at C4)','<strong>4-methylpentanoic acid</strong>','<span class="qtag tag-acid">Acid</span>'],
+          ['d','Cyclohexane ring + COOH','<strong>Cyclohexanecarboxylic acid</strong>','<span class="qtag tag-acid">Acid</span>'],
+          ['e','Branched chain with Cl + COOH','<strong>3-chloro-2-ethylpentanoic acid</strong>','<span class="qtag tag-acid">Acid</span>'],
+          ['f','Cyclohexane + ethyl + COOH','<strong>4-ethylcyclohexanecarboxylic acid</strong>','<span class="qtag tag-acid">Acid</span>'],
+          ['g','7C chain, C=O at C4','<strong>4-heptanone</strong>','<span class="qtag tag-ketone">Ketone</span>'],
+          ['h','Benzene ring–CHO','<strong>Benzaldehyde</strong>','<span class="qtag tag-aldehyde">Aldehyde</span>'],
+          ['i','<span class="chem">C₆H₅CH₂CHO</span>','<strong>2-Phenylethanal</strong>','<span class="qtag tag-aldehyde">Aldehyde</span>'],
+          ['j','<span class="chem">CH₃CH₂COOH</span>','<strong>Propanoic acid</strong>','<span class="qtag tag-acid">Acid</span>'],
+          ['k','<span class="chem">CH₂=CHCH₂COOH</span>','<strong>But-3-enoic acid</strong>','<span class="qtag tag-acid">Acid</span>'],
+          ['l','<span class="chem">(CH₃)₂CHCOOH</span>','<strong>2-methylpropanoic acid</strong>','<span class="qtag tag-acid">Acid</span>'],
+          ['m','Cyclopentane ring with C=O','<strong>Cyclopentanone</strong>','<span class="qtag tag-ketone">Ketone</span>'],
+          ['n','Cyclohexane ring–CHO','<strong>Cyclohexanecarbaldehyde</strong>','<span class="qtag tag-aldehyde">Aldehyde</span>'],
+        ])}
+      `,
+    },
+    {
+      id:'cc-b2', num:'B2', type:'Drawing', navLabel:'[B2] Draw Structural Formulas',
+      question:'Draw structural formulas for: Hexanoic acid, chloroethanoic acid, formaldehyde, butanone, cyclohexanone, 2-pentanone, 1-phenylpropanone, 2-methylbutanal, benzoic acid.',
+      searchText:'draw structural formula hexanoic acid formaldehyde butanone cyclohexanone benzene zigzag',
+      tags:['drawing','acid','ketone','aldehyde'],
+      answerHTML:`
+        ${R.diag([
+          {svg:`<text x="0" y="48" font-family="Arial" font-size="10" fill="#555">CH₃</text><line x1="24" y1="44" x2="50" y2="26" stroke="#333" stroke-width="1.5"/><line x1="50" y1="26" x2="76" y2="44" stroke="#333" stroke-width="1.5"/><line x1="76" y1="44" x2="102" y2="26" stroke="#333" stroke-width="1.5"/><line x1="102" y1="26" x2="128" y2="44" stroke="#333" stroke-width="1.5"/><line x1="128" y1="44" x2="128" y2="20" stroke="#333" stroke-width="1.5"/><line x1="131" y1="44" x2="131" y2="20" stroke="#333" stroke-width="1.5"/><text x="124" y="17" font-family="Arial" font-size="11" fill="#C62828">O</text><line x1="128" y1="44" x2="146" y2="56" stroke="#333" stroke-width="1.5"/><text x="145" y="61" font-family="Arial" font-size="10" fill="#C62828">OH</text>`,
+           name:'Hexanoic acid',formula:'CH₃(CH₂)₄COOH',badge:'Acid',bc:'tag-acid',w:162,h:68},
+          {svg:`<text x="5" y="45" font-family="Arial" font-size="13" fill="#777">H</text><line x1="14" y1="41" x2="38" y2="41" stroke="#333" stroke-width="1.5"/><line x1="38" y1="41" x2="38" y2="15" stroke="#333" stroke-width="1.5"/><line x1="41" y1="41" x2="41" y2="15" stroke="#333" stroke-width="1.5"/><text x="33" y="12" font-family="Arial" font-size="13" fill="#C62828">O</text><line x1="38" y1="41" x2="62" y2="41" stroke="#333" stroke-width="1.5"/><text x="63" y="45" font-family="Arial" font-size="13" fill="#777">H</text>`,
+           name:'Formaldehyde',formula:'HCHO (Methanal)',badge:'Aldehyde',bc:'tag-aldehyde',w:80,h:65},
+          {svg:`<text x="2" y="48" font-family="Arial" font-size="11" fill="#555">CH₃</text><line x1="27" y1="44" x2="53" y2="26" stroke="#333" stroke-width="1.5"/><line x1="53" y1="26" x2="53" y2="6" stroke="#333" stroke-width="1.5"/><line x1="56" y1="26" x2="56" y2="6" stroke="#333" stroke-width="1.5"/><text x="49" y="4" font-family="Arial" font-size="12" fill="#C62828">O</text><line x1="53" y1="26" x2="79" y2="44" stroke="#333" stroke-width="1.5"/><line x1="79" y1="44" x2="105" y2="26" stroke="#333" stroke-width="1.5"/><text x="106" y="30" font-family="Arial" font-size="11" fill="#555">CH₃</text>`,
+           name:'Butanone',formula:'CH₃COCH₂CH₃',badge:'Ketone',bc:'tag-ketone',w:130,h:62},
+          {svg:`<line x1="48" y1="16" x2="71" y2="30" stroke="#333" stroke-width="1.5"/><line x1="71" y1="30" x2="71" y2="60" stroke="#333" stroke-width="1.5"/><line x1="71" y1="60" x2="48" y2="74" stroke="#333" stroke-width="1.5"/><line x1="48" y1="74" x2="25" y2="60" stroke="#333" stroke-width="1.5"/><line x1="25" y1="60" x2="25" y2="30" stroke="#333" stroke-width="1.5"/><line x1="25" y1="30" x2="48" y2="16" stroke="#333" stroke-width="1.5"/><line x1="48" y1="16" x2="48" y2="3" stroke="#333" stroke-width="1.5"/><line x1="51" y1="16" x2="51" y2="3" stroke="#333" stroke-width="1.5"/><text x="43" y="2" font-family="Arial" font-size="12" fill="#C62828">O</text>`,
+           name:'Cyclohexanone',formula:'Cyclic ketone',badge:'Ketone',bc:'tag-ketone',w:98,h:82},
+          {svg:`<polygon points="57,50 46,69 24,69 13,50 24,31 46,31" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="35" cy="50" r="13" fill="none" stroke="#333" stroke-width="1.2"/><line x1="57" y1="50" x2="79" y2="50" stroke="#333" stroke-width="1.5"/><line x1="79" y1="50" x2="79" y2="27" stroke="#333" stroke-width="1.5"/><line x1="82" y1="50" x2="82" y2="27" stroke="#333" stroke-width="1.5"/><text x="75" y="24" font-family="Arial" font-size="12" fill="#C62828">O</text><line x1="79" y1="50" x2="96" y2="62" stroke="#333" stroke-width="1.5"/><text x="95" y="67" font-family="Arial" font-size="10" fill="#C62828">OH</text>`,
+           name:'Benzoic acid',formula:'C₆H₅COOH',badge:'Acid',bc:'tag-acid',w:118,h:88},
+          {svg:`<polygon points="62,55 51,74 29,74 18,55 29,36 51,36" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="40" cy="55" r="13" fill="none" stroke="#333" stroke-width="1.2"/><line x1="62" y1="55" x2="84" y2="55" stroke="#333" stroke-width="1.5"/><line x1="84" y1="55" x2="84" y2="31" stroke="#333" stroke-width="1.5"/><line x1="87" y1="55" x2="87" y2="31" stroke="#333" stroke-width="1.5"/><text x="80" y="28" font-family="Arial" font-size="12" fill="#C62828">O</text><line x1="84" y1="55" x2="100" y2="67" stroke="#333" stroke-width="1.5"/><text x="99" y="71" font-family="Arial" font-size="11" fill="#777">H</text>`,
+           name:'Benzaldehyde',formula:'C₆H₅CHO',badge:'Aldehyde',bc:'tag-aldehyde',w:118,h:92},
+        ])}
+        ${R.note('In skeletal/zigzag notation, each vertex represents a carbon. Always draw –COOH, –CHO, –OH functional groups explicitly.')}
+      `,
+    },
+    {
+      id:'cc-c1', num:'C1', type:'Properties', navLabel:'[C1] Boiling Point — Acid vs Ester',
+      question:'Methyl methanoate (HCOOCH₃) and ethanoic acid (CH₃COOH) are isomers (C₂H₄O₂). Explain why ethanoic acid has a higher boiling point.',
+      searchText:'boiling point ethanoic acid methyl methanoate hydrogen bond isomer intermolecular',
+      tags:['acid','reaction'],
+      answerHTML:`
+        ${R.table(['Property','Ethanoic acid (CH₃COOH)','Methyl methanoate (HCOOCH₃)'],[
+          ['O–H group?','✅ Has –COOH with O–H','❌ No O–H (ester has no O–H)'],
+          ['H-bond type','Donates AND accepts; forms cyclic dimers via 2 H-bonds','Can only accept H-bonds; cannot donate'],
+          ['Energy to vaporise','High — must break strong H-bonds','Low — only dipole–dipole forces'],
+          ['Boiling point','≈ 118°C','≈ 32°C'],
+        ])}
+        ${R.ans('Ethanoic acid forms strong intermolecular hydrogen bonds (including cyclic dimers via –COOH), requiring significantly more energy to vaporise. Methyl methanoate is an ester — it lacks O–H and cannot donate H-bonds, so its boiling point is much lower despite having the same molecular formula.')}
+      `,
+    },
+    {
+      id:'cc-c3', num:'C3', type:'Properties', navLabel:'[C3] Acidity Order — Benzoic Acids',
+      question:'Arrange in order of increasing acidity and explain: Compound A (o-nitrobenzoic acid) and Compound B (benzoic acid).',
+      searchText:'acidity order nitrobenzoic benzoic electron withdrawing resonance substituent COO-',
+      tags:['acid','reaction'],
+      answerHTML:`
+        ${R.ans('<strong>Increasing acidity: B (benzoic acid) &lt; A (nitrobenzoic acid)</strong>')}
+        ${R.table(['Compound','Substituent Effect','Effect on Acidity'],[
+          ['B: Benzoic acid','No substituent — baseline','Less acidic (reference)'],
+          ['A: Nitrobenzoic acid','–NO₂ is strongly electron-withdrawing (both inductive and resonance)','More acidic — –NO₂ stabilises the carboxylate anion (COO⁻)'],
+        ])}
+        ${R.note('<strong>Principle:</strong> Acidity increases when the conjugate base (COO⁻) is stabilised. Electron-withdrawing groups (EWG like –NO₂) delocalise the negative charge on COO⁻, stabilising it → stronger acid. Electron-donating groups destabilise COO⁻ → weaker acid.')}
+      `,
+    },
+    {
+      id:'cc-d1', num:'D1', type:'Synthesis', navLabel:'[D1] Carboxylic Acid Synthesis',
+      question:'Prepare: a) ethanoic acid from i) ethanol and ii) ethanonitrile. b) butanoic acid from i) propene and ii) 1-butanol. c) 2-methylpropanoic acid from aldehyde X and alcohol Y — identify X, Y, and outline synthesis.',
+      searchText:'ethanoic acid synthesis ethanol oxidation nitrile hydrolysis butanoic acid propene Grignard CO2 2-methylpropanoic',
+      tags:['acid','synthesis','reaction'],
+      answerHTML:`
+        <strong>a) Ethanoic acid:</strong>
+        ${R.eq(`i) From ethanol:
+CH₃CH₂OH  →[K₂Cr₂O₇/H₂SO₄, excess, heat]→  CH₃COOH
+(Oxidation — use excess oxidant to oxidise all the way to acid, not just aldehyde)
+
+ii) From ethanonitrile:
+CH₃CN + 2H₂O  →[H₂SO₄(aq), heat]→  CH₃COOH + NH₄⁺
+(Acid hydrolysis of nitrile: CN → CONH₂ → COOH)`)}
+        <strong>b) Butanoic acid:</strong>
+        ${R.eq(`i) From propene — Grignard + CO₂ (chain extension +1C):
+Step 1: CH₃CH=CH₂ + HBr (peroxide) → CH₃CH₂CH₂Br   [anti-Markovnikov]
+Step 2: CH₃CH₂CH₂Br + Mg/ether → CH₃CH₂CH₂MgBr     [Grignard reagent]
+Step 3: CH₃CH₂CH₂MgBr + CO₂ → CH₃CH₂CH₂COOMgBr
+Step 4: + H₃O⁺ → CH₃CH₂CH₂COOH   [butanoic acid]
+
+ii) From 1-butanol:
+CH₃CH₂CH₂CH₂OH + K₂Cr₂O₇/H₂SO₄ (excess, heat) → CH₃CH₂CH₂COOH`)}
+        <strong>c) 2-Methylpropanoic acid:</strong>
+        ${R.grid2([
+          R.lbl('X (Aldehyde)','2-Methylpropanal: (CH₃)₂CHCHO'),
+          R.lbl('Y (Alcohol)','2-Methyl-1-propanol: (CH₃)₂CHCH₂OH'),
+        ])}
+        ${R.eq(`Step 1: (CH₃)₂CHCH₂OH →[PCC/CH₂Cl₂ or K₂Cr₂O₇ controlled]→ (CH₃)₂CHCHO [X]
+Step 2: (CH₃)₂CHCHO →[K₂Cr₂O₇/H₂SO₄ excess]→ (CH₃)₂CHCOOH`)}
+      `,
+    },
+    {
+      id:'cc-e1', num:'E1', type:'Reactions', navLabel:'[E1] Two Common Carbonyl Reactions',
+      question:'Name two most common reactions of carbonyl groups. (March 2014)',
+      searchText:'nucleophilic addition acyl substitution carbonyl reaction',
+      tags:['reaction','mechanism','exam'], examYear:'2014',
+      answerHTML:`
+        ${R.grid2([
+          `<div class="ic-label">Reaction 1</div><div class="ic-val">Nucleophilic Addition</div><div style="font-size:12px;color:var(--text2);margin-top:4px;">Nucleophile (Nu:) attacks the electrophilic C of C=O. π bond breaks; Nu bonds to C. Common for <strong>aldehydes and ketones</strong>.</div>`,
+          `<div class="ic-label">Reaction 2</div><div class="ic-val">Nucleophilic Acyl Substitution</div><div style="font-size:12px;color:var(--text2);margin-top:4px;">Nucleophile replaces a leaving group on the carbonyl compound. Common for <strong>carboxylic acid derivatives</strong> (acyl chlorides, esters, amides).</div>`,
+        ])}
+        ${R.note('Other common reactions: Condensation (→ imines/hydrazones), Oxidation (aldehyde → acid), Reduction (C=O → C–OH).')}
+      `,
+    },
+    {
+      id:'cc-e2', num:'E2', type:'Reactions', navLabel:'[E2] C₅H₁₁Cl → 2-Pentanone (March 2014)',
+      question:'C₅H₁₁Cl →A→ B →C→ 2-pentanone. a) Name A, B, C. b) Explain how pentanal could form. (March 2014)',
+      searchText:'C5H11Cl pentanol 2-pentanone pentanal sequence reaction hydrolysis oxidation',
+      tags:['reaction','ketone','aldehyde','exam'], examYear:'2014',
+      answerHTML:`
+        ${R.eq(`2-Chloropentane →[A: NaOH(aq)]→ B: 2-Pentanol →[C: K₂Cr₂O₇/H₂SO₄]→ 2-Pentanone`)}
+        ${R.table(['Label','Identity','Notes'],[
+          ['A (reagent)','NaOH(aq)','SN2: Cl replaced by OH → secondary alcohol'],
+          ['B (product)','<strong>2-Pentanol</strong> (CH₃CH(OH)CH₂CH₂CH₃)','Secondary alcohol'],
+          ['C (reagent)','<strong>K₂Cr₂O₇/H₂SO₄, heat</strong>','Oxidation of 2° alcohol → ketone'],
+        ])}
+        ${R.note('<strong>Pentanal:</strong> If C₅H₁₁Cl is <em>1-chloropentane</em> (primary isomer), SN2 with NaOH gives 1-pentanol (primary alcohol). Controlled mild oxidation (PCC) of 1-pentanol gives <strong>pentanal</strong> (an aldehyde) instead of 2-pentanone.')}
+      `,
+    },
+    {
+      id:'cc-e3', num:'E3', type:'Synthesis', navLabel:'[E3] Benzyl Chloride → Phenylethanoic Acid (2016)',
+      question:'Show reagents X, Y and intermediate Z to produce phenylethanoic acid from benzyl chloride. (March 2016)',
+      searchText:'benzyl chloride phenylethanoic acid KCN nitrile hydrolysis chain extension',
+      tags:['acid','synthesis','reaction','exam'], examYear:'2016',
+      answerHTML:`
+        ${R.eq(`PhCH₂Cl  →[X: KCN (SN2)]→  Z: PhCH₂CN  →[Y: H₂O/H₂SO₄, heat]→  PhCH₂COOH`)}
+        ${R.grid3([
+          R.lbl('X = Reagent','KCN — cyanide ion (CN⁻) is the nucleophile in SN2'),
+          R.lbl('Z = Intermediate','PhCH₂CN (phenylacetonitrile / benzyl cyanide)'),
+          R.lbl('Y = Reagent','H₂O/H₂SO₄, heat — acid hydrolysis of nitrile to COOH'),
+        ])}
+        ${R.note('This is a chain extension reaction: the nitrile adds one carbon (–CH₂Cl → –CH₂CN → –CH₂COOH).')}
+      `,
+    },
+    {
+      id:'cc-e5', num:'E5', type:'Reactions', navLabel:'[E5] Pentanoic Acid + 5 Reagents',
+      question:'Predict products when pentanoic acid (CH₃(CH₂)₃COOH) reacts with: a) Na, b) NaOH, c) SOCl₂, d) LiAlH₄/H₃O⁺, e) 2-propanol/H₂SO₄.',
+      searchText:'pentanoic acid sodium hydroxide SOCl2 LiAlH4 esterification products reactions',
+      tags:['acid','reaction'],
+      answerHTML:`
+        ${R.table(['Reagent','Product','Reaction'],[
+          ['a) Na','<span class="chem">CH₃(CH₂)₃COONa + ½H₂↑</span> — Sodium pentanoate','Acid + metal'],
+          ['b) NaOH','<span class="chem">CH₃(CH₂)₃COONa + H₂O</span> — Sodium pentanoate','Neutralisation'],
+          ['c) SOCl₂','<span class="chem">CH₃(CH₂)₃COCl + SO₂↑ + HCl↑</span> — Pentanoyl chloride','–OH → –Cl (acyl chloride)'],
+          ['d) i) LiAlH₄; ii) H₃O⁺','<span class="chem">CH₃(CH₂)₃CH₂OH</span> — 1-Pentanol','Reduction: acid → 1° alcohol'],
+          ['e) 2-Propanol + H₂SO₄','<span class="chem">CH₃(CH₂)₃COOCH(CH₃)₂ + H₂O</span> — Isopropyl pentanoate','Fischer esterification'],
+        ])}
+      `,
+    },
+    {
+      id:'cc-exam-reactivity', num:'EX1', type:'Exam Question', navLabel:'[Exam] Carbonyl Reactivity Order',
+      question:'Arrange the reactivity of HCHO, CH₃CHO, and (CH₃)₂CO toward nucleophilic attack. Justify. (3 marks)',
+      searchText:'reactivity order formaldehyde ethanal propanone steric electronic nucleophilic aldehyde ketone',
+      tags:['reaction','mechanism','exam'], examYear:'2014',
+      answerHTML:`
+        ${R.ans('<strong>Most → Least reactive: HCHO &gt; CH₃CHO &gt; (CH₃)₂CO</strong>')}
+        ${R.note('<strong>Two reasons:</strong><br><br>① <em>Steric effect:</em> More alkyl groups around the carbonyl C → more steric hindrance → nucleophile has less access to carbonyl C.<br>• HCHO: no alkyl groups — most accessible (most reactive)<br>• CH₃CHO: one methyl group<br>• (CH₃)₂CO: two methyl groups — most hindered (least reactive)<br><br>② <em>Electronic effect:</em> Alkyl groups are electron-donating (+I inductive effect), which increases electron density on the carbonyl C → reduces its δ⁺ electrophilicity → less attracted to nucleophiles.')}
+        ${R.table(['Compound','Alkyl groups on C=O','Reactivity'],[
+          ['HCHO (Formaldehyde)','0','Highest'],
+          ['CH₃CHO (Ethanal)','1 (methyl)','Intermediate'],
+          ['(CH₃)₂CO (Propanone)','2 (two methyl)','Lowest'],
+        ])}
+      `,
+    },
+  ],
+},
+
+/* ─── SECTION 2: CARBOXYLIC ACID ─── */
+{
+  id:'ca', title:'Carboxylic Acid', shortTitle:'Carboxylic Acid', icon:'🧪',
+  questions:[
+    {
+      id:'ca-q1', num:'Q1', type:'Nomenclature', navLabel:'[Q1] IUPAC Names (a–l)',
+      question:'Give IUPAC names for: a) CH₃CH₂CH(CH₃)COOH, b) CH₃CHBrCOOH, c) C₆H₅CH₂COOH, d–l) various acid structures.',
+      searchText:'IUPAC name carboxylic acid methylbutanoic bromopropanoic phenylethanoic valproic chloro nitro dicarboxylic',
+      tags:['acid','naming'],
+      answerHTML:`
+        ${R.table(['#','Formula','IUPAC Name'],[
+          ['a','<span class="chem">CH₃CH₂CH(CH₃)COOH</span>','<strong>2-methylbutanoic acid</strong>'],
+          ['b','<span class="chem">CH₃CHBrCOOH</span>','<strong>2-bromopropanoic acid</strong>'],
+          ['c','<span class="chem">C₆H₅CH₂COOH</span>','<strong>2-phenylethanoic acid</strong> (phenylacetic acid)'],
+          ['d','<span class="chem">PhCH₂CH₂COOH</span>','<strong>3-phenylpropanoic acid</strong>'],
+          ['e','<span class="chem">CH₃CH(CH₃)CHBrCOOH</span>','<strong>2-bromo-3-methylbutanoic acid</strong>'],
+          ['f','<span class="chem">HOOCCH₂CH(CH₃)CH₂COOH</span>','<strong>3-methylpentanedioic acid</strong>'],
+          ['g','Unsaturated branched acid','<strong>4-methylpent-3-enoic acid</strong>'],
+          ['h','Iodo-substituted acid','<strong>3-iodo-2-methylpentanoic acid</strong>'],
+          ['i','Benzene + COOH + Cl (meta)','<strong>3-chlorobenzoic acid</strong>'],
+          ['j','Benzene + COOH + 2×NO₂','<strong>2,4-dinitrobenzoic acid</strong>'],
+          ['k','Long dicarboxylic acid','<strong>3-ethyl-6-methyloctanedioic acid</strong>'],
+          ['l','<span class="chem">(CH₃CH₂CH₂)₂CHCOOH</span>','<strong>2-propylpentanoic acid</strong> (= Valproic acid!)'],
+        ])}
+        ${R.pharma('<strong>Valproic acid</strong> (2-propylpentanoic acid) is an antiepileptic and mood stabiliser used widely in Malaysia. Brand names: <strong>Epilim®</strong> and <strong>Depakene®</strong>. Essential pharmacology knowledge for Diploma Pharmacy students.')}
+      `,
+    },
+    {
+      id:'ca-q2', num:'Q2', type:'Drawing', navLabel:'[Q2] Draw Structures',
+      question:'Draw: a) 2-hydroxy-3,4-dimethylpentanoic acid, b) o-hydroxybenzoic acid (salicylic acid), c) 3-amino-4-chloro-6-phenylhexanoic acid, d) 2,4-hexadienoic acid (sorbic acid).',
+      searchText:'salicylic acid sorbic acid hydroxy draw structure aspirin food preservative',
+      tags:['acid','drawing'],
+      answerHTML:`
+        ${R.diag([
+          {svg:`<polygon points="62,55 51,74 29,74 18,55 29,36 51,36" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="40" cy="55" r="13" fill="none" stroke="#333" stroke-width="1.2"/><line x1="62" y1="55" x2="84" y2="55" stroke="#333" stroke-width="1.5"/><line x1="84" y1="55" x2="84" y2="32" stroke="#333" stroke-width="1.5"/><line x1="87" y1="55" x2="87" y2="32" stroke="#333" stroke-width="1.5"/><text x="80" y="29" font-family="Arial" font-size="11" fill="#C62828">O</text><line x1="84" y1="55" x2="100" y2="67" stroke="#333" stroke-width="1.5"/><text x="99" y="72" font-family="Arial" font-size="10" fill="#C62828">OH</text><line x1="51" y1="36" x2="66" y2="22" stroke="#333" stroke-width="1.5"/><text x="65" y="18" font-family="Arial" font-size="11" fill="#C62828">OH</text>`,
+           name:'Salicylic acid (o-Hydroxybenzoic acid)',formula:'C₇H₆O₃',badge:'Acid',bc:'tag-acid',w:132,h:92},
+          {svg:`<text x="2" y="50" font-family="Arial" font-size="11" fill="#555">CH₃</text><line x1="28" y1="46" x2="52" y2="28" stroke="#333" stroke-width="1.5"/><line x1="52" y1="28" x2="78" y2="46" stroke="#333" stroke-width="1.5"/><line x1="52" y1="26" x2="78" y2="44" stroke="#333" stroke-width="1.2"/><line x1="78" y1="46" x2="104" y2="28" stroke="#333" stroke-width="1.5"/><line x1="104" y1="28" x2="130" y2="46" stroke="#333" stroke-width="1.5"/><line x1="104" y1="26" x2="130" y2="44" stroke="#333" stroke-width="1.2"/><line x1="130" y1="46" x2="130" y2="24" stroke="#333" stroke-width="1.5"/><line x1="133" y1="46" x2="133" y2="24" stroke="#333" stroke-width="1.5"/><text x="126" y="21" font-family="Arial" font-size="11" fill="#C62828">O</text><line x1="130" y1="46" x2="148" y2="58" stroke="#333" stroke-width="1.5"/><text x="147" y="63" font-family="Arial" font-size="10" fill="#C62828">OH</text>`,
+           name:'Sorbic acid (2,4-Hexadienoic acid)',formula:'Food preservative E200',badge:'Acid',bc:'tag-acid',w:162,h:72},
+        ])}
+        ${R.pharma('<strong>Salicylic acid</strong> is the precursor of aspirin — it is esterified with acetic anhydride to form acetylsalicylic acid (aspirin, an NSAID). Salicylic acid is also used in acne and wart treatments. <strong>Sorbic acid</strong> (E200) is a common food preservative in Malaysian packaged foods.')}
+      `,
+    },
+    {
+      id:'ca-q4', num:'Q4', type:'Properties', navLabel:'[Q4] Acidity Order — para-Substituted',
+      question:'Arrange with respect to increasing acidity: p-bromobenzoic acid, p-hydroxybenzoic acid, p-nitrobenzoic acid.',
+      searchText:'acidity order para bromo hydroxy nitro benzoic acid EWG EDG electron withdrawing donating',
+      tags:['acid','reaction'],
+      answerHTML:`
+        ${R.ans('<strong>Increasing acidity: p-Hydroxybenzoic &lt; p-Bromobenzoic &lt; p-Nitrobenzoic acid</strong>')}
+        ${R.table(['Compound','Substituent Effect','Acidity'],[
+          ['p-Hydroxybenzoic acid','–OH = electron-donating (EDG by resonance); destabilises COO⁻','Least acidic'],
+          ['p-Bromobenzoic acid','–Br = weakly electron-withdrawing (net); slight stabilisation of COO⁻','Intermediate'],
+          ['p-Nitrobenzoic acid','–NO₂ = strongly electron-withdrawing (EWG by resonance + inductive); greatly stabilises COO⁻','Most acidic'],
+        ])}
+        ${R.note('Rule: EWG groups stabilise COO⁻ → stronger acid. EDG groups destabilise COO⁻ → weaker acid.')}
+      `,
+    },
+    {
+      id:'ca-q8', num:'Q8', type:'Reactions', navLabel:'[Q8] Reaction Products (a–j)',
+      question:'Predict products: a) 3-phenylpropanoic acid + SOCl₂, b) acid + LiAlH₄/H₃O⁺, c) acid + 2-butanol/H⁺, d) PhCH₂CH₂CH₂OH + Na₂Cr₂O₇, e) p-toluidine + KMnO₄, f) acid + amine, g) PhCH₂COOH + PCl₅, j) Grignard + CO₂.',
+      searchText:'SOCl2 LiAlH4 esterification oxidation amine PCl5 Grignard CO2 carboxylic acid reactions',
+      tags:['acid','reaction'],
+      answerHTML:`
+        ${R.table(['#','Reaction','Product'],[
+          ['a','3-phenylpropanoic acid + SOCl₂','<span class="chem">C₆H₅CH₂CH₂COCl</span> + SO₂ + HCl — <strong>3-phenylpropanoyl chloride</strong>'],
+          ['b','Acid + i) LiAlH₄; ii) H₃O⁺','Primary alcohol — LiAlH₄ reduces acid → 1° alcohol'],
+          ['c','2-methylbenzoic acid + 2-butanol + H⁺','Ester: <span class="chem">CH₃C₆H₄COOCH(CH₃)CH₂CH₃</span> — <strong>sec-butyl 2-methylbenzoate</strong>'],
+          ['d','PhCH₂CH₂CH₂OH + Na₂Cr₂O₇/H⁺, Δ','<span class="chem">PhCH₂CH₂COOH</span> — <strong>3-phenylpropanoic acid</strong> (oxidation: 1°OH → acid)'],
+          ['e','p-toluidine + KMnO₄/H⁺, Δ','<strong>4-aminobenzoic acid (PABA)</strong> — methyl group oxidised to COOH'],
+          ['f','4-hydroxybenzoic acid + CH₃NH₂','<span class="chem">4-HOC₆H₄CONHCH₃</span> — <strong>4-hydroxy-N-methylbenzamide</strong>'],
+          ['g','PhCH₂COOH + PCl₅','<span class="chem">PhCH₂COCl</span> + POCl₃ + HCl — <strong>phenylacetyl chloride</strong>'],
+          ['j','Cyclopentyl MgCl + CO₂; then H₃O⁺','<span class="chem">C₅H₉COOH</span> — <strong>cyclopentanecarboxylic acid</strong>'],
+        ])}
+      `,
+    },
+  ],
+},
+
+/* ─── SECTION 3: ALDEHYDES ─── */
+{
+  id:'ald', title:'Aldehydes', shortTitle:'Aldehydes', icon:'🔬',
+  questions:[
+    {
+      id:'ald-q1', num:'Q1', type:'Nomenclature', navLabel:'[Q1] IUPAC Names (a–g)',
+      question:'Name: a) CH₃(CH₂)₅CHO, b) CH₃CH(CH₃)CH(Cl)CH₂CH₂CHO, c–g) various aldehyde structures.',
+      searchText:'heptanal hexanal chloro methyl aldehyde IUPAC naming hexenal formaldehyde methanal',
+      tags:['aldehyde','naming'],
+      answerHTML:`
+        ${R.table(['#','Formula','IUPAC Name'],[
+          ['a','<span class="chem">CH₃(CH₂)₅CHO</span>','<strong>Heptanal</strong>'],
+          ['b','<span class="chem">CH₃CH(CH₃)CH(Cl)CH₂CH₂CHO</span>','<strong>4-chloro-5-methylhexanal</strong>'],
+          ['c','<span class="chem">CH₃CH₂CH(Br)CH₂CH(CH₃)CHO</span>','<strong>3-bromo-5-methylhexanal</strong>'],
+          ['d','<span class="chem">CH₃C(=O)(CH₂)₃CHO</span>','<strong>6-oxoheptanal</strong>'],
+          ['e','<span class="chem">CH₃CH₂CH₂CH=CHCHO</span>','<strong>hex-2-enal</strong>'],
+          ['f','Cyclopentane ring with OH and CHO','<strong>1-hydroxycyclopentane-1-carbaldehyde</strong>'],
+          ['g','<span class="chem">HCHO</span>','<strong>Methanal</strong> (formaldehyde)'],
+        ])}
+      `,
+    },
+    {
+      id:'ald-q3', num:'Q3', type:'Reactions', navLabel:'[Q3] Complete 4 Reactions',
+      question:'Complete: a) propanal → propanoic acid, b) ? + HCN → mandelonitrile, c) benzaldehyde + phenylhydrazine → ?, d) HCHO + ethyl Grignard → ?',
+      searchText:'propanal propanoic acid mandelonitrile HCN benzaldehyde phenylhydrazine Grignard 1-propanol cyanohydrin',
+      tags:['aldehyde','reaction'],
+      answerHTML:`
+        ${R.table(['#','Reaction','Product','Type'],[
+          ['a','<span class="chem">CH₃CH₂CHO + K₂Cr₂O₇/H₂SO₄</span>','<span class="chem">CH₃CH₂COOH</span> — <strong>propanoic acid</strong>','Oxidation'],
+          ['b','<span class="chem">PhCHO + HCN</span>','<span class="chem">PhCH(OH)CN</span> — <strong>mandelonitrile</strong> (cyanohydrin)','Nucleophilic addition'],
+          ['c','<span class="chem">PhCHO + C₆H₅NHNH₂</span>','<span class="chem">PhCH=N–NHC₆H₅ + H₂O</span> — <strong>benzaldehyde phenylhydrazone</strong>','Condensation'],
+          ['d','<span class="chem">HCHO + CH₃CH₂MgCl; then H₃O⁺</span>','<span class="chem">CH₃CH₂CH₂OH</span> — <strong>1-propanol</strong>','Grignard → 1° alcohol'],
+        ])}
+      `,
+    },
+    {
+      id:'ald-q4', num:'Q4', type:'Reactions', navLabel:'[Q4] Propanal + 8 Reagents',
+      question:'Products when propanal (CH₃CH₂CHO) reacts with: i) NaBH₄, ii) K₂Cr₂O₇/H₂SO₄, iii) H₂O, iv) HCN, v) 2,4-DNP, vi) NaHSO₃, vii) Tollens\', viii) CH₃CH₂MgBr/H₃O⁺.',
+      searchText:'propanal NaBH4 K2Cr2O7 HCN 2,4-DNP NaHSO3 Tollens Grignard silver mirror cyanohydrin bisulphite propanoic 3-pentanol',
+      tags:['aldehyde','reaction'],
+      answerHTML:`
+        ${R.table(['Reagent','Product','Reaction'],[
+          ['i) NaBH₄','<span class="chem">CH₃CH₂CH₂OH</span> — <strong>1-propanol</strong>','Reduction → 1° alcohol'],
+          ['ii) K₂Cr₂O₇/H₂SO₄','<span class="chem">CH₃CH₂COOH</span> — <strong>propanoic acid</strong>','Oxidation → carboxylic acid'],
+          ['iii) H₂O','<span class="chem">CH₃CH₂CH(OH)₂</span> — <strong>gem-diol</strong> (unstable hydrate)','Nucleophilic addition of water'],
+          ['iv) HCN','<span class="chem">CH₃CH₂CH(OH)CN</span> — <strong>2-hydroxybutanenitrile</strong>','Cyanohydrin formation'],
+          ['v) 2,4-DNP','Orange/yellow precipitate — <strong>propanal 2,4-DNP hydrazone</strong>','Condensation — test for C=O'],
+          ['vi) NaHSO₃','<span class="chem">CH₃CH₂CH(OH)SO₃Na</span> — <strong>bisulphite adduct</strong> (crystalline)','Nucleophilic addition'],
+          ['vii) Ag(NH₃)₂OH (Tollens\')','<strong>Silver mirror deposited</strong> — positive result','Oxidation: Ag⁺ → Ag⁰'],
+          ['viii) CH₃CH₂MgBr; then H₃O⁺','<span class="chem">CH₃CH₂CH(OH)CH₂CH₃</span> — <strong>pentan-3-ol</strong>','Grignard → 2° alcohol'],
+        ])}
+        ${R.note('Tollens\' and Fehling\'s → positive for <em>aldehydes</em> only, NOT ketones. 2,4-DNP → positive for ALL compounds with C=O group (aldehydes AND ketones).')}
+      `,
+    },
+    {
+      id:'ald-q7', num:'Q7', type:'Chemical Tests', navLabel:'[Q7] Differentiate Compound Pairs',
+      question:'Chemical tests to differentiate: a) ethanal vs. butanal, b) ethanal vs. propanone.',
+      searchText:'iodoform test Tollens Fehling CHI3 yellow precipitate ethanal butanal propanone silver mirror',
+      tags:['aldehyde','reaction','identification'],
+      answerHTML:`
+        <strong>a) Ethanal (CH₃CHO) vs. Butanal (CH₃CH₂CH₂CHO):</strong>
+        ${R.ans('<strong>Test: Iodoform test</strong> — Add I₂ + NaOH (aqueous) to each.')}
+        ${R.table(['Compound','Result','Reason'],[
+          ['Ethanal (CH₃CHO)','✅ Yellow CHI₃ precipitate + distinctive smell','Has CH₃CO– group → positive iodoform test'],
+          ['Butanal (CH₃CH₂CH₂CHO)','❌ No yellow precipitate','Lacks CH₃CO– group → negative'],
+        ])}
+        <strong>b) Ethanal (CH₃CHO) vs. Propanone (CH₃COCH₃):</strong>
+        ${R.note('Both give positive iodoform test! So iodoform does NOT distinguish them. Use Tollens\' or Fehling\'s.')}
+        ${R.table(['Compound','Tollens\' test','Fehling\'s test','Reason'],[
+          ['Ethanal (aldehyde)','✅ Silver mirror','✅ Brick-red Cu₂O precipitate','Aldehydes are oxidised by mild oxidants'],
+          ['Propanone (ketone)','❌ No reaction','❌ No reaction','Ketones resist mild oxidation'],
+        ])}
+      `,
+    },
+    {
+      id:'ald-q8', num:'Q8', type:'Identification', navLabel:'[Q8] Identify Compounds A–E',
+      question:'A=CH₃CHO, B=CH₃COCH₃, C=CH₂=CHCHO, D=C₆H₅CHO, E=C₆H₅COCH₃. Which compounds: a) oxidise to acid without C loss, b) react with NaHSO₃, c) give yellow ppt with I₂/NaOH, d) give silver mirror, e) give brick-red ppt with Fehling\'s, f) give orange ppt with 2,4-DNP?',
+      searchText:'iodoform Tollens Fehling 2,4-DNP NaHSO3 silver mirror aldehyde ketone identification compounds',
+      tags:['aldehyde','reaction','identification'],
+      answerHTML:`
+        ${R.table(['Test','Compounds','Explanation'],[
+          ['a) Oxidise to acid (no C loss)','<strong>A, C, D</strong> (all aldehydes)','Only aldehydes (–CHO) → –COOH without C–C cleavage. Ketones cannot.'],
+          ['b) Add with NaHSO₃','<strong>A, B, D</strong>','Unhindered aldehydes + methyl ketones react. Bulky ketones do not.'],
+          ['c) Yellow ppt with I₂/NaOH (iodoform)','<strong>A, B, E</strong>','Must have CH₃CO– group: ethanal (A), propanone (B), acetophenone (E).'],
+          ['d) Silver mirror with Tollens\'','<strong>A, C, D</strong> (all aldehydes)','Aldehydes reduce Ag⁺ → Ag⁰. Ketones do not react.'],
+          ['e) Brick-red ppt with Fehling\'s','<strong>A and C</strong> (aliphatic aldehydes only)','Benzaldehyde (D) — aromatic — gives negative Fehling\'s. Ketones negative.'],
+          ['f) Orange ppt with 2,4-DNP','<strong>A, B, C, D, E</strong> (ALL five)','2,4-DNP reacts with ALL carbonyl compounds (any C=O), both aldehydes and ketones.'],
+        ])}
+      `,
+    },
+  ],
+},
+
+/* ─── SECTION 4: KETONES ─── */
+{
+  id:'ket', title:'Ketones', shortTitle:'Ketones', icon:'🔷',
+  questions:[
+    {
+      id:'ket-q1', num:'Q1', type:'Drawing', navLabel:'[Q1] Draw 6 Ketone Structures',
+      question:'Draw: a) 5-hydroxy-3-pentanone, b) 2-cyclohexenone, c) 1,3-cyclohexanedione, d) phenyl propyl ketone, e) 1-chloro-2-hydroxy-3-hexanone, f) 4-heptene-2-one.',
+      searchText:'5-hydroxy-3-pentanone cyclohexenone cyclohexanedione phenyl propyl ketone hexanone heptene',
+      tags:['ketone','drawing'],
+      answerHTML:`
+        ${R.diag([
+          {svg:`<text x="2" y="36" font-family="Arial" font-size="12" fill="#C62828">HO</text><line x1="22" y1="32" x2="48" y2="48" stroke="#333" stroke-width="1.5"/><line x1="48" y1="48" x2="74" y2="32" stroke="#333" stroke-width="1.5"/><line x1="74" y1="32" x2="74" y2="10" stroke="#333" stroke-width="1.5"/><line x1="77" y1="32" x2="77" y2="10" stroke="#333" stroke-width="1.5"/><text x="70" y="8" font-family="Arial" font-size="12" fill="#C62828">O</text><line x1="74" y1="32" x2="100" y2="48" stroke="#333" stroke-width="1.5"/><line x1="100" y1="48" x2="126" y2="32" stroke="#333" stroke-width="1.5"/><text x="127" y="36" font-family="Arial" font-size="11" fill="#555">CH₃</text>`,
+           name:'5-Hydroxy-3-pentanone',formula:'HOCH₂CH₂COCH₂CH₃',badge:'Ketone',bc:'tag-ketone',w:155,h:62},
+          {svg:`<line x1="48" y1="16" x2="71" y2="30" stroke="#333" stroke-width="1.5"/><line x1="71" y1="30" x2="71" y2="60" stroke="#333" stroke-width="1.5"/><line x1="71" y1="60" x2="48" y2="74" stroke="#333" stroke-width="1.5"/><line x1="48" y1="74" x2="25" y2="60" stroke="#333" stroke-width="1.5"/><line x1="25" y1="60" x2="25" y2="30" stroke="#333" stroke-width="1.5"/><line x1="25" y1="30" x2="48" y2="16" stroke="#333" stroke-width="1.5"/><line x1="48" y1="16" x2="48" y2="3" stroke="#333" stroke-width="1.5"/><line x1="51" y1="16" x2="51" y2="3" stroke="#333" stroke-width="1.5"/><text x="43" y="2" font-family="Arial" font-size="12" fill="#C62828">O</text>`,
+           name:'Cyclohexanone',formula:'Cyclic ketone',badge:'Ketone',bc:'tag-ketone',w:98,h:82},
+          {svg:`<polygon points="42,55 31,74 9,74 0,55 9,36 31,36" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="21" cy="55" r="11" fill="none" stroke="#333" stroke-width="1.1"/><polygon points="143,55 132,74 110,74 101,55 110,36 132,36" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="122" cy="55" r="11" fill="none" stroke="#333" stroke-width="1.1"/><line x1="42" y1="55" x2="62" y2="55" stroke="#333" stroke-width="1.5"/><line x1="62" y1="55" x2="62" y2="32" stroke="#333" stroke-width="1.5"/><line x1="65" y1="55" x2="65" y2="32" stroke="#333" stroke-width="1.5"/><text x="59" y="29" font-family="Arial" font-size="12" fill="#C62828">O</text><line x1="62" y1="55" x2="101" y2="55" stroke="#333" stroke-width="1.5"/>`,
+           name:'Benzophenone (diphenyl ketone)',formula:'C₆H₅COC₆H₅',badge:'Ketone',bc:'tag-ketone',w:155,h:88},
+        ])}
+        ${R.table(['Name','Structural Formula','Key Feature'],[
+          ['5-Hydroxy-3-pentanone','<span class="chem">HOCH₂CH₂COCH₂CH₃</span>','C=O at C3; OH at C5'],
+          ['2-Cyclohexenone','Cyclohexanone ring with C=C at C2–C3','Conjugated enone'],
+          ['1,3-Cyclohexanedione','Cyclohexane ring with C=O at C1 and C3','Diketone'],
+          ['Phenyl propyl ketone','<span class="chem">C₆H₅COCH₂CH₂CH₃</span>','IUPAC: 1-phenylbutan-1-one'],
+          ['1-Chloro-2-hydroxy-3-hexanone','<span class="chem">ClCH₂CH(OH)COCH₂CH₂CH₃</span>','Cl at C1, OH at C2, C=O at C3'],
+          ['4-Heptene-2-one','<span class="chem">CH₃COCH₂CH=CHCH₂CH₃</span>','C=O at C2, C=C at C4–C5'],
+        ])}
+      `,
+    },
+    {
+      id:'ket-q4', num:'Q4', type:'Reactions', navLabel:'[Q4] 3-Pentanone + 5 Reagents',
+      question:'Products when 3-pentanone (CH₃CH₂COCH₂CH₃) reacts with: a) NH₂OH, b) 2,4-DNP, c) HCN, e) LiAlH₄, f) CH₃MgCl then H₃O⁺.',
+      searchText:'3-pentanone hydroxylamine oxime 2,4-DNP hydrazone HCN cyanohydrin LiAlH4 secondary alcohol Grignard tertiary',
+      tags:['ketone','reaction'],
+      answerHTML:`
+        ${R.table(['Reagent','Product','Functional Group'],[
+          ['a) NH₂OH (hydroxylamine)','<span class="chem">CH₃CH₂C(=NOH)CH₂CH₃ + H₂O</span><br><strong>3-pentanone oxime</strong>','C=N–OH (oxime)'],
+          ['b) 2,4-DNP','Orange/yellow precipitate — <strong>2,4-DNP hydrazone</strong>','C=N–NHAr (hydrazone)'],
+          ['c) HCN','<span class="chem">CH₃CH₂C(OH)(CN)CH₂CH₃</span> — <strong>cyanohydrin</strong>','C–OH and C–CN'],
+          ['e) LiAlH₄, then H₃O⁺','<span class="chem">CH₃CH₂CH(OH)CH₂CH₃</span> — <strong>pentan-3-ol</strong>','C–OH (secondary alcohol)'],
+          ['f) CH₃MgCl, then H₃O⁺','<span class="chem">CH₃CH₂C(OH)(CH₃)CH₂CH₃</span> — <strong>3-methylpentan-3-ol</strong>','Tertiary C–OH'],
+        ])}
+        ${R.note('Ketone + NaBH₄ or LiAlH₄ → secondary alcohol. Ketone + Grignard → tertiary alcohol.')}
+      `,
+    },
+    {
+      id:'ket-q5', num:'Q5', type:'Reaction Scheme', navLabel:'[Q5] Ketone Reaction Scheme',
+      question:'Ketone reacts via HCN (→A), C₆H₅MgCl/H₃O⁺ (→B), reduction (Step 1 →alcohol), NH₂OH (Step II →NOH product). a) Structures of A and B. b) Reagents for Step I and Step II. c) Name of Step I reaction.',
+      searchText:'cyanohydrin Grignard tertiary alcohol oxime ketone scheme reaction nucleophilic addition reduction',
+      tags:['ketone','reaction','mechanism'],
+      answerHTML:`
+        ${R.grid2([
+          R.lbl('Compound A (ketone + HCN)','Cyanohydrin: R₂C(OH)CN<br><em>Nucleophilic addition of HCN to C=O</em>'),
+          R.lbl('Compound B (ketone + C₆H₅MgCl/H₃O⁺)','Tertiary alcohol: R₂C(OH)(C₆H₅)<br><em>Grignard addition to C=O</em>'),
+        ])}
+        ${R.table(['Step','Reagents','Reaction Name'],[
+          ['Step 1 (ketone → alcohol)','NaBH₄ (or LiAlH₄, dry ether; then H₃O⁺)','<strong>Reduction</strong> (Nucleophilic Addition)'],
+          ['Step II (ketone → oxime, NOH product)','NH₂OH·HCl + NaOH (buffer)','<strong>Condensation</strong> (Addition–Elimination)'],
+        ])}
+        ${R.ans('Name of Step 1: <strong>Nucleophilic Addition (Reduction)</strong> — the hydride ion (H⁻) from NaBH₄ acts as the nucleophile and adds to the electrophilic carbonyl C.')}
+      `,
+    },
+  ],
+},
+
+/* ─── SECTION 5: ESTERS ─── */
+{
+  id:'est', title:'Esters', shortTitle:'Esters', icon:'🌸',
+  questions:[
+    {
+      id:'est-q1', num:'Q1', type:'Nomenclature', navLabel:'[Q1] IUPAC Names (a–f)',
+      question:'Give IUPAC names for six ester structures (a–f): branched ester, cyclopentyl ester, phenyl ester, isopropyl ester, complex unsaturated ester, aromatic ester.',
+      searchText:'ester IUPAC name methyl ethanoate propanoate isopropyl cyclopentyl phenyl benzoate',
+      tags:['ester','naming'],
+      answerHTML:`
+        ${R.table(['#','Description','IUPAC Name'],[
+          ['a','Branched acid (3-methylbutanoic) + isopropyl alcohol','<strong>Isopropyl 3-methylbutanoate</strong>'],
+          ['b','Cyclopentanecarboxylic acid + methanol','<strong>Methyl cyclopentanecarboxylate</strong>'],
+          ['c','Acetic acid + phenol (phenyl ester)','<strong>Phenyl ethanoate</strong> (phenyl acetate)'],
+          ['d','3-methylbutanoic acid + isopropyl alcohol','<strong>Isopropyl 3-methylbutanoate</strong>'],
+          ['e','Complex unsaturated ester with cyclopentyl chain','Name by identifying longest chain + substituents'],
+          ['f','Aromatic ester with NO₂ and OH on ring','<strong>Benzyl 4-hydroxy-3-nitrobenzoate</strong>'],
+        ])}
+        ${R.note('<strong>Naming rule:</strong> [alkyl from alcohol]-yl [acyl from acid]-ate. E.g., methyl ethanoate = methanol + ethanoic acid.')}
+      `,
+    },
+    {
+      id:'est-q3', num:'Q3', type:'Reactions', navLabel:'[Q3] Ester A — Analysis & Reactions',
+      question:'CH₃CO₂H + Y → Ester A (CH₃CO₂CH₂CH₂CH₂CH₃) + H₂O. a) Formula/name of Y, b) reaction name, c) products with: i) H₂O/H⁺, ii) amine, iii) sec-BuOH, iv) excess CH₃CH₂MgBr.',
+      searchText:'butyl ethanoate esterification 1-butanol hydrolysis aminolysis transesterification Grignard ester reactions',
+      tags:['ester','reaction'],
+      answerHTML:`
+        ${R.grid3([
+          R.lbl('Y = Compound','1-Butanol (butan-1-ol): CH₃CH₂CH₂CH₂OH'),
+          R.lbl('Reaction name','Fischer Esterification (conc. H₂SO₄ catalyst, heat; reversible ⇌)'),
+          R.lbl('Ester A name','Butyl ethanoate (n-butyl acetate) — fruity smell'),
+        ])}
+        <strong>c) Products when Ester A reacts:</strong>
+        ${R.table(['Reagent','Product','Reaction'],[
+          ['i) H₂O/H⁺','<span class="chem">CH₃COOH + CH₃CH₂CH₂CH₂OH</span> — ethanoic acid + 1-butanol','Acid hydrolysis (reverse of esterification)'],
+          ['ii) Secondary amine','Amide + 1-butanol (aminolysis)','Nucleophilic acyl substitution'],
+          ['iii) sec-Butanol','<span class="chem">CH₃COOCH(CH₃)CH₂CH₃ + 1-butanol</span>','Transesterification'],
+          ['iv) Excess CH₃CH₂MgBr; H₃O⁺','<span class="chem">CH₃C(OH)(CH₂CH₃)₂</span> — <strong>3-methylpentan-3-ol</strong> (tertiary alcohol)','2 equiv. Grignard (ester → ketone → tertiary alcohol)'],
+        ])}
+        ${R.note('<strong>Key:</strong> Esters react with 2 equivalents of Grignard. First addition gives a ketone intermediate; the second Grignard equivalent adds to the ketone → tertiary alcohol.')}
+      `,
+    },
+    {
+      id:'est-q4', num:'Q4', type:'Synthesis', navLabel:'[Q4] Outline Conversions (a–c)',
+      question:'Outline: a) CH₃CH₂CN → propanoate ester, b) benzaldehyde → ethyl benzoate, c) benzyl bromide → benzyl benzoate.',
+      searchText:'nitrile ester benzaldehyde ethyl benzoate benzyl bromide benzyl benzoate synthesis steps scabicide',
+      tags:['ester','synthesis','reaction'],
+      answerHTML:`
+        ${R.eq(`a) CH₃CH₂CN → propanoate ester:
+Step 1: CH₃CH₂CN + H₂O/H⁺, heat → CH₃CH₂COOH (propanoic acid)  [nitrile hydrolysis]
+Step 2: CH₃CH₂COOH + (CH₃)₂CHCH₂OH →[H₂SO₄, heat]→ CH₃CH₂COOCH₂CH(CH₃)₂ + H₂O  [esterification]
+
+b) Benzaldehyde → Ethyl benzoate:
+Step 1: C₆H₅CHO + K₂Cr₂O₇/H₂SO₄ → C₆H₅COOH  [oxidation of aldehyde to acid]
+Step 2: C₆H₅COOH + C₂H₅OH →[H₂SO₄ cat., heat]→ C₆H₅COOC₂H₅ + H₂O  [esterification]
+
+c) Benzyl bromide → Benzyl benzoate:
+Step 1: C₆H₅CH₂Br + KCN → C₆H₅CH₂CN  [SN2 — nitrile formation]
+Step 2: C₆H₅CH₂CN + H₂O/H⁺ → C₆H₅CH₂COOH  [nitrile hydrolysis]
+Step 3: C₆H₅CH₂COOH + C₆H₅CH₂OH →[H₂SO₄]→ C₆H₅COOCH₂C₆H₅  [esterification]`)}
+        ${R.diag([
+          {svg:`<polygon points="40,62 29,81 7,81 0,62 7,43 29,43" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="20" cy="62" r="11" fill="none" stroke="#333" stroke-width="1.1"/><line x1="40" y1="62" x2="60" y2="62" stroke="#333" stroke-width="1.5"/><line x1="60" y1="62" x2="60" y2="38" stroke="#333" stroke-width="1.5"/><line x1="63" y1="62" x2="63" y2="38" stroke="#333" stroke-width="1.5"/><text x="57" y="35" font-family="Arial" font-size="11" fill="#C62828">O</text><line x1="60" y1="62" x2="78" y2="74" stroke="#333" stroke-width="1.5"/><text x="76" y="78" font-family="Arial" font-size="13" fill="#C62828">O</text><line x1="89" y1="76" x2="103" y2="60" stroke="#333" stroke-width="1.5"/><text x="94" y="57" font-family="Arial" font-size="10" fill="#555">CH₂</text><polygon points="130,47 119,66 97,66 88,47 97,28 119,28" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="109" cy="47" r="11" fill="none" stroke="#333" stroke-width="1.1"/><line x1="103" y1="64" x2="88" y2="47" stroke="#333" stroke-width="1.5"/>`,
+           name:'Benzyl benzoate',formula:'C₆H₅COOCH₂C₆H₅',badge:'Scabicide Drug (Malaysia)',bc:'tag-ester',w:155,h:95},
+        ])}
+        ${R.pharma('<strong>Benzyl benzoate</strong> (C₆H₅COOCH₂C₆H₅) is a topical drug used as a <strong>scabicide</strong> — treatment for scabies caused by the mite <em>Sarcoptes scabiei</em>. Brand: <strong>Ascabiol®</strong>. Available in Malaysian pharmacies. Pharmacists must counsel patients on correct topical application.')}
+      `,
+    },
+  ],
+},
+
+/* ─── SECTION 6: AMIDES ─── */
+{
+  id:'amid', title:'Amides', shortTitle:'Amides', icon:'💊',
+  questions:[
+    {
+      id:'amid-q1', num:'Q1', type:'Nomenclature', navLabel:'[Q1] IUPAC Names (a–g)',
+      question:'Give IUPAC names for: a) CH₃CH₂CONH₂, b) CH₃–C(=O)–N(CH₃)(CH₂CH₃), c–g) various amide structures.',
+      searchText:'propanamide N-ethyl N-methyl ethanamide amide IUPAC name acetamide benzamide',
+      tags:['amide','naming'],
+      answerHTML:`
+        ${R.table(['#','Formula','IUPAC Name'],[
+          ['a','<span class="chem">CH₃CH₂CONH₂</span>','<strong>Propanamide</strong>'],
+          ['b','<span class="chem">CH₃–C(=O)–N(CH₃)(CH₂CH₃)</span>','<strong>N-ethyl-N-methylethanamide</strong>'],
+          ['c','Secondary amide with N–H and alkyl chains','<strong>N-butylbutanamide</strong>'],
+          ['d','Br substituent + N–H amide','<strong>2-bromo-N-methylpropanamide</strong>'],
+          ['e','<span class="chem">C₆H₁₁CH₂CONH₂</span>','<strong>2-cyclohexylacetamide</strong>'],
+          ['f','<span class="chem">H₂C=CHCH₂CH₂C(=O)NHCH₃</span>','<strong>N-methylpent-4-enamide</strong>'],
+          ['g','Diphenyl amide with N-ethyl group','<strong>N-ethyl-N-phenylbenzamide</strong>'],
+        ])}
+      `,
+    },
+    {
+      id:'amid-q4', num:'Q4', type:'Reaction Scheme', navLabel:'[Q4] Compound Q — Reactions',
+      question:'P (CH₃NH₂) ←I— Q (CH₃CONH₂) —II→ R (CH₃CH₂NH₂). a) IUPAC names of P, Q, R. b) Reagents for I and II. c) Name both reactions.',
+      searchText:'ethanamide methanamine ethanamine Hofmann degradation reduction Br2 NaOH LiAlH4',
+      tags:['amide','reaction'],
+      answerHTML:`
+        ${R.grid3([
+          R.lbl('P (CH₃NH₂)','<strong>Methanamine</strong> (methylamine)'),
+          R.lbl('Q (CH₃CONH₂)','<strong>Ethanamide</strong> (acetamide)'),
+          R.lbl('R (CH₃CH₂NH₂)','<strong>Ethanamine</strong> (ethylamine)'),
+        ])}
+        ${R.table(['Reaction','Reagents','Reaction Name','Key Point'],[
+          ['I: Q → P (loses 1C)','<strong>Br₂ + NaOH (excess), heat</strong>','<strong>Hofmann Degradation</strong>','Amide loses one C as CO₂; amine has (n−1) carbons'],
+          ['II: Q → R (same C)','<strong>i) LiAlH₄, dry ether; ii) H₃O⁺</strong>','<strong>Reduction</strong>','C=O reduced to CH₂; amine has same n carbons'],
+        ])}
+        ${R.note('<strong>Compare Hofmann vs Reduction:</strong> Hofmann → amine is smaller by 1C. Reduction → amine is same size as amide. Both start from the same amide.')}
+      `,
+    },
+    {
+      id:'amid-q5', num:'Q5', type:'Reactions', navLabel:'[Q5] Compound S (Propanamide)',
+      question:'Compound S = CH₃CH₂CONH₂. Products when heated with: i) NaOH, Br₂, ii) P₂O₅.',
+      searchText:'propanamide NaOH Br2 Hofmann P2O5 dehydration nitrile ethanamine propanenitrile',
+      tags:['amide','reaction'],
+      answerHTML:`
+        ${R.eq(`i) + Br₂/NaOH, heat (Hofmann Degradation):
+CH₃CH₂CONH₂ + Br₂ + 4NaOH  →  CH₃CH₂NH₂ + Na₂CO₃ + 2NaBr + 2H₂O
+Product: Ethanamine (CH₃CH₂NH₂) — one carbon shorter than propanamide
+
+ii) + P₂O₅, heat (Dehydration):
+CH₃CH₂CONH₂ + P₂O₅  →  CH₃CH₂CN + H₃PO₄
+Product: Propanenitrile (CH₃CH₂CN) — water removed; P₂O₅ is dehydrating agent`)}
+      `,
+    },
+    {
+      id:'amid-q7', num:'Q7', type:'Pharmaceutical', navLabel:'[Q7] ⭐ Paracetamol — Functional Groups & Reactions',
+      question:'Paracetamol (HO–C₆H₄–NHCOCH₃): a) Name all functional groups. b) Draw products with i) Br₂/NaOH and ii) LiAlH₄. c) Name both reactions.',
+      searchText:'paracetamol acetaminophen Panadol phenol amide aromatic Hofmann degradation LiAlH4 reduction 4-aminophenol Malaysia',
+      tags:['amide','reaction','identification'],
+      answerHTML:`
+        <div style="display:flex;justify-content:center;margin:10px 0;">
+          <div style="background:linear-gradient(135deg,#FFF9F0,#FFF3E0);border:2px solid var(--gold);border-radius:10px;padding:14px 24px;text-align:center;">
+            <svg viewBox="0 0 330 148" width="300" height="135">
+              <polygon points="162,82 149,108 123,108 110,82 123,56 149,56" fill="none" stroke="#333" stroke-width="2"/>
+              <circle cx="136" cy="82" r="18" fill="none" stroke="#333" stroke-width="1.5"/>
+              <line x1="123" y1="108" x2="100" y2="126" stroke="#C62828" stroke-width="2"/>
+              <text x="80" y="131" font-family="Arial" font-size="14" fill="#C62828" font-weight="bold">OH</text>
+              <text x="4" y="130" font-family="Arial" font-size="9" fill="#C62828" font-style="italic">① Phenol</text>
+              <line x1="149" y1="56" x2="188" y2="40" stroke="#333" stroke-width="2"/>
+              <text x="186" y="38" font-family="Arial" font-size="15" fill="#1565C0" font-weight="bold">N</text>
+              <line x1="195" y1="30" x2="195" y2="17" stroke="#333" stroke-width="1.5"/>
+              <text x="191" y="14" font-family="Arial" font-size="11" fill="#777">H</text>
+              <line x1="200" y1="38" x2="228" y2="38" stroke="#333" stroke-width="2"/>
+              <line x1="228" y1="38" x2="228" y2="14" stroke="#333" stroke-width="2"/>
+              <line x1="232" y1="38" x2="232" y2="14" stroke="#333" stroke-width="2"/>
+              <text x="224" y="11" font-family="Arial" font-size="15" fill="#C62828" font-weight="bold">O</text>
+              <line x1="228" y1="38" x2="260" y2="38" stroke="#333" stroke-width="2"/>
+              <text x="261" y="42" font-family="Arial" font-size="13" fill="#333">CH₃</text>
+              <text x="184" y="60" font-family="Arial" font-size="9" fill="#1565C0" font-style="italic">② Amide (–NHCO–)</text>
+              <text x="100" y="145" font-family="Arial" font-size="9" fill="#555" font-style="italic">③ Aromatic ring</text>
+            </svg>
+            <div style="font-size:13px;font-weight:700;color:#7B1C1C;">Paracetamol (Acetaminophen)</div>
+            <div style="font-size:10px;color:var(--text3);">HO–C₆H₄–NHCOCH₃ · Panadol® / Uphamol® (Malaysia)</div>
+          </div>
+        </div>
+        <strong>a) Functional groups in paracetamol:</strong>
+        ${R.table(['Group','Location','Chemical Feature'],[
+          ['① Phenol (–OH)','Para position on benzene ring','Can form H-bonds; phenol is a weak acid'],
+          ['② Amide (–NHCO–)','N–H linked to C=O','Key pharmacophore; can undergo Hofmann/reduction'],
+          ['③ Aromatic ring','Central benzene ring','Resonance stabilisation; allows electrophilic substitution'],
+        ])}
+        <strong>b) Reaction products:</strong>
+        ${R.diag([
+          {svg:`<polygon points="62,55 51,74 29,74 18,55 29,36 51,36" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="40" cy="55" r="13" fill="none" stroke="#333" stroke-width="1.2"/><line x1="29" y1="74" x2="14" y2="88" stroke="#C62828" stroke-width="1.5"/><text x="2" y="94" font-family="Arial" font-size="12" fill="#C62828">HO</text><line x1="51" y1="36" x2="66" y2="22" stroke="#1565C0" stroke-width="1.5"/><text x="65" y="18" font-family="Arial" font-size="12" fill="#1565C0">H₂N</text>`,
+           name:'Product of Br₂/NaOH',formula:'4-Aminophenol (HO–C₆H₄–NH₂)',badge:'Hofmann product',bc:'tag-amide',w:112,h:98},
+          {svg:`<polygon points="62,55 51,74 29,74 18,55 29,36 51,36" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="40" cy="55" r="13" fill="none" stroke="#333" stroke-width="1.2"/><line x1="29" y1="74" x2="14" y2="88" stroke="#C62828" stroke-width="1.5"/><text x="2" y="94" font-family="Arial" font-size="12" fill="#C62828">HO</text><line x1="51" y1="36" x2="71" y2="22" stroke="#333" stroke-width="1.5"/><text x="69" y="18" font-family="Arial" font-size="14" fill="#1565C0">N</text><line x1="73" y1="12" x2="73" y2="2" stroke="#333" stroke-width="1.5"/><text x="69" y="1" font-family="Arial" font-size="10" fill="#777">H</text><line x1="80" y1="18" x2="100" y2="10" stroke="#333" stroke-width="1.5"/><line x1="100" y1="10" x2="122" y2="22" stroke="#333" stroke-width="1.5"/><text x="123" y="26" font-family="Arial" font-size="10" fill="#555">CH₃</text>`,
+           name:'Product of LiAlH₄',formula:'4-(Ethylamino)phenol',badge:'Reduction product',bc:'tag-amide',w:138,h:98},
+        ])}
+        ${R.table(['Reagent','Reaction Name','What Changes'],[
+          ['Br₂/NaOH','<strong>Hofmann Degradation</strong>','–NHCOCH₃ → –NH₂ (amide loses 1C as CO₂)'],
+          ['LiAlH₄','<strong>Reduction</strong>','–NHCOCH₃ → –NHCH₂CH₃ (C=O reduced to CH₂)'],
+        ])}
+        ${R.pharma('<strong>Paracetamol</strong> is the most widely used OTC analgesic/antipyretic in Malaysia. Brand names: <strong>Panadol®</strong>, <strong>Uphamol®</strong>. The amide bond is central to its chemistry and metabolic pathway (conjugation in liver). Overdose → hepatotoxicity via NAPQI accumulation — antidote is N-acetylcysteine (NAC).')}
+      `,
+    },
+    {
+      id:'amid-q8', num:'Q8', type:'Mechanism', navLabel:'[Q8] Mechanism — Ethanamide Synthesis',
+      question:'Write the mechanism for synthesis of ethanamide (CH₃CONH₂) from ethanoyl chloride and ammonia (NH₃).',
+      searchText:'mechanism ethanamide ethanoyl chloride ammonia nucleophilic acyl substitution tetrahedral intermediate 4 steps',
+      tags:['amide','mechanism'],
+      answerHTML:`
+        <div style="display:flex;gap:12px;align-items:flex-start;justify-content:center;flex-wrap:wrap;margin:10px 0;">
+          <div style="text-align:center;min-width:95px;">
+            <svg viewBox="0 0 110 85" width="100" height="78">
+              <text x="2" y="48" font-family="Arial" font-size="11" fill="#555">CH₃</text>
+              <line x1="26" y1="44" x2="52" y2="44" stroke="#333" stroke-width="1.5"/>
+              <line x1="52" y1="44" x2="52" y2="18" stroke="#333" stroke-width="1.5"/>
+              <line x1="55" y1="44" x2="55" y2="18" stroke="#333" stroke-width="1.5"/>
+              <text x="48" y="15" font-family="Arial" font-size="12" fill="#C62828">O</text>
+              <line x1="52" y1="44" x2="76" y2="60" stroke="#333" stroke-width="1.5"/>
+              <text x="74" y="65" font-family="Arial" font-size="12" fill="#6A1B9A">Cl</text>
+              <text x="60" y="28" font-family="Arial" font-size="10" fill="#1565C0">NH₃ ↗</text>
+            </svg>
+            <div style="font-size:9.5px;font-weight:700;color:var(--maroon);">Step 1</div>
+            <div style="font-size:9px;color:var(--text3);">NH₃ attacks electrophilic C</div>
+          </div>
+          <div style="font-size:20pt;align-self:center;color:var(--text3);">→</div>
+          <div style="text-align:center;min-width:105px;">
+            <svg viewBox="0 0 120 92" width="110" height="84">
+              <text x="2" y="52" font-family="Arial" font-size="11" fill="#555">CH₃</text>
+              <line x1="26" y1="48" x2="58" y2="48" stroke="#333" stroke-width="1.5"/>
+              <line x1="58" y1="48" x2="58" y2="24" stroke="#333" stroke-width="1.5"/>
+              <text x="49" y="21" font-family="Arial" font-size="11" fill="#C62828">O⁻</text>
+              <line x1="58" y1="48" x2="58" y2="74" stroke="#333" stroke-width="1.5"/>
+              <text x="48" y="80" font-family="Arial" font-size="11" fill="#1565C0">NH₃⁺</text>
+              <line x1="58" y1="48" x2="82" y2="60" stroke="#333" stroke-width="1.5"/>
+              <text x="83" y="65" font-family="Arial" font-size="11" fill="#6A1B9A">Cl</text>
+            </svg>
+            <div style="font-size:9.5px;font-weight:700;color:var(--maroon);">Step 2</div>
+            <div style="font-size:9px;color:var(--text3);">Tetrahedral intermediate</div>
+          </div>
+          <div style="font-size:20pt;align-self:center;color:var(--text3);">→</div>
+          <div style="text-align:center;min-width:105px;">
+            <svg viewBox="0 0 118 82" width="108" height="75">
+              <text x="2" y="46" font-family="Arial" font-size="11" fill="#555">CH₃</text>
+              <line x1="26" y1="42" x2="52" y2="42" stroke="#333" stroke-width="1.5"/>
+              <line x1="52" y1="42" x2="52" y2="16" stroke="#333" stroke-width="1.5"/>
+              <line x1="55" y1="42" x2="55" y2="16" stroke="#333" stroke-width="1.5"/>
+              <text x="48" y="13" font-family="Arial" font-size="12" fill="#C62828">O</text>
+              <line x1="52" y1="42" x2="78" y2="54" stroke="#333" stroke-width="1.5"/>
+              <text x="76" y="58" font-family="Arial" font-size="14" fill="#1565C0">N</text>
+              <line x1="86" y1="52" x2="100" y2="42" stroke="#333" stroke-width="1.5"/>
+              <text x="101" y="38" font-family="Arial" font-size="10" fill="#777">H</text>
+              <line x1="86" y1="58" x2="100" y2="68" stroke="#333" stroke-width="1.5"/>
+              <text x="101" y="72" font-family="Arial" font-size="10" fill="#777">H</text>
+              <text x="54" y="28" font-family="Arial" font-size="9" fill="#6A1B9A">Cl⁻ leaves ↗</text>
+            </svg>
+            <div style="font-size:9.5px;font-weight:700;color:var(--maroon);">Steps 3–4</div>
+            <div style="font-size:9px;color:var(--text3);">Cl⁻ leaves; C=O reforms; proton transfer</div>
+          </div>
+        </div>
+        ${R.mech([
+          'Ammonia (NH₃) acts as a <strong>nucleophile</strong>. Its lone pair attacks the electrophilic carbonyl C (δ⁺) of ethanoyl chloride.',
+          'A <strong>tetrahedral intermediate</strong> forms — C now has four single bonds (O⁻, NH₃⁺, CH₃, Cl). The C=O π bond is broken.',
+          '<strong>Cl⁻ departs</strong> as the leaving group. The C=O π bond reforms (O⁻ lone pair donates back).',
+          '<strong>Proton transfer:</strong> Cl⁻ or a second NH₃ removes H⁺ from the N–H₃⁺ group → neutral product <strong>CH₃CONH₂</strong> (ethanamide).',
+        ])}
+        ${R.eq(`Overall: CH₃COCl + 2NH₃  →  CH₃CONH₂ + NH₄Cl
+(Second NH₃ neutralises the HCl produced)`)}
+        ${R.ans('<strong>Reaction type: Nucleophilic Acyl Substitution</strong> — NH₃ (nucleophile) replaces Cl⁻ (leaving group) at the carbonyl centre.')}
+      `,
+    },
+  ],
+},
+
+/* ─── SECTION 7: AMINES ─── */
+{
+  id:'amine', title:'Amines', shortTitle:'Amines', icon:'🧬',
+  questions:[
+    {
+      id:'amine-q1', num:'Q1', type:'Nomenclature', navLabel:'[Q1] IUPAC Names + Classification (a–j)',
+      question:'Give IUPAC names and classify as 1°, 2° or 3° for: a) (CH₃)₃CNH₂, b) cyclohexyl-NH₂, c) (C₆H₅)₂NH, d) (CH₃)₂NCH₂CH₂CH₃, e) NH₂(CH₂)₄NH₂, f–j) various structures.',
+      searchText:'amine primary secondary tertiary 1 2 3 IUPAC name classify tert-butylamine cyclohexanamine diphenylamine diethylaniline',
+      tags:['amine','naming','identification'],
+      answerHTML:`
+        ${R.table(['#','Formula','IUPAC Name','Class'],[
+          ['a','<span class="chem">(CH₃)₃C–NH₂</span>','<strong>2-methylpropan-2-amine</strong> (tert-butylamine)','1°'],
+          ['b','Cyclohexyl–NH₂','<strong>Cyclohexanamine</strong>','1°'],
+          ['c','<span class="chem">(C₆H₅)₂NH</span>','<strong>N-phenylaniline</strong> (diphenylamine)','2°'],
+          ['d','<span class="chem">(CH₃)₂NCH₂CH₂CH₃</span>','<strong>N,N-dimethylpropan-1-amine</strong>','3°'],
+          ['e','<span class="chem">NH₂(CH₂)₄NH₂</span>','<strong>Butane-1,4-diamine</strong> (putrescine)','1° (diamine)'],
+          ['f','<span class="chem">CH₃CH₂CHCH₃ with NH₂</span>','<strong>Butan-2-amine</strong>','1°'],
+          ['g','Ph–N(CH₂CH₃)₂','<strong>N,N-diethylaniline</strong>','3°'],
+          ['h','Ph–NH₂ + NO₂ (para)','<strong>4-nitroaniline</strong>','1°'],
+          ['i','Ph–NH–CH₂CH₃','<strong>N-ethylaniline</strong>','2°'],
+          ['j','Ph(3-Br)–NH–CH₃','<strong>3-bromo-N-methylaniline</strong>','2°'],
+        ])}
+        ${R.note('<strong>Classification rule:</strong> Count carbon groups directly on N. 1° = one C group. 2° = two C groups. 3° = three C groups.')}
+      `,
+    },
+    {
+      id:'amine-q3', num:'Q3', type:'Reactions', navLabel:'[Q3] n-Propylamine + 4 Reagents',
+      question:'Predict products when n-propylamine (CH₃CH₂CH₂NH₂) reacts with: a) HCl, b) methyl ethanoate, c) propanoyl chloride, d) acetic anhydride.',
+      searchText:'propylamine HCl ammonium salt methyl ethanoate aminolysis propanoyl chloride acetic anhydride amide',
+      tags:['amine','reaction'],
+      answerHTML:`
+        ${R.table(['Reagent','Product','Reaction Type'],[
+          ['a) HCl','<span class="chem">CH₃CH₂CH₂NH₃⁺Cl⁻</span> — <strong>Propylammonium chloride</strong>','Acid-base: amine + acid → ammonium salt'],
+          ['b) CH₃COOCH₃ (methyl ethanoate)','<span class="chem">CH₃CONHCH₂CH₂CH₃ + CH₃OH</span> — <strong>N-propylacetamide</strong>','Aminolysis of ester'],
+          ['c) CH₃CH₂COCl (propanoyl chloride)','<span class="chem">CH₃CH₂CONHCH₂CH₂CH₃ + HCl</span> — <strong>N-propylpropanamide</strong>','Nucleophilic acyl substitution'],
+          ['d) (CH₃CO)₂O (acetic anhydride)','<span class="chem">CH₃CONHCH₂CH₂CH₃ + CH₃COOH</span> — <strong>N-propylacetamide</strong>','Amine + anhydride → amide (milder than acyl chloride)'],
+        ])}
+      `,
+    },
+    {
+      id:'amine-q5', num:'Q5', type:'Reactions', navLabel:'[Q5] Ethylamine Equations (a–b)',
+      question:'Complete and balance: a) C₂H₅NH₂ + C₆H₅COCl, b) C₂H₅NH₂ + CH₃Cl (excess).',
+      searchText:'ethylamine benzoyl chloride N-ethylbenzamide quaternary ammonium exhaustive methylation excess',
+      tags:['amine','reaction'],
+      answerHTML:`
+        ${R.eq(`a) C₂H₅NH₂ + C₆H₅COCl  →  C₆H₅CONHC₂H₅ + HCl
+Product: N-ethylbenzamide — nucleophilic acyl substitution
+(Note: add 2 equiv of amine or pyridine to neutralise HCl: C₂H₅NH₂ + C₆H₅COCl + C₂H₅NH₂ → product + C₂H₅NH₃⁺Cl⁻)
+
+b) C₂H₅NH₂ + CH₃Cl (excess)  →  [C₂H₅(CH₃)₃N]⁺Cl⁻
+Exhaustive methylation → quaternary ammonium salt
+Sequence: C₂H₅NH₂ → C₂H₅NHCH₃ → C₂H₅N(CH₃)₂ → [C₂H₅N(CH₃)₃]⁺Cl⁻`)}
+        ${R.note('Quaternary ammonium salts have no N–H and carry a permanent positive charge. They have applications as antiseptics and surfactants.')}
+      `,
+    },
+    {
+      id:'amine-q6', num:'Q6', type:'Synthesis', navLabel:'[Q6] Phenyl-4-aminosalicylate (Anti-TB)',
+      question:'Phenyl-4-aminosalicylate is an anti-TB drug. Propose its synthesis starting from 4-nitrosalicylic acid.',
+      searchText:'phenyl-4-aminosalicylate anti-tuberculosis TB synthesis esterification nitro reduction H2/Pd',
+      tags:['amine','synthesis','reaction'],
+      answerHTML:`
+        ${R.eq(`Step 1: Esterification (–COOH + phenol → ester):
+4-NO₂-C₆H₃(OH)(COOH) + C₆H₅OH  →[SOCl₂ then C₆H₅OH, or DCC]→  4-NO₂-C₆H₃(OH)(COOC₆H₅)
+[The –COOH is converted to ester; the ring –OH is retained]
+
+Step 2: Reduction (–NO₂ → –NH₂):
+4-NO₂-C₆H₃(OH)(COOC₆H₅) + H₂/Pd–C  →  4-NH₂-C₆H₃(OH)(COOC₆H₅)
+Product: Phenyl-4-aminosalicylate`)}
+        ${R.note('<strong>Why esterification first?</strong> If we reduce –NO₂ first, the resulting –NH₂ group can interfere with esterification. Esterification conditions (acid catalyst) are compatible with –NO₂ but not always with –NH₂.')}
+        ${R.pharma('<strong>Phenyl-4-aminosalicylate</strong> (PAS ester) is an anti-tuberculosis drug. Malaysia has one of the highest TB burdens in Southeast Asia — pharmacists play a critical role in ensuring patient adherence to TB treatment regimens (DOTS strategy).')}
+      `,
+    },
+    {
+      id:'amine-q7', num:'Q7', type:'Reaction Scheme', navLabel:'[Q7] Nitrobenzene Scheme (W + I, II, III)',
+      question:'Nitrobenzene →(H₂/Pt)→ W →(I)→ N-phenylbenzamide →(II)→ diphenylamine; W →(III) also gives diphenylamine. i) Draw W, ii) IUPAC name of W, iii) reagents for I, II, III, iv) name reactions.',
+      searchText:'nitrobenzene aniline W reduction benzanilide N-phenylbenzamide diphenylamine benzoyl chloride LiAlH4 acylation',
+      tags:['amine','reaction','synthesis'],
+      answerHTML:`
+        ${R.diag([
+          {svg:`<polygon points="58,55 47,74 25,74 14,55 25,36 47,36" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="36" cy="55" r="13" fill="none" stroke="#333" stroke-width="1.2"/><line x1="47" y1="36" x2="47" y2="16" stroke="#333" stroke-width="1.5"/><text x="40" y="13" font-family="Arial" font-size="13" fill="#1565C0">NH₂</text>`,
+           name:'W = Aniline (benzenamine)',formula:'C₆H₅NH₂',badge:'1° Aromatic Amine',bc:'tag-amine',w:90,h:90},
+          {svg:`<polygon points="42,55 31,74 9,74 0,55 9,36 31,36" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="21" cy="55" r="11" fill="none" stroke="#333" stroke-width="1.1"/><polygon points="143,55 132,74 110,74 101,55 110,36 132,36" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="122" cy="55" r="11" fill="none" stroke="#333" stroke-width="1.1"/><line x1="42" y1="55" x2="62" y2="55" stroke="#333" stroke-width="1.5"/><line x1="62" y1="55" x2="62" y2="32" stroke="#333" stroke-width="1.5"/><line x1="65" y1="55" x2="65" y2="32" stroke="#333" stroke-width="1.5"/><text x="59" y="29" font-family="Arial" font-size="10" fill="#C62828">O</text><line x1="62" y1="55" x2="80" y2="55" stroke="#333" stroke-width="1.5"/><text x="78" y="53" font-family="Arial" font-size="14" fill="#1565C0">N</text><line x1="84" y1="47" x2="84" y2="37" stroke="#333" stroke-width="1.5"/><text x="80" y="34" font-family="Arial" font-size="9" fill="#777">H</text><line x1="90" y1="55" x2="101" y2="55" stroke="#333" stroke-width="1.5"/>`,
+           name:'N-phenylbenzamide (benzanilide)',formula:'C₆H₅CONHC₆H₅',badge:'2° Amide',bc:'tag-amide',w:155,h:88},
+        ])}
+        ${R.table(['Step','Reagents &amp; Conditions','Reaction Name'],[
+          ['NO₂ → W (Aniline)','H₂/Pt (catalytic hydrogenation)','Reduction'],
+          ['I: Aniline → N-phenylbenzamide','C₆H₅COCl (benzoyl chloride) + pyridine','<strong>Nucleophilic Acyl Substitution</strong> (Acylation)'],
+          ['II: N-phenylbenzamide → Diphenylamine','i) LiAlH₄, dry ether; ii) H₃O⁺','<strong>Reduction</strong> of amide to 2° amine'],
+          ['III: Aniline → Diphenylamine (directly)','C₆H₅Br + base (Buchwald–Hartwig) or similar','<strong>N-Arylation</strong> (or via reduction of acylation product)'],
+        ])}
+      `,
+    },
+    {
+      id:'amine-q8', num:'Q8', type:'Chemical Tests', navLabel:'[Q8] Ethylamine vs Dimethylamine Test',
+      question:'Describe the chemical test to distinguish ethylamine (1° amine) from dimethylamine (2° amine).',
+      searchText:'ethylamine dimethylamine nitrous acid NaNO2 HCl N2 gas nitrogen N-nitrosamine yellow oil primary secondary',
+      tags:['amine','reaction','identification'],
+      answerHTML:`
+        ${R.ans('<strong>Test: Nitrous acid test</strong> — Add NaNO₂ + HCl (ice cold, 0–5°C) to each compound.')}
+        ${R.table(['Amine','Type','Result with NaNO₂/HCl (0–5°C)','Explanation'],[
+          ['Ethylamine (CH₃CH₂NH₂)','1° (primary)','✅ Vigorous effervescence — N₂ gas (bubbles) released + ethanol formed','Unstable diazonium salt (RN₂⁺) forms immediately and decomposes: R–N₂⁺ → R⁺ + N₂↑ → alcohol'],
+          ['Dimethylamine ((CH₃)₂NH)','2° (secondary)','✅ Yellow oily liquid forms: (CH₃)₂N–N=O (N-nitrosamine) — no gas','Stable N-nitrosamine forms and persists as a yellow oil or precipitate'],
+        ])}
+        ${R.note('<strong>Summary:</strong> 1° amine + HNO₂ → N₂ gas (effervescence). 2° amine + HNO₂ → stable yellow N-nitrosamine oil (no gas). This is the key distinction.')}
+        ${R.note('<strong>Safety note:</strong> N-nitrosamines are known carcinogens. Handle with care in laboratory settings.')}
+      `,
+    },
+  ],
+},
+
+  ], // end sections
+}; // end TUTORIALS['t2']
+
+
+
+TUTORIALS['t1'] = {
+  id:'t1', code:'PHD125', tutorialNo:1,
+  topicShort:'Alkanes, Alkenes, Alkynes & Alcohols',
+  sections:[
+
+/* ─── SECTION 1: ALKANES, ALKENES & ALKYNES ─── */
+{
+  id:'alk', title:'Alkanes, Alkenes & Alkynes', shortTitle:'Hydrocarbons', icon:'⛽',
+  questions:[
+    {
+      id:'t1-a1', num:'A1', type:'Nomenclature', navLabel:'[A1] IUPAC Names (a–s)',
+      question:'Name compounds a–s using IUPAC nomenclature: branched alkanes, alkenes, alkynes, cycloalkanes, halogenated cycloalkenes.',
+      searchText:'IUPAC name alkane alkene alkyne cycloalkane methylbutane dimethylbutane pentyne hexyne halogenated cyclopentene',
+      tags:['naming','identification'],
+      answerHTML:`
+        ${R.table(['#','Structure','IUPAC Name','Type'],[
+          ['a','CH₃CH₂CH(CH₃)CH₃','<strong>2-methylbutane</strong>','Alkane'],
+          ['b','CH₃CH(CH₃)CH(CH₃)CH₃','<strong>2,3-dimethylbutane</strong>','Alkane'],
+          ['c','4C chain + ethyl + methyl branches','<strong>2-methyl-3-ethylpentane</strong> (verify longest chain = 5C)','Alkane'],
+          ['d','Long chain with propyl group','<strong>4-propylheptane</strong>','Alkane'],
+          ['e','5C chain with OH at C2 (expanded)','<strong>Pentan-2-ol</strong>','Alcohol'],
+          ['f','CH₃CH₂CH₂C≡CCH₂CH₂CH₂CH₃','<strong>4-nonyne</strong>','Alkyne'],
+          ['g','CH₃CH=CHCH₂CH₂CH₃','<strong>Hex-2-ene</strong>','Alkene'],
+          ['h','2,2,3,3-tetramethylbutane (very branched)','<strong>2,2,3,3-tetramethylbutane</strong>','Alkane'],
+          ['i','Branched alkene','<strong>2-methylpent-2-ene</strong>','Alkene'],
+          ['j','Complex cyclic alkene with substituents','Find longest chain + number for lowest locants','Cycloalkene'],
+          ['k','Expanded formula — cyclopentene','<strong>Cyclopentene</strong>','Cycloalkene'],
+          ['l','Expanded formula — methylcyclopentene','<strong>1-methylcyclopentene</strong>','Cycloalkene'],
+          ['m','Long expanded carbon chain','<strong>Octane</strong> (count carefully)','Alkane'],
+          ['n','Cyclopentane + two ethyl + propyl','<strong>1-ethyl-2-methyl-3-propylcyclopentane</strong>','Cycloalkane'],
+          ['o','Cycloheptane + CH₃ + CH₃ + CH₂CH₃','<strong>1,1-dimethyl-2-ethylcycloheptane</strong>','Cycloalkane'],
+          ['p','Cyclohexene + ethyl + CH₃','<strong>1-ethyl-2-methylcyclohex-2-ene</strong>','Cycloalkene'],
+          ['q','Alkene with Br and Cl','<strong>(Z)-1-bromo-1-chlorobut-1-ene</strong>','Halogenated alkene'],
+          ['r','Cyclohexene with ethyl group','<strong>1-ethylcyclohex-2-ene</strong>','Cycloalkene'],
+          ['s','Cyclohexene with Br and ethyl','<strong>3-bromo-1-ethylcyclohex-1-ene</strong>','Halogenated cycloalkene'],
+        ])}
+        ${R.note('<strong>IUPAC Rules Summary:</strong> ① Find longest continuous chain. ② Number from end closest to first substituent. ③ For alkenes/alkynes, number so multiple bond gets lowest locant. ④ For cyclic: add "cyclo-" prefix. ⑤ List substituents alphabetically.')}
+      `,
+    },
+    {
+      id:'t1-a2', num:'A2', type:'Drawing', navLabel:'[A2] Draw Molecules',
+      question:'Draw: 2,2,4-trimethylpentane, 2,3-diethyl-4-propyloctane, 3,4-diethyl-2,2-dimethyl-3-propyldecane, 1,2-dibromo-1-butene, 2-pentyne, 3-methyl-1-pentyne, 2,5,5,6-tetramethyl-3-heptyne, 4-isopropyloctane, isobutylene.',
+      searchText:'draw 2,2,4-trimethylpentane isooctane pentyne trimethylheptyne isobutylene 1,2-dibromo-1-butene',
+      tags:['drawing'],
+      answerHTML:`
+        ${R.table(['Name','Condensed Structural Formula','Key Note'],[
+          ['2,2,4-Trimethylpentane (isooctane)','<span class="chem">(CH₃)₃CCH₂CH(CH₃)CH₃</span>','Petrol octane rating reference (RON 100)'],
+          ['1,2-Dibromo-1-butene','<span class="chem">CHBr=CBrCH₂CH₃</span>','Both Br on C=C carbons'],
+          ['2-Pentyne','<span class="chem">CH₃C≡CCH₂CH₃</span>','Triple bond at C2–C3'],
+          ['3-Methyl-1-pentyne','<span class="chem">HC≡CCH(CH₃)CH₂CH₃</span>','Terminal alkyne; methyl at C3'],
+          ['4-Isopropyloctane','<span class="chem">CH₃CH₂CH₂CH(CH(CH₃)₂)CH₂CH₂CH₂CH₃</span>','Isopropyl group on C4 of octane'],
+          ['Isobutylene','<span class="chem">CH₂=C(CH₃)₂</span> (2-methylpropene)','Used in petrol additive synthesis (MTBE)'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-b1', num:'B1', type:'Properties', navLabel:'[B1] Boiling Point — Alkanes',
+      question:'Arrange in increasing boiling point: a) Nonane, pentane, decane, heptane. b) Pentane, 2-methylbutane, 2,2-dimethylpropane. Explain.',
+      searchText:'alkane boiling point order van der Waals branching nonane decane heptane pentane neopentane isopentane',
+      tags:['reaction','identification'],
+      answerHTML:`
+        ${R.ans('<strong>a) Pentane &lt; Heptane &lt; Nonane &lt; Decane</strong>')}
+        ${R.note('All straight-chain alkanes. Longer chain = greater MW + larger surface area = stronger London dispersion forces = higher BP.')}
+        ${R.ans('<strong>b) 2,2-Dimethylpropane &lt; 2-Methylbutane &lt; Pentane</strong>')}
+        ${R.note('All C₅H₁₂ isomers (same MW). More branching → more spherical shape → smaller surface area → weaker van der Waals forces → lower BP. Pentane (linear) has highest BP; 2,2-dimethylpropane (most spherical/compact) has lowest.')}
+        ${R.table(['Compound','Branching','Approx. BP'],[
+          ['Pentane (n-pentane)','None','36°C'],
+          ['2-Methylbutane (isopentane)','One branch','28°C'],
+          ['2,2-Dimethylpropane (neopentane)','Most branched','10°C'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-b2', num:'B2', type:'Properties', navLabel:'[B2] Alkene Reactivity Order',
+      question:'Explain the order of reactivity for acid-catalysed hydration: (CH₃)₂C=CH₂ > CH₃CH=CH₂ > CH₂=CH₂.',
+      searchText:'alkene reactivity acid catalysed hydration substituted electron density carbocation stability',
+      tags:['reaction'],
+      answerHTML:`
+        ${R.ans('<strong>Most → Least reactive: (CH₃)₂C=CH₂ > CH₃CH=CH₂ > CH₂=CH₂</strong>')}
+        ${R.note('More substituted alkenes react faster in acid-catalysed hydration because:<br>① Alkyl groups donate electrons (+I) → increase electron density on C=C → more reactive toward H⁺ (electrophile)<br>② More substituted carbocation intermediate formed → more stable → lower activation energy → faster reaction')}
+        ${R.table(['Alkene','Carbocation Formed','Stability','Reactivity'],[
+          ['(CH₃)₂C=CH₂','(CH₃)₃C⁺ (tertiary)','Most stable','Most reactive'],
+          ['CH₃CH=CH₂','CH₃CH⁺CH₃ (secondary)','Intermediate','Intermediate'],
+          ['CH₂=CH₂','CH₃CH₂⁺ (primary)','Least stable','Least reactive'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-c1', num:'C1', type:'Reactions', navLabel:'[C1] Identify Reaction Types (a–e)',
+      question:'Identify reaction types: a) CH₃CH₂CH=CH₂ + Br₂/CCl₄ → dibromide, b) alcohol + H⁺/heat → alkene + H₂O, c) alcohol + HCl/Zn → alkyl chloride, d) benzene + CH₃Cl/AlCl₃ → toluene, e) alkene → structural isomer alkene.',
+      searchText:'reaction type addition elimination substitution rearrangement Friedel Crafts alkylation dehydration',
+      tags:['reaction','identification'],
+      answerHTML:`
+        ${R.table(['#','Reaction','Type'],[
+          ['a','CH₃CH₂CH=CH₂ + Br₂/CCl₄ → CH₃CH₂CHBrCH₂Br','<strong>Addition (electrophilic)</strong> — Br₂ adds across C=C'],
+          ['b','CH₃CH(OH)CH₃ + H⁺/heat → CH₃CH=CH₂ + H₂O','<strong>Elimination (dehydration)</strong> — H₂O removed; C=C forms'],
+          ['c','CH₃CH₂OH + HCl/Zn → CH₃CH₂Cl + H₂O','<strong>Substitution (nucleophilic)</strong> — OH replaced by Cl'],
+          ['d','C₆H₆ + CH₃Cl/AlCl₃ → C₆H₅CH₃ + HCl','<strong>Substitution (electrophilic aromatic — Friedel-Crafts alkylation)</strong>'],
+          ['e','CH₃CH₂CH=CH₂ → CH₃CH=CHCH₃','<strong>Rearrangement (isomerisation)</strong> — same formula, different structure'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-c2', num:'C2', type:'Reactions', navLabel:'[C2] Carbocation Classification',
+      question:'Carbocations from: CH₃C(CH₃)–CHCH₃ rearrangement. a) Classify the carbocations. b) Relative stability. c) Type of reaction.',
+      searchText:'carbocation classify primary secondary tertiary stability electrophilic addition',
+      tags:['reaction','mechanism'],
+      answerHTML:`
+        ${R.ans('Both carbocations shown are <strong>Tertiary (3°)</strong> — the positive carbon is bonded to 3 other carbon groups.')}
+        ${R.note('<strong>Stability order:</strong> 3° (tertiary) > 2° (secondary) > 1° (primary) > methyl carbocation<br>More alkyl groups → donate electrons by induction (+I) → stabilise the positive charge → more stable.')}
+        ${R.ans('<strong>c) Reaction type: Electrophilic Addition</strong> — H⁺ (electrophile) adds to the C=C to form a carbocation intermediate.')}
+      `,
+    },
+    {
+      id:'t1-c3', num:'C3', type:'Definitions', navLabel:'[C3] Define 4 Reaction Types',
+      question:'Define: a) Rearrangement, b) Substitution, c) Addition, d) Elimination.',
+      searchText:'define rearrangement substitution addition elimination organic reaction types meaning',
+      tags:['identification'],
+      answerHTML:`
+        ${R.table(['Term','Definition','Example'],[
+          ['a) Rearrangement','Atoms within a molecule reorganise to give a structural isomer; same molecular formula, different connectivity','1-butene → 2-butene'],
+          ['b) Substitution','One atom or group in a molecule is replaced by another atom or group','CH₄ + Cl₂ → CH₃Cl + HCl'],
+          ['c) Addition','Two reactants combine to form a single product by breaking a π bond (C=C or C≡C)','CH₂=CH₂ + HBr → CH₃CH₂Br'],
+          ['d) Elimination','A small molecule (HX, H₂O) is lost from a substrate, forming a π bond (C=C); reverse of addition','CH₃CH₂OH → CH₂=CH₂ + H₂O'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-c4', num:'C4', type:'Identification', navLabel:'[C4] Classify Reactive Species',
+      question:'Classify as free radical, carbonium ion, carbanion, electrophile or nucleophile: a) (CH₃)₂CH⁻, b) CH₃CH₂·, c) CH₃O⁻, d) NO₂⁺, e) (CH₃)₃C⁺.',
+      searchText:'free radical carbocation carbanion electrophile nucleophile classify species',
+      tags:['identification'],
+      answerHTML:`
+        ${R.table(['Species','Classification','Reason'],[
+          ['a) (CH₃)₂CH⁻','<strong>Carbanion</strong>','Carbon with negative charge; electron-rich; acts as nucleophile'],
+          ['b) CH₃CH₂·','<strong>Free radical</strong>','Unpaired electron (dot notation); highly reactive'],
+          ['c) CH₃O⁻','<strong>Nucleophile (methoxide ion)</strong>','Negative charge + lone pairs on O; donates electrons to electrophiles'],
+          ['d) NO₂⁺','<strong>Electrophile (nitronium ion)</strong>','Positive charge; attacks electron-rich rings in aromatic nitration'],
+          ['e) (CH₃)₃C⁺','<strong>Carbonium ion (tertiary carbocation)</strong>','Positive charge on C; electron-deficient; acts as electrophile'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-d1', num:'D1', type:'Reactions', navLabel:'[D1] Combustion Reactions',
+      question:'Write balanced combustion reactions for: a) C₇H₁₆, b) C₄H₁₀, c) But-2-ene, d) But-1-yne, e) 2-methylpropane, f) 2,4-diethylhexane.',
+      searchText:'combustion balanced equation alkane alkene alkyne heptane butane oxygen CO2 H2O methylpropane',
+      tags:['reaction'],
+      answerHTML:`
+        ${R.note('<strong>Formula:</strong> Alkane CₙH₂ₙ₊₂: CₙH₂ₙ₊₂ + (3n+1)/2 O₂ → nCO₂ + (n+1)H₂O &nbsp;|&nbsp; Alkene CₙH₂ₙ: + 3n/2 O₂ → nCO₂ + nH₂O &nbsp;|&nbsp; Alkyne CₙH₂ₙ₋₂: + (3n-1)/2 O₂ → nCO₂ + (n-1)H₂O')}
+        ${R.eq(`a) C₇H₁₆ + 11O₂  →  7CO₂ + 8H₂O
+
+b) 2C₄H₁₀ + 13O₂  →  8CO₂ + 10H₂O
+
+c) But-2-ene (C₄H₈): C₄H₈ + 6O₂  →  4CO₂ + 4H₂O
+
+d) But-1-yne (C₄H₆): 2C₄H₆ + 11O₂  →  8CO₂ + 6H₂O
+
+e) 2-Methylpropane (C₄H₁₀): 2C₄H₁₀ + 13O₂  →  8CO₂ + 10H₂O
+
+f) 2,4-Diethylhexane (C₁₀H₂₂): 2C₁₀H₂₂ + 31O₂  →  20CO₂ + 22H₂O`)}
+      `,
+    },
+    {
+      id:'t1-d2', num:'D2', type:'Reactions', navLabel:'[D2] Free Radical Halogenation of 2-Methylpentane',
+      question:'2-Methylpentane + Br₂/sunlight: a) Reaction type. b) Name 4 possible monobrominated products. c) Mechanism for major product. d) What happens in the dark?',
+      searchText:'free radical bromination 2-methylpentane sunlight mechanism initiation propagation termination major product',
+      tags:['reaction','mechanism'],
+      answerHTML:`
+        ${R.ans('<strong>a) Free Radical Substitution (photochemical bromination)</strong>')}
+        <strong>b) Four monobrominated products of (CH₃)₂CHCH₂CH₂CH₃:</strong>
+        ${R.table(['Product','IUPAC Name','C-type'],[
+          ['<span class="chem">(CH₃)₂CBrCH₂CH₂CH₃</span>','<strong>2-bromo-2-methylpentane</strong> (MAJOR)','3° C — most stable radical'],
+          ['<span class="chem">(CH₃)₂CHCH(Br)CH₂CH₃</span>','<strong>3-bromo-2-methylpentane</strong>','2° C'],
+          ['<span class="chem">(CH₃)₂CHCH₂CH(Br)CH₃</span>','<strong>4-bromo-2-methylpentane</strong>','2° C'],
+          ['<span class="chem">(CH₃)₂CHCH₂CH₂CH₂Br</span>','<strong>1-bromo-4-methylpentane</strong>','1° C'],
+        ])}
+        ${R.mech([
+          '<strong>Initiation:</strong> Br₂ + hν → 2Br· (UV light cleaves Br–Br homolytically)',
+          '<strong>Propagation 1:</strong> Br· + (CH₃)₂CHCH₂CH₂CH₃ → (CH₃)₂C·CH₂CH₂CH₃ + HBr (H abstracted from 3° C — most stable radical)',
+          '<strong>Propagation 2:</strong> (CH₃)₂C·CH₂CH₂CH₃ + Br₂ → (CH₃)₂CBrCH₂CH₂CH₃ + Br· (chain continues)',
+          '<strong>Termination:</strong> Br· + Br· → Br₂ (or any two radicals combine)',
+        ])}
+        ${R.ans('<strong>d) In the dark:</strong> No reaction. Free radical halogenation requires UV light (hν) or heat to initiate. Without light, Br₂ does not react with alkanes at room temperature.')}
+      `,
+    },
+    {
+      id:'t1-d3', num:'D3', type:'Mechanism', navLabel:'[D3] Monochlorination of Propane Mechanism',
+      question:'Write the stepwise mechanism for monochlorination of propane (CH₃CH₂CH₃ + Cl₂ → products).',
+      searchText:'monochlorination propane mechanism free radical initiation propagation termination 1-chloropropane 2-chloropropane',
+      tags:['mechanism','reaction'],
+      answerHTML:`
+        ${R.eq(`CH₃CH₂CH₃ + Cl₂  →[hν]→  CH₃CH₂CH₂Cl (1-chloropropane, minor) + CH₃CHClCH₃ (2-chloropropane, major) + HCl`)}
+        ${R.mech([
+          '<strong>Initiation:</strong> Cl₂ + hν → 2Cl· (UV light; homolytic cleavage)',
+          '<strong>Propagation 1a:</strong> Cl· + CH₃CH₂CH₃ → CH₃CH·CH₃ + HCl (H abstracted from C2 → 2° radical, more stable — gives MAJOR product)',
+          '<strong>Propagation 1b:</strong> Cl· + CH₃CH₂CH₃ → CH₃CH₂CH₂· + HCl (H abstracted from C1 → 1° radical → minor product)',
+          '<strong>Propagation 2:</strong> CH₃CH·CH₃ + Cl₂ → CH₃CHClCH₃ + Cl· (radical reacts with Cl₂; Cl· regenerated; chain continues)',
+          '<strong>Termination:</strong> Cl· + Cl· → Cl₂ OR Cl· + CH₃CH·CH₃ → CH₃CHClCH₃ (two radicals combine; chain ends)',
+        ])}
+        ${R.note('Major product = 2-chloropropane (via more stable 2° radical intermediate). Unlike Br₂, Cl₂ is less selective — it attacks both 1° and 2° C–H bonds, so both products form.')}
+      `,
+    },
+    {
+      id:'t1-d4', num:'D4', type:'Reactions', navLabel:'[D4] 2-Butene + 6 Reagents',
+      question:'Write and name organic products when 2-butene (CH₃CH=CHCH₃) reacts with: a) H₂/Ni, b) HCl, c) H₂O/H₂SO₄, d) acidified KMnO₄, e) Br₂/CH₂Cl₂, f) Br₂/H₂O.',
+      searchText:'2-butene reactions hydrogenation HCl Markovnikov water hydration KMnO4 oxidation bromine bromohydrin products',
+      tags:['reaction'],
+      answerHTML:`
+        ${R.table(['Reagent','Product','Reaction'],[
+          ['a) H₂/Ni','<span class="chem">CH₃CH₂CH₂CH₃</span> — <strong>Butane</strong>','Hydrogenation — catalytic reduction'],
+          ['b) HCl','<span class="chem">CH₃CH₂CHClCH₃</span> — <strong>2-Chlorobutane</strong> (Markovnikov, major)','Electrophilic addition — H to less substituted C'],
+          ['c) H₂O/H₂SO₄','<span class="chem">CH₃CH₂CH(OH)CH₃</span> — <strong>Butan-2-ol</strong>','Acid-catalysed hydration — Markovnikov'],
+          ['d) KMnO₄/H⁺','<span class="chem">2 × CH₃COOH</span> — <strong>2 mol ethanoic acid</strong>','Oxidative cleavage of C=C'],
+          ['e) Br₂/CH₂Cl₂','<span class="chem">CH₃CHBrCHBrCH₃</span> — <strong>2,3-Dibromobutane</strong>','Electrophilic addition — anti addition via bromonium ion'],
+          ['f) Br₂/H₂O','<span class="chem">CH₃CH(OH)CHBrCH₃</span> — <strong>3-Bromo-2-butanol</strong>','Bromohydrin formation — OH and Br add anti'],
+        ])}
+        ${R.note('<strong>Markovnikov\'s Rule:</strong> In HX addition to unsymmetrical alkene, H adds to carbon with MORE H atoms; X adds to carbon with FEWER H atoms (more substituted). Based on stability of carbocation intermediate.')}
+      `,
+    },
+    {
+      id:'t1-d5', num:'D5', type:'Reactions', navLabel:'[D5] Markovnikov vs Anti-Markovnikov',
+      question:'a) Distinguish Markovnikov and anti-Markovnikov. b) Equation: 2-methylpropene + HBr. c) Reaction type. d) Mechanism.',
+      searchText:'Markovnikov anti-Markovnikov 2-methylpropene HBr mechanism electrophilic addition peroxide radical carbocation',
+      tags:['reaction','mechanism'],
+      answerHTML:`
+        ${R.table(['','Markovnikov','Anti-Markovnikov'],[
+          ['Conditions','HX without peroxide (ionic)','HBr with peroxide ROOR (radical)'],
+          ['H adds to...','C with MORE H (less substituted)','C with LESS H (more substituted)'],
+          ['X adds to...','More substituted C','Less substituted C'],
+          ['Intermediate','Carbocation (more stable = more substituted)','Free radical (more stable = more substituted)'],
+        ])}
+        ${R.eq(`b) 2-Methylpropene + HBr (no peroxide — Markovnikov):
+(CH₃)₂C=CH₂ + HBr  →  (CH₃)₂CBrCH₃
+Product: 2-bromo-2-methylpropane (tert-butyl bromide, MAJOR)
+[With peroxide: (CH₃)₂C=CH₂ + HBr/ROOR → (CH₃)₂CHCH₂Br — 1-bromo-2-methylpropane (anti-Markovnikov)]`)}
+        ${R.ans('<strong>c) Electrophilic Addition</strong>')}
+        ${R.mech([
+          'H⁺ from HBr adds to CH₂ (less substituted C) → forms tertiary carbocation (CH₃)₃C⁺ (more stable)',
+          'Br⁻ (nucleophile) attacks the tertiary C⁺ → (CH₃)₃CBr (2-bromo-2-methylpropane)',
+          'Markovnikov selectivity: tertiary carbocation (CH₃)₃C⁺ is much more stable than primary CH₂⁺; lower activation energy → major product',
+        ])}
+      `,
+    },
+    {
+      id:'t1-d6', num:'D6', type:'Reactions', navLabel:'[D6] Reagents for Cycloalkene Conversions',
+      question:'Identify reagents for converting methylenecyclohexane to: a) methylcyclohexane, b) bromomethylcyclohexane, c) 1-methylcyclohexan-1-ol, d) 1-chloro product (major), e) 1,1-dichloride, f) chlorohydrin.',
+      searchText:'methylenecyclohexane reagents H2 HBr HCl water H2SO4 Cl2 bromine halogenation cyclohexane',
+      tags:['reaction'],
+      answerHTML:`
+        ${R.table(['Target','Reagents & Conditions'],[
+          ['a) Reduce C=C → CH₂ (methylcyclohexane)','<strong>H₂/Ni (or Pt, Pd)</strong> — catalytic hydrogenation'],
+          ['b) Br on exo-CH₂ (Markovnikov: Br on ring C)','<strong>HBr</strong> (no peroxide) — electrophilic addition; Markovnikov → Br at more substituted ring C'],
+          ['c) OH on ring C (tertiary alcohol)','<strong>H₂O/conc. H₂SO₄</strong> — acid-catalysed hydration; Markovnikov → OH at tertiary C'],
+          ['d) Cl on ring C (major)','<strong>HCl</strong> — electrophilic addition; Markovnikov'],
+          ['e) 1,1-Dichloride (gem-dichloride)','<strong>Cl₂/CCl₄</strong> (or CH₂Cl₂) — addition across C=C'],
+          ['f) Chlorohydrin','<strong>Cl₂/H₂O</strong> — chlorohydrin formation; Cl and OH add anti'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-d7', num:'D7', type:'Reactions', navLabel:'[D7] Reactions with Mechanisms',
+      question:'Predict products + mechanisms: a) 2-pentyne + excess H₂/Pd, b) 2-methylbut-2-ene + H₂/Pt, c) 2-methylbut-2-ene + Cl₂/CCl₄, d) 2-pentyne + O₃.',
+      searchText:'2-pentyne excess hydrogen hydrogenation 2-methylbut-2-ene chlorine ozonolysis products mechanism',
+      tags:['reaction','mechanism'],
+      answerHTML:`
+        ${R.eq(`a) 2-Pentyne + excess H₂/Pd:
+CH₃C≡CCH₂CH₃ + 2H₂ →[Pd, excess H₂]→ CH₃CH₂CH₂CH₂CH₃ (pentane)
+Alkyne fully reduced to alkane (via alkene intermediate)
+
+b) 2-Methylbut-2-ene + H₂/Pt:
+(CH₃)₂C=CHCH₃ + H₂ →[Pt]→ (CH₃)₂CHCH₂CH₃ (2-methylbutane)
+Syn addition (both H add to same face)
+
+c) 2-Methylbut-2-ene + Cl₂/CCl₄:
+(CH₃)₂C=CHCH₃ + Cl₂ → (CH₃)₂CClCHClCH₃ (2,3-dichloro-2-methylbutane)
+Anti addition via cyclic chloronium ion; vicinal dichloride
+
+d) 2-Pentyne + O₃ (ozonolysis):
+CH₃C≡CCH₂CH₃ + O₃ →[H₂O]→ CH₃COOH + CH₃CH₂COOH
+(Triple bond cleaved: ethanoic acid + propanoic acid)`)}
+      `,
+    },
+    {
+      id:'t1-exam-mar2016', num:'EX1', type:'Exam Question', navLabel:'[Exam Mar 2016] Isomers & Markovnikov Mechanism',
+      question:'a) List 4 structural isomers of C₆H₁₄. b) Rank in increasing BP. c) Draw trans-2-pentene, isobutylcyclohexane, 2,2-dimethylpentane. d) Explain Markovnikov\'s rule. e) Mechanism for acid-catalysed hydration of 2-methylbut-2-ene. (4+2+6+2+4 marks)',
+      searchText:'C6H14 isomers hexane methylpentane dimethylbutane boiling point Markovnikov hydration mechanism 2-methylbut-2-ene',
+      tags:['naming','reaction','mechanism','exam'], examYear:'2016',
+      answerHTML:`
+        <strong>a) Four structural isomers of C₆H₁₄:</strong>
+        ${R.table(['#','Name','Formula'],[
+          ['1','Hexane','CH₃CH₂CH₂CH₂CH₂CH₃'],
+          ['2','2-Methylpentane','CH₃CH(CH₃)CH₂CH₂CH₃'],
+          ['3','3-Methylpentane','CH₃CH₂CH(CH₃)CH₂CH₃'],
+          ['4','2,2-Dimethylbutane','(CH₃)₃CCH₂CH₃'],
+        ])}
+        ${R.note('Total 5 isomers exist for C₆H₁₄; 2,3-dimethylbutane is the 5th.')}
+        <strong>b) Increasing BP: 2,2-Dimethylbutane &lt; 2-Methylpentane &lt; 3-Methylpentane &lt; Hexane</strong><br>
+        <em>More branching → lower BP. Hexane (unbranched) has highest BP.</em>
+        <strong>c) Structures:</strong>
+        ${R.grid3([
+          R.lbl('trans-2-Pentene','CH₃CH=CHCH₂CH₃ (trans: CH₃ groups on opposite sides of C=C)'),
+          R.lbl('Isobutylcyclohexane','Cyclohexane ring with –CH₂CH(CH₃)₂ at C1'),
+          R.lbl('2,2-Dimethylpentane','(CH₃)₃CCH₂CH₂CH₃'),
+        ])}
+        ${R.ans('<strong>d) Markovnikov\'s Rule:</strong> When HX adds to an asymmetric alkene, H adds to the carbon bearing more H atoms (less substituted), and X adds to the carbon bearing fewer H atoms (more substituted). This occurs because the more substituted carbocation is more stable (more alkyl groups donate electrons).')}
+        <strong>e) Mechanism — Acid-catalysed hydration of 2-methylbut-2-ene:</strong>
+        ${R.mech([
+          '<strong>Step 1 — Protonation:</strong> H⁺ (from H₂SO₄) adds to less substituted C (=CHCH₃ end) → tertiary carbocation forms: (CH₃)₂C⁺CH₂CH₃',
+          '<strong>Step 2 — Water attack:</strong> H₂O (nucleophile) attacks the tertiary carbocation → protonated alcohol (oxonium ion): (CH₃)₂C(OH₂⁺)CH₂CH₃',
+          '<strong>Step 3 — Deprotonation:</strong> H₂O removes H⁺ from oxonium ion → 2-methylbutan-2-ol (tertiary alcohol): (CH₃)₂C(OH)CH₂CH₃',
+        ])}
+      `,
+    },
+    {
+      id:'t1-exam-oct2016', num:'EX2', type:'Exam Question', navLabel:'[Exam Oct 2016] Sigma/Pi Bonds & HBr Reactions',
+      question:'a) Draw condensed structures: i) 1,3,5-trichloropentyne, ii) cis-1,2-dimethylcyclopropane. b) Count σ and π bonds in 5-isopropyl-2-octen-6-yne. c) IUPAC names. d) HBr + peroxide (X) and HBr without peroxide (Y) products. e) Increasing BP: hexane, 1-pentanol, pentane, 1,2-hexanediol. (Oct 2016)',
+      searchText:'sigma pi bonds trichloropentyne cis dimethylcyclopropane HBr peroxide anti-Markovnikov boiling point hexanediol pentanol',
+      tags:['naming','reaction','mechanism','exam'], examYear:'2016',
+      answerHTML:`
+        ${R.grid2([
+          R.lbl('a-i) 1,3,5-Trichloropentyne','<span class="chem">ClCH₂C≡CCHClCH₂Cl</span><br>(Cl at C1, C3, C5; triple bond C2–C3)'),
+          R.lbl('a-ii) cis-1,2-Dimethylcyclopropane','Cyclopropane (triangle ring) with both CH₃ groups on the SAME side (cis = same face)'),
+        ])}
+        <strong>b) σ and π bonds in 5-isopropyl-2-octen-6-yne:</strong>
+        ${R.eq(`Structure: CH₃-CH=CH-CH₂-CH(CH(CH₃)₂)-C≡C-CH₃
+C=C double bond contributes: 1σ + 1π
+C≡C triple bond contributes: 1σ + 2π
+All C–C and C–H single bonds = σ bonds only
+Total π bonds = 3 (1 from C=C and 2 from C≡C)`)}
+        <strong>d) HBr reactions:</strong>
+        ${R.eq(`Cyclobutyl-CH₂ (methylenecyclobutane) + HBr + peroxide (anti-Markovnikov):
+X = BrCH₂–cyclobutane (Br on terminal CH₂; anti-Markovnikov)
+
+CH₃CH₂=C(CH₃)₂ (2-methylbut-2-ene) + HBr without peroxide (Markovnikov):
+Y = CH₃CH₂CBr(CH₃)₂ = 2-bromo-2-methylbutane (Br on most substituted C)`)}
+        <strong>e) Increasing BP: Pentane &lt; Hexane &lt; 1-Pentanol &lt; 1,2-Hexanediol</strong>
+        ${R.note('Pentane/hexane — van der Waals only. 1-Pentanol — one O–H H-bond. 1,2-Hexanediol — TWO O–H groups → more H-bonds → highest BP.')}
+      `,
+    },
+    {
+      id:'t1-exam-sep2014', num:'EX3', type:'Exam Question', navLabel:'[Exam Sept 2014] Naming + Ozonolysis + Free Radical',
+      question:'a) Name three structures by IUPAC. b) Draw: alkane with 1° and 4° C; alkyl halide with 2° halide. c) Products: i) ozonolysis, ii) Cl₂/UV, iii) 1-bromobutane + Mg/H₂O. d) Mechanism for chloromethane production. (6+3+6+4 marks)',
+      searchText:'IUPAC name September 2014 ozonolysis Cl2 UV free radical chloromethane 1-bromobutane Grignard Mg',
+      tags:['naming','reaction','mechanism','exam'], examYear:'2014',
+      answerHTML:`
+        <strong>a) IUPAC names from structures:</strong>
+        ${R.table(['Description','IUPAC Name'],[
+          ['Branched chain with Cl (skeletal formula)','<strong>4-chloro-2,3-dimethylpentane</strong> (or as read from actual structure)'],
+          ['Cyclopentane ring with Br and methyl','<strong>1-bromo-2-methylcyclopentane</strong>'],
+          ['Cyclobutane with attached alkyne','<strong>Ethynylcyclobutane</strong> (cyclobutylacetylene)'],
+        ])}
+        <strong>b) Structures:</strong>
+        ${R.grid2([
+          R.lbl('Alkane with 1° and 4° carbon','<span class="chem">(CH₃)₄C</span> = neopentane. Central C is quaternary (4°); each CH₃ C is primary (1°).'),
+          R.lbl('Alkyl halide with 2° halide','<span class="chem">CH₃CHBrCH₃</span> = 2-bromopropane. Br on C2 = secondary carbon.'),
+        ])}
+        <strong>c) Products:</strong>
+        ${R.eq(`i) Ozonolysis (O₃ then (CH₃)₂S or Zn/H₂O):
+Alkene cleaved at C=C; each C of double bond → carbonyl compound
+e.g. (CH₃)₂C=C(CH₃)₂ + O₃ + (CH₃)₂S → 2 × CH₃COCH₃ (acetone)
+
+ii) Cl₂/UV (free radical photochlorination of branched alkane):
+Multiple monosubstituted products (at each C–H); mixture of constitutional isomers
+
+iii) CH₃CH₂CH₂CH₂Br + Mg/H₂O:
+Step 1: + Mg/dry ether → CH₃CH₂CH₂CH₂MgBr (Grignard reagent)
+Step 2: + H₂O → CH₃CH₂CH₂CH₃ + Mg(OH)Br
+Product: Butane (Grignard hydrolysis)`)}
+        <strong>d) Free radical mechanism for chloromethane (CH₄ + Cl₂):</strong>
+        ${R.mech([
+          '<strong>Initiation:</strong> Cl₂ + hν → 2Cl· (UV light; homolytic cleavage)',
+          '<strong>Propagation 1:</strong> Cl· + CH₄ → CH₃· + HCl (H abstracted from methane)',
+          '<strong>Propagation 2:</strong> CH₃· + Cl₂ → CH₃Cl + Cl· (Cl· regenerated; chain continues)',
+          '<strong>Termination:</strong> Cl· + Cl· → Cl₂ OR CH₃· + Cl· → CH₃Cl OR CH₃· + CH₃· → C₂H₆',
+        ])}
+      `,
+    },
+  ],
+},
+
+/* ─── SECTION 2: ALCOHOL & PHENOL ─── */
+{
+  id:'alc', title:'Alcohol & Phenol', shortTitle:'Alcohol & Phenol', icon:'🍶',
+  questions:[
+    {
+      id:'t1-alc-a1', num:'A1', type:'Nomenclature', navLabel:'[A1] IUPAC Names — Alcohols (a–n)',
+      question:'Give IUPAC names for 14 alcohol structures (a–n) including cyclic alcohols, phenols, diols, and aromatic alcohols.',
+      searchText:'alcohol IUPAC name cyclopentanol methylpropanol phenol diol propanol hexanol butanol glycerol hydroxyl naming',
+      tags:['naming','identification'],
+      answerHTML:`
+        ${R.table(['#','Structure/Description','IUPAC Name','Class'],[
+          ['a','CH₃CH₂CH(OH)CH₂CH₂CH₃','<strong>Hexan-3-ol</strong>','2° alcohol'],
+          ['b','Cyclopentane + OH','<strong>Cyclopentanol</strong>','2° cyclic'],
+          ['c','(CH₃)₂CHCH₂OH','<strong>2-Methylpropan-1-ol</strong>','1° alcohol'],
+          ['d','Benzene ring + OH','<strong>Phenol</strong>','Phenol'],
+          ['e','CH₃CH₂CH₂OH','<strong>Propan-1-ol</strong>','1° alcohol'],
+          ['f','CH₂=CHCH(OH)CH₂CH₂CH₃','<strong>Hex-5-en-3-ol</strong>','Unsaturated 2° alcohol'],
+          ['g','Benzene + CH=CH–C(CH₃)₂OH','Complex aromatic tertiary alcohol','3° alcohol'],
+          ['h','HOCH₂CH(OH)CH₂OH (glycerol expanded)','<strong>Propane-1,2,3-triol</strong> (glycerol)','Triol'],
+          ['i','HCH=CHC(OH)Br₂ type structure','<strong>Bromo-propenol derivative</strong>','Halogenated alcohol'],
+          ['k','H₂C=CHCH(OH)CH₂CH₂CH₃','<strong>Hex-1-en-3-ol</strong>','Unsaturated 2°'],
+          ['l','Benzene + CH=CH–C(CH₃)(OH) chain','<strong>2-methyl-1-phenylprop-2-en-1-ol</strong>','Allylic 2°'],
+          ['m','Propane-1,2,3-triol (glycerol)','<strong>Propane-1,2,3-triol</strong>','Triol'],
+          ['n','Dibromo-propenol','<strong>1,1-Dibromoprop-2-en-1-ol</strong>','Halogenated alcohol'],
+        ])}
+        ${R.pharma('<strong>Glycerol</strong> (propane-1,2,3-triol) is a key pharmaceutical excipient in Malaysian medicines — used as a solvent, humectant, and sweetening agent in syrups and skin formulations. Also the backbone of triglyceride fats.')}
+      `,
+    },
+    {
+      id:'t1-alc-a2', num:'A2', type:'Drawing', navLabel:'[A2] Draw Alcohol Structures',
+      question:'Draw: sec-butyl alcohol, 2,3-dichloro-4-methyl-4-octanol, 3-heptanol, 1-cyclopropylethanol, 1-methylcyclohexanol, 2,4-dinitrophenol, 2-ethyl-2-pentanol, o-bromophenol, 2,4,6-trifluorophenol, 1,4-butandiol.',
+      searchText:'draw alcohol sec-butyl 3-heptanol cyclopropylethanol methylcyclohexanol dinitrophenol bromophenol trifluorophenol butandiol',
+      tags:['drawing'],
+      answerHTML:`
+        ${R.table(['Name','Structural Formula','Type'],[
+          ['sec-Butyl alcohol','<span class="chem">CH₃CH(OH)CH₂CH₃</span> (butan-2-ol)','2° alcohol'],
+          ['3-Heptanol','<span class="chem">CH₃CH₂CH(OH)CH₂CH₂CH₂CH₃</span>','2° alcohol'],
+          ['1-Cyclopropylethanol','Cyclopropyl ring–CH(OH)CH₃','2° alcohol with cyclopropyl group'],
+          ['1-Methylcyclohexanol','Cyclohexane ring: C1 has both –CH₃ and –OH','3° alcohol'],
+          ['2,4-Dinitrophenol','Benzene: OH at C1, NO₂ at C2 and C4','Phenol — very acidic'],
+          ['2-Ethyl-2-pentanol','<span class="chem">CH₃CH₂CH₂C(OH)(CH₂CH₃)CH₃... </span> (3° alcohol at C2 of pentane)','3° alcohol'],
+          ['o-Bromophenol','Benzene: OH at C1, Br at C2','Ortho-substituted phenol'],
+          ['2,4,6-Trifluorophenol','Benzene: OH at C1, F at C2, C4, C6','Highly acidic phenol'],
+          ['1,4-Butandiol','<span class="chem">HOCH₂CH₂CH₂CH₂OH</span>','Diol (both ends)'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-alc-b1', num:'B1', type:'Properties', navLabel:'[B1] H-Bonding in Methanol',
+      question:'Draw several methanol (CH₃OH) molecules illustrating hydrogen bonding between them.',
+      searchText:'methanol hydrogen bonding intermolecular O-H dipole partial charge alcohol solubility',
+      tags:['identification'],
+      answerHTML:`
+        <div style="text-align:center;margin:8px 0;padding:12px;background:var(--surface2);border-radius:6px;">
+          <svg viewBox="0 0 280 100" width="260" height="92">
+            <text x="8" y="42" font-family="Arial" font-size="11" fill="#555">CH₃</text>
+            <line x1="30" y1="38" x2="52" y2="38" stroke="#333" stroke-width="1.5"/>
+            <text x="50" y="42" font-family="Arial" font-size="13" fill="#C62828">O</text>
+            <line x1="60" y1="36" x2="75" y2="26" stroke="#333" stroke-width="1.5"/>
+            <text x="73" y="22" font-family="Arial" font-size="11" fill="#777">H···</text>
+            <line x1="98" y1="22" x2="112" y2="38" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <text x="105" y="65" font-family="Arial" font-size="11" fill="#555">CH₃</text>
+            <line x1="127" y1="62" x2="148" y2="62" stroke="#333" stroke-width="1.5"/>
+            <text x="146" y="66" font-family="Arial" font-size="13" fill="#C62828">O</text>
+            <line x1="156" y1="60" x2="170" y2="50" stroke="#333" stroke-width="1.5"/>
+            <text x="168" y="46" font-family="Arial" font-size="11" fill="#777">H···</text>
+            <line x1="192" y1="46" x2="208" y2="62" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <text x="202" y="88" font-family="Arial" font-size="11" fill="#555">CH₃</text>
+            <line x1="222" y1="85" x2="245" y2="85" stroke="#333" stroke-width="1.5"/>
+            <text x="243" y="89" font-family="Arial" font-size="13" fill="#C62828">O</text>
+            <line x1="253" y1="83" x2="268" y2="73" stroke="#333" stroke-width="1.5"/>
+            <text x="266" y="69" font-family="Arial" font-size="11" fill="#777">H</text>
+            <text x="92" y="18" font-family="Arial" font-size="8" fill="#1565C0" font-style="italic">H-bond</text>
+            <text x="188" y="42" font-family="Arial" font-size="8" fill="#1565C0" font-style="italic">H-bond</text>
+          </svg>
+        </div>
+        ${R.ans('Each methanol has one O–H donor and two lone pairs on O as acceptors → forms a chain/network of H-bonds.')}
+        ${R.note('<strong>H-bond requirements:</strong> (1) X–H where X = O, N, or F (donor), (2) Lone pair on O, N, or F (acceptor), (3) Proximity. Strength ~20 kJ/mol — much weaker than covalent but stronger than van der Waals.')}
+      `,
+    },
+    {
+      id:'t1-alc-b2', num:'B2', type:'Properties', navLabel:'[B2] Boiling Point Orders',
+      question:'a) Descending BP: propanol, decanol, heptanol. b) Descending BP: propane, propenol, pentanol. c) Increasing BP: 2-propanol, cyclohexanol, methanol, 1-propanol. d) Increasing BP: benzyl alcohol, ethanol, ethylene glycol, 1-propanol.',
+      searchText:'boiling point alcohol descending increasing order chain length intermolecular hydrogen bond diol glycol',
+      tags:['reaction'],
+      answerHTML:`
+        ${R.ans('<strong>a) Descending BP: Decanol &gt; Heptanol &gt; Propanol</strong> — all have –OH; longer chain = more vdW forces.')}
+        ${R.ans('<strong>b) Descending BP: Pentanol &gt; Propenol &gt; Propane</strong> — pentanol has H-bond + longest chain; propane has no H-bond (non-polar).')}
+        ${R.ans('<strong>c) Increasing BP: CH₃OH &lt; CH₃CH(OH)CH₃ &lt; CH₂CH₂CH₂OH &lt; C₆H₁₁OH</strong> — methanol smallest; cyclohexanol largest (ring + H-bond).')}
+        ${R.ans('<strong>d) Increasing BP: CH₃CH₂OH &lt; CH₃CH₂CH₂OH &lt; C₆H₅CH₂OH &lt; HOCH₂CH₂OH</strong>')}
+        ${R.note('Ethylene glycol (HOCH₂CH₂OH) has TWO –OH groups → more H-bonds per molecule → highest BP despite lower MW than benzyl alcohol.')}
+      `,
+    },
+    {
+      id:'t1-alc-b3', num:'B3', type:'Properties', navLabel:'[B3] Water Solubility & Phenoxide Resonance',
+      question:'4. From each pair, select the more water-soluble compound: a) CH₃OH or CH₃CH₂CH₂CH₂OH, b) CH₃CH₂OCH₃ or CH₃CH₂CH₂OH. 5. Write 4 resonance structures of phenoxide ion.',
+      searchText:'water solubility alcohol ether methanol butanol propanol hydrophilic phenoxide resonance structures',
+      tags:['identification'],
+      answerHTML:`
+        ${R.grid2([
+          `${R.lbl('a) More soluble: CH₃OH (methanol)','Methanol has only 1C — small hydrophobic part; OH dominates. 1-Butanol (4C) has larger hydrophobic chain → less soluble in water.')}`,
+          `${R.lbl('b) More soluble: CH₃CH₂CH₂OH (1-propanol)','Propanol has –OH group (donates AND accepts H-bonds with water). Methyl ethyl ether can only accept H-bonds — less soluble.')}`,
+        ])}
+        <strong>5. Resonance structures of phenoxide ion (C₆H₅O⁻):</strong>
+        ${R.note('The negative charge is delocalised from O into the ring ortho and para positions via resonance — this stabilises the phenoxide ion and explains why phenol is more acidic than aliphatic alcohols.')}
+        ${R.eq(`Structure 1: C₆H₅–O⁻  (main — negative charge on O)
+Structure 2: ⁻C₆H₄=O  (negative charge at ortho C2; C=O double bond)
+Structure 3: ⁻C₆H₄=O  (negative charge at ortho C6; C=O double bond)
+Structure 4: ⁻C₆H₄=O  (negative charge at para C4; C=O double bond)
+Order of acidity: Phenol > H₂O > Alcohol (phenoxide most stable → phenol most acidic)`)}
+      `,
+    },
+    {
+      id:'t1-alc-c1', num:'C1', type:'Reactions', navLabel:'[C1] 2-Bromopropane + KOH(aq)',
+      question:'Determine the product when 2-bromopropane is heated with aqueous KOH. Write the equation.',
+      searchText:'2-bromopropane KOH aqueous nucleophilic substitution SN2 propan-2-ol product',
+      tags:['reaction'],
+      answerHTML:`
+        ${R.eq(`CH₃CHBrCH₃ + KOH(aq)  →[heat/reflux]→  CH₃CH(OH)CH₃ + KBr
+Product: Propan-2-ol (2-propanol / isopropanol)`)}
+        ${R.ans('<strong>Reaction type: Nucleophilic Substitution (SN2)</strong> — OH⁻ (from aqueous KOH) attacks C bearing Br; Br⁻ departs as leaving group.')}
+        ${R.note('<strong>Key distinction:</strong> Aqueous KOH → substitution (gives alcohol). Ethanolic KOH → elimination (gives propene). Temperature also matters: lower temperature favours substitution.')}
+        ${R.pharma('<strong>Isopropanol (propan-2-ol)</strong> = active ingredient in hand sanitisers (70% v/v) used widely in Malaysia. Pharmacists advise patients on effective use and flammability precautions.')}
+      `,
+    },
+    {
+      id:'t1-alc-c2', num:'C2', type:'Synthesis', navLabel:'[C2] Prepare Alcohols from Alkenes/Haloalkanes',
+      question:'Write equations for: a) 2-methyl-2-propanol from 2-methylpropene. b) Cyclohexanol from a suitable haloalkane.',
+      searchText:'2-methyl-2-propanol 2-methylpropene hydration cyclohexanol haloalkane SN2 tertiary alcohol',
+      tags:['reaction','synthesis'],
+      answerHTML:`
+        ${R.eq(`a) 2-Methyl-2-propanol from 2-methylpropene (acid-catalysed hydration):
+(CH₃)₂C=CH₂ + H₂O  →[conc. H₂SO₄, heat]→  (CH₃)₃COH
+Reagents: Conc. H₂SO₄ + H₂O; Markovnikov → OH on tertiary C
+Product: 2-Methylpropan-2-ol (tert-butanol) — 3° alcohol
+
+b) Cyclohexanol from cyclohexyl bromide:
+C₆H₁₁Br + KOH(aq)  →[reflux]→  C₆H₁₁OH + KBr
+Reagents: Aqueous KOH (or NaOH/H₂O); SN2 substitution; Br → OH`)}
+      `,
+    },
+    {
+      id:'t1-alc-c3', num:'C3', type:'Synthesis', navLabel:'[C3] Synthesis from Alcohols',
+      question:'Show synthesis from alcohols: a) propanoic acid, b) propanone, c) propanal.',
+      searchText:'synthesis propanoic acid propanone propanal from alcohol oxidation KMnO4 K2Cr2O7 PCC secondary primary',
+      tags:['reaction','synthesis'],
+      answerHTML:`
+        ${R.eq(`a) Propanoic acid from 1-propanol (excess oxidation):
+CH₃CH₂CH₂OH + K₂Cr₂O₇/H₂SO₄ (excess, heat)  →  CH₃CH₂COOH
+
+b) Propanone from 2-propanol (secondary alcohol → ketone):
+CH₃CH(OH)CH₃ + K₂Cr₂O₇/H₂SO₄  →  CH₃COCH₃ + H₂O
+
+c) Propanal from 1-propanol (controlled mild oxidation):
+CH₃CH₂CH₂OH + PCC/CH₂Cl₂  →  CH₃CH₂CHO (propanal)
+[Use PCC or K₂Cr₂O₇/H₂SO₄ with immediate distillation to stop at aldehyde]`)}
+        ${R.note('<strong>Oxidation levels:</strong> 1° alcohol → aldehyde → carboxylic acid. 2° alcohol → ketone (stops here). 3° alcohol → NOT oxidised normally. PCC is selective for 1° alcohol → aldehyde only.')}
+      `,
+    },
+    {
+      id:'t1-alc-c4', num:'C4', type:'Reaction Scheme', navLabel:'[C4] 2-Butanol Reaction Scheme (A→E)',
+      question:'2-Butanol diagram: A →[KOH(aq)]→ 2-butanol →[Al₂O₃/350°C]→ B + C (main). Also: →[KMnO₄]→ D and →[HCOOH/H₂SO₄]→ E. a) Suggest A. b) Draw B and C. c) Name D. d) Name E and write equation.',
+      searchText:'2-butanol reaction scheme KOH Al2O3 dehydration Zaitsev KMnO4 oxidation butanone HCOOH esterification sec-butyl methanoate',
+      tags:['reaction','synthesis'],
+      answerHTML:`
+        ${R.grid2([
+          R.lbl('A (starting material)','<strong>2-Bromobutane</strong> (CH₃CHBrCH₂CH₃)<br>KOH(aq)/reflux → 2-Butanol by SN2'),
+          R.lbl('D (KMnO₄ oxidation of 2-butanol)','<strong>Butanone (2-butanone, CH₃COCH₂CH₃)</strong><br>2° alcohol → ketone'),
+        ])}
+        ${R.eq(`b) B and C from Al₂O₃/350°C (dehydration — Zaitsev):
+CH₃CH(OH)CH₂CH₃ →[Al₂O₃/350°C]→ CH₃CH=CHCH₃ (B: but-2-ene, MAJOR) + CH₃CH₂CH=CH₂ (C: but-1-ene, minor)
+B is major (Zaitsev — more substituted alkene more stable)
+
+d) E — Esterification with methanoic acid:
+CH₃CH(OH)CH₂CH₃ + HCOOH →[H₂SO₄ cat., heat]→ HCOOCH(CH₃)CH₂CH₃ + H₂O
+E = sec-Butyl methanoate (sec-butyl formate) — Fischer esterification`)}
+      `,
+    },
+    {
+      id:'t1-alc-c5', num:'C5', type:'Reactions', navLabel:'[C5] 1-Butanol + PBr₃',
+      question:'Draw the organic product when CH₃CH₂CH₂CH₂OH is treated with PBr₃.',
+      searchText:'1-butanol PBr3 phosphorus tribromide 1-bromobutane product nucleophilic substitution',
+      tags:['reaction'],
+      answerHTML:`
+        ${R.eq(`3 CH₃CH₂CH₂CH₂OH + PBr₃  →  3 CH₃CH₂CH₂CH₂Br + H₃PO₃
+Product: 1-Bromobutane (n-butyl bromide)`)}
+        ${R.ans('<strong>Reaction type: Nucleophilic Substitution</strong> — PBr₃ activates –OH (forms good leaving group); Br⁻ attacks C by SN2 → inversion of configuration. Clean, high-yield method for converting 1° and 2° alcohols to alkyl bromides.')}
+      `,
+    },
+    {
+      id:'t1-alc-c6', num:'C6', type:'Reactions', navLabel:'[C6] Dehydration of 2,2-Dimethylcyclopentanol',
+      question:'2,2-Dimethylcyclopentanol + conc. H₂SO₄ → F (major). a) Draw F. b) Draw minor products. c) Rule determining major. d) Mechanism.',
+      searchText:'dehydration 2,2-dimethylcyclopentanol H2SO4 Zaitsev major minor alkene carbocation mechanism',
+      tags:['reaction','mechanism'],
+      answerHTML:`
+        ${R.ans('<strong>F (major product): 1,2-Dimethylcyclopentene</strong> — most substituted alkene; Zaitsev\'s rule')}
+        ${R.note('<strong>Minor product:</strong> Rearrangement may give 1-methylcyclopentene or methylenecyclopentane (if methyl group migrates from C1 to give more stable carbocation).')}
+        ${R.ans('<strong>c) Zaitsev\'s Rule:</strong> In elimination, the major product is the most thermodynamically stable (most substituted) alkene.')}
+        ${R.mech([
+          '<strong>Protonation:</strong> H⁺ protonates –OH → –OH₂⁺ (good leaving group)',
+          '<strong>Carbocation:</strong> H₂O departs → tertiary carbocation at ring C1',
+          '<strong>Deprotonation:</strong> Base (HSO₄⁻) abstracts β-H → C=C forms; more substituted product = major (Zaitsev)',
+        ])}
+      `,
+    },
+    {
+      id:'t1-alc-c7', num:'C7', type:'Reactions', navLabel:'[C7] C₅H₁₁Br Isomers (G, H, I Scheme)',
+      question:'G, H, I are optically active isomers of C₅H₁₁Br. G + KOH/ethanol → J. J + O₃/Zn/H₂O → propanal. H + aq.NaOH → K (positive iodoform). a) Predict G, H, I, J, K. b) Cis-trans of J. c) Propanal from G via J.',
+      searchText:'C5H11Br optically active isomers KOH ethanol ozonolysis propanal iodoform sodium hydroxide chiral stereocentre',
+      tags:['reaction','synthesis'],
+      answerHTML:`
+        ${R.table(['Compound','Identity','Reasoning'],[
+          ['G','<strong>2-Bromopentane</strong> (CH₃CHBrCH₂CH₂CH₃)','Chiral at C2; KOH/ethanol → pent-2-ene (J) by E2'],
+          ['J','<strong>Pent-2-ene</strong> (CH₃CH=CHCH₂CH₃)','Ozonolysis of pent-2-ene → propanal (CH₃CH₂CHO) + ethanal (CH₃CHO)'],
+          ['H','<strong>3-Bromo-2-methylbutane</strong> ((CH₃)₂CHCH(Br)CH₃)','Chiral; SN2 with NaOH(aq) → 3-methyl-2-butanol (K)'],
+          ['K','<strong>3-Methyl-2-butanol</strong> ((CH₃)₂CHCH(OH)CH₃)','Contains CH₃CH(OH)– → oxidised to CH₃CO– → positive iodoform'],
+          ['I','<strong>1-Bromo-3-methylbutane</strong> ((CH₃)₂CHCH₂CH₂Br)','Third optically active C₅H₁₁Br isomer'],
+        ])}
+        ${R.eq(`b) Cis-trans isomers of J (pent-2-ene):
+cis-Pent-2-ene: CH₃ and CH₂CH₂CH₃ on SAME side of C=C
+trans-Pent-2-ene: CH₃ and CH₂CH₂CH₃ on OPPOSITE sides of C=C
+
+c) Propanal preparation:
+Step 1: G (2-bromopentane) + KOH/ethanol →[E2]→ J (pent-2-ene)
+Step 2: J (pent-2-ene) + O₃; then Zn/H₂O → CH₃CH₂CHO (propanal) + CH₃CHO (ethanal)`)}
+      `,
+    },
+    {
+      id:'t1-alc-c8', num:'C8', type:'Reactions', navLabel:'[C8] Alkyl Halides from Alcohols (March 2014)',
+      question:'Draw alkyl halides from: a) cyclobutanol + HCl (25°C), b) tertiary branched alcohol + NaBr/H₂SO₄. (March 2014)',
+      searchText:'alkyl halide cyclobutanol HCl chlorocyclobutane tertiary alcohol NaBr H2SO4 SN1',
+      tags:['reaction','exam'], examYear:'2014',
+      answerHTML:`
+        ${R.grid2([
+          R.lbl('a) Cyclobutanol + HCl → Chlorocyclobutane','<span class="chem">Cyclobutyl–Cl</span><br>SN1 (secondary cyclic → cyclobutyl carbocation → Cl⁻ attacks)'),
+          R.lbl('b) Tertiary alcohol + NaBr/H₂SO₄ → Tertiary bromide','Br replaces tertiary –OH via SN1 (stable 3° carbocation intermediate)'),
+        ])}
+        ${R.note('<strong>SN1 vs SN2:</strong> Tertiary → SN1 (via carbocation; racemisation). Primary → SN2 (backside attack; inversion). ZnCl₂/HCl or NaBr/H₂SO₄ are classic reagents for converting alcohols to alkyl halides.')}
+      `,
+    },
+    {
+      id:'t1-alc-c9', num:'C9', type:'Synthesis', navLabel:'[C9] Suggest Starting Alcohols (March 2014)',
+      question:'Suggest appropriate starting alcohol for: a) 2,3-dimethylhexene, b) cyclopentanone, c) ortho-nitrophenol. (March 2014)',
+      searchText:'starting alcohol 2,3-dimethylhexene cyclopentanone ortho-nitrophenol dehydration oxidation nitration',
+      tags:['reaction','synthesis','exam'], examYear:'2014',
+      answerHTML:`
+        ${R.table(['Target','Starting Alcohol','Reagents/Method'],[
+          ['a) 2,3-Dimethylhexene','<strong>2,3-Dimethylhexan-2-ol</strong> (3° alcohol)','Dehydration: conc. H₂SO₄/heat or Al₂O₃/350°C → elimination of H₂O'],
+          ['b) Cyclopentanone','<strong>Cyclopentanol</strong> (2° cyclic alcohol)','Oxidation: K₂Cr₂O₇/H₂SO₄ or KMnO₄/H₂SO₄ → 2° alcohol → ketone'],
+          ['c) o-Nitrophenol','<strong>Phenol</strong> (C₆H₅OH)','Nitration: conc. HNO₃/H₂SO₄, 0°C → EAS; ortho (+ para) products'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-alc-c10', num:'C10', type:'Mechanism', navLabel:'[C10] Ether Formation Mechanism',
+      question:'Write the mechanism for acid-catalysed dehydration of ethanol to give diethyl ether (140°C).',
+      searchText:'dehydration ethanol diethyl ether mechanism acid-catalysed 140 degrees H2SO4 SN2 intermolecular',
+      tags:['mechanism','reaction'],
+      answerHTML:`
+        ${R.mech([
+          '<strong>Step 1 — Protonation:</strong> H⁺ (conc. H₂SO₄) protonates O of ethanol → ethyloxonium ion: CH₃CH₂OH₂⁺ (OH becomes a good leaving group)',
+          '<strong>Step 2 — Nucleophilic attack:</strong> A second ethanol molecule (nucleophile) attacks the activated carbon of CH₃CH₂OH₂⁺ via SN2, displacing H₂O → protonated diethyl ether: CH₃CH₂–O⁺(H)–CH₂CH₃',
+          '<strong>Step 3 — Deprotonation:</strong> Base (HSO₄⁻ or H₂O) removes H⁺ → diethyl ether: CH₃CH₂–O–CH₂CH₃ + H⁺ (catalyst regenerated)',
+        ])}
+        ${R.eq(`Overall: 2CH₃CH₂OH  →[conc. H₂SO₄, 140°C]→  CH₃CH₂OCH₂CH₃ + H₂O
+At 170°C: intramolecular elimination → ethene (not ether)`)}
+        ${R.pharma('<strong>Diethyl ether</strong> — historically the first general anaesthetic (1846). Now replaced by safer agents but still used as a pharmaceutical extraction solvent. Highly flammable — stored away from ignition sources in Malaysian pharmacy labs.')}
+      `,
+    },
+    {
+      id:'t1-alc-c11', num:'C11', type:'Reactions', navLabel:'[C11] 2-Methyl-2-butanol Dehydration Products (March 2014)',
+      question:'Show the two products formed when 2-methyl-2-butanol reacts with acid. (March 2014)',
+      searchText:'2-methyl-2-butanol dehydration acid two products Zaitsev major minor 2-methylbut-2-ene 2-methylbut-1-ene',
+      tags:['reaction','exam'], examYear:'2014',
+      answerHTML:`
+        ${R.eq(`(CH₃)₂C(OH)CH₂CH₃  →[conc. H₂SO₄/Δ]→`)}
+        ${R.grid2([
+          R.lbl('Major product: 2-Methylbut-2-ene','(CH₃)₂C=CHCH₃<br>More substituted C=C (3 alkyl groups) = more stable = major (Zaitsev)'),
+          R.lbl('Minor product: 2-Methylbut-1-ene','CH₂=C(CH₃)CH₂CH₃<br>Less substituted C=C (2 alkyl groups) = less stable = minor'),
+        ])}
+        ${R.note('Mechanism: H⁺ protonates –OH → H₂O leaves → 3° carbocation (CH₃)₂C⁺CH₂CH₃ forms → two possible β-H removals give two different alkenes. Zaitsev → more substituted alkene (2-methylbut-2-ene) is major.')}
+      `,
+    },
+    {
+      id:'t1-alc-exam-sep2014', num:'EX4', type:'Exam Question', navLabel:'[Exam Sept 2014] Ethanol + 3 Reagents + Grignard',
+      question:'b) Products when ethanol treated with: i) HBr, ii) H₂SO₄, iii) NaCr₂O₄/H₂SO₄. d) Grignard synthesis of: i) 2-pentanol, ii) 1-butanol, iii) 1-phenylcyclohexanol. (Sept 2014)',
+      searchText:'ethanol HBr H2SO4 NaCr2O4 products bromoethane ether ethene Grignard 2-pentanol 1-butanol 1-phenylcyclohexanol',
+      tags:['reaction','synthesis','exam'], examYear:'2014',
+      answerHTML:`
+        ${R.table(['Reagent','Conditions','Product'],[
+          ['i) HBr','RT','<strong>Bromoethane (CH₃CH₂Br) + H₂O</strong> — nucleophilic substitution'],
+          ['ii) H₂SO₄ (conc.)','140°C','<strong>Diethyl ether</strong> (intermolecular dehydration)'],
+          ['ii) H₂SO₄ (conc.)','170°C','<strong>Ethene + H₂O</strong> (intramolecular dehydration)'],
+          ['iii) NaCr₂O₄/H₂SO₄','Heat','<strong>Ethanoic acid (CH₃COOH)</strong> with excess — full oxidation of 1° alcohol'],
+        ])}
+        <strong>Grignard synthesis:</strong>
+        ${R.eq(`i) 2-Pentanol: CH₃CHO (ethanal) + CH₃CH₂CH₂MgBr →[H₃O⁺]→ CH₃CH(OH)CH₂CH₂CH₃ (2° alcohol)
+   OR: CH₃CH₂CH₂CHO (butanal) + CH₃MgBr →[H₃O⁺]→ same product
+
+ii) 1-Butanol: HCHO (formaldehyde) + CH₃CH₂CH₂MgBr →[H₃O⁺]→ CH₃CH₂CH₂CH₂OH (1° alcohol)
+
+iii) 1-Phenylcyclohexanol: Cyclohexanone + C₆H₅MgBr →[H₃O⁺]→ 1-phenylcyclohexanol (3° alcohol)`)}
+        ${R.note('<strong>Grignard rule:</strong> Formaldehyde (HCHO) → 1° alcohol. Other aldehydes → 2° alcohol. Ketones → 3° alcohol.')}
+      `,
+    },
+    {
+      id:'t1-alc-exam-mar2016', num:'EX5', type:'Exam Question', navLabel:'[Exam Mar 2016] Classify + Correct Names + Reactions + Mechanism',
+      question:'a) Classify as 1°, 2°, 3°. b) Correct wrong IUPAC names. c) Products: i) 2-butanol + KMnO₄, ii) 2-propanol + conc. H₂SO₄, iii) ethanol + ethanoic acid. d) Stepwise dehydration mechanism of ethanol. (March 2016)',
+      searchText:'classify primary secondary tertiary alcohol 4-butanol 1,1-dimethyl-2-cyclopentanol 7-chloro-4-heptanol KMnO4 H2SO4 esterification ethanol dehydration mechanism',
+      tags:['reaction','mechanism','exam'], examYear:'2016',
+      answerHTML:`
+        <strong>a) Classify:</strong>
+        ${R.grid2([
+          R.lbl('i) 4-Nitrocyclohexanol (O₂N-ring-OH)','<strong>Secondary (2°)</strong> — OH on ring C bonded to 2 other carbons'),
+          R.lbl('ii) 1-Methylcyclopentanol (ring + CH₃ + OH on same C)','<strong>Tertiary (3°)</strong> — OH-bearing C bonded to 3 carbon groups'),
+        ])}
+        <strong>b) Correct IUPAC names:</strong>
+        ${R.table(['Wrong Name','Correct Name','Reason'],[
+          ['4-Butanol','<strong>Butan-2-ol</strong>','4C chain; number from nearest end to OH → C2 (not C4)'],
+          ['1,1-Dimethyl-2-cyclopentanol','<strong>1,2-Dimethylcyclopentan-1-ol</strong>','OH at C1; CH₃ groups at C1 and C2'],
+          ['7-Chloro-4-heptanol','<strong>1-Chloroheptan-4-ol</strong>','Renumber from Cl end to give lower locant to OH'],
+        ])}
+        <strong>c) Products:</strong>
+        ${R.eq(`i) 2-Butanol + KMnO₄/H⁺ → CH₃COCH₂CH₃ (butanone, 2° alcohol → ketone)
+ii) 2-Propanol + conc. H₂SO₄ → CH₃CH=CH₂ + H₂O (propene; dehydration)
+iii) Ethanol + ethanoic acid → CH₃COOC₂H₅ + H₂O (ethyl ethanoate; Fischer esterification)`)}
+        <strong>d) Mechanism for dehydration of ethanol → ethene:</strong>
+        ${R.mech([
+          '<strong>Step 1 — Protonation:</strong> H⁺ (H₂SO₄) protonates O of ethanol → CH₃CH₂OH₂⁺ (oxonium ion; –OH becomes good leaving group)',
+          '<strong>Step 2 — Carbocation:</strong> H₂O departs → CH₃CH₂⁺ (primary carbocation) — or concerted with step 3',
+          '<strong>Step 3 — Deprotonation:</strong> Base (HSO₄⁻) abstracts β-H from CH₃ group → electrons form C=C π bond → CH₂=CH₂ (ethene) + H₂SO₄ (regenerated)',
+        ])}
+      `,
+    },
+    {
+      id:'t1-alc-exam-oct2016', num:'EX6', type:'Exam Question', navLabel:'[Exam Oct 2016] 2-Phenylethanol & Conversions',
+      question:'For 2-phenylethanol (PhCH₂CH₂OH): a) Products with i) HBr, ii) SOCl₂. b) Reactions: i) pentanol → pentanal, ii) 2-methyl-2-butanol → 2-methyl-2-butene. (Oct 2016)',
+      searchText:'2-phenylethanol HBr SOCl2 bromoethylbenzene chloroethylbenzene pentanol pentanal PCC oxidation 2-methyl-2-butanol dehydration',
+      tags:['reaction','synthesis','exam'], examYear:'2016',
+      answerHTML:`
+        ${R.eq(`a-i) C₆H₅CH₂CH₂OH + HBr  →  C₆H₅CH₂CH₂Br + H₂O
+Product: (2-Bromoethyl)benzene — nucleophilic substitution (SN2); Br replaces OH
+
+a-ii) C₆H₅CH₂CH₂OH + SOCl₂  →  C₆H₅CH₂CH₂Cl + SO₂↑ + HCl↑
+Product: (2-Chloroethyl)benzene — SOCl₂ is an excellent reagent for converting –OH to –Cl cleanly
+
+b-i) 1-Pentanol → Pentanal:
+CH₃CH₂CH₂CH₂CH₂OH + PCC/CH₂Cl₂  →  CH₃CH₂CH₂CH₂CHO (pentanal)
+[PCC = selective oxidant for 1° alcohol → aldehyde; prevents over-oxidation to acid]
+
+b-ii) 2-Methyl-2-butanol → 2-Methyl-2-butene:
+(CH₃)₂C(OH)CH₂CH₃ + conc. H₂SO₄/Δ  →  (CH₃)₂C=CHCH₃ + H₂O (major, Zaitsev)
+[Tertiary alcohol readily dehydrated; major product is most substituted alkene]`)}
+      `,
+    },
+  ],
+},
+
+/* ─── SECTION 3: CARBONYL OVERVIEW ─── */
+{
+  id:'cc-t1', title:'Carbonyl Compounds — Overview', shortTitle:'Carbonyl Overview', icon:'⚗️',
+  questions:[
+    {
+      id:'t1-cc-a', num:'CC-A', type:'Identification', navLabel:'[CC-A] Identify 6 Carbonyl Compounds',
+      question:'Identify as carboxylic acid, ketone or aldehyde: CH₃CH₂CHO, cyclohexane–COOH, CH₃–C(=O)–Ph, cyclohexanone, (CH₃)₂CHCOOH, CH₃CH₂–C(=O)–CH₃.',
+      searchText:'identify carbonyl aldehyde ketone carboxylic acid propanal cyclohexanone acetophenone butanone COOH CHO',
+      tags:['identification','aldehyde','ketone','acid'],
+      answerHTML:`
+        ${R.table(['Compound','Name','Class','Key Feature'],[
+          ['CH₃CH₂CHO','Propanal','<span class="qtag tag-aldehyde">Aldehyde</span>','–CHO: C=O with H on carbonyl C'],
+          ['Cyclohexane–COOH','Cyclohexanecarboxylic acid','<span class="qtag tag-acid">Carboxylic acid</span>','–COOH: both C=O and –OH on same C'],
+          ['CH₃–C(=O)–Ph (acetophenone)','Acetophenone','<span class="qtag tag-ketone">Ketone</span>','C=O flanked by two C groups (Ph and CH₃); no H on carbonyl C'],
+          ['Cyclohexanone (ring with C=O)','Cyclohexanone','<span class="qtag tag-ketone">Ketone</span>','Cyclic ketone; C=O within ring'],
+          ['(CH₃)₂CHCOOH','2-Methylpropanoic acid','<span class="qtag tag-acid">Carboxylic acid</span>','–COOH group'],
+          ['CH₃CH₂COCH₃ (butanone)','Butanone (2-Butanone)','<span class="qtag tag-ketone">Ketone</span>','C=O flanked by two C groups; no H'],
+        ])}
+        ${R.note('For complete Tutorial 2 carbonyl questions with SVG diagrams, select <strong>Tutorial 2 → Section 1</strong>.')}
+      `,
+    },
+    {
+      id:'t1-cc-b', num:'CC-B', type:'Nomenclature', navLabel:'[CC-B] Name Carbonyl Compounds (a–d)',
+      question:'Name: a) CH₃CH₂CH₂COOH, b) H₃C–C(=O)–OH, c) 4-methylpentanoic acid structure, d) cyclohexanecarboxylic acid structure.',
+      searchText:'butanoic ethanoic 4-methylpentanoic cyclohexanecarboxylic acid name carbonyl',
+      tags:['naming','acid'],
+      answerHTML:`
+        ${R.grid2([
+          R.lbl('a) CH₃CH₂CH₂COOH','<strong>Butanoic acid</strong> (4C chain ending in COOH)'),
+          R.lbl('b) H₃C–C(=O)–OH','<strong>Ethanoic acid</strong> (acetic acid; 2C)'),
+          R.lbl('c) Branched 4-methylpentanoic acid structure','<strong>4-Methylpentanoic acid</strong> (5C + CH₃ at C4)'),
+          R.lbl('d) Cyclohexane ring + COOH','<strong>Cyclohexanecarboxylic acid</strong>'),
+        ])}
+        ${R.note('For all 14 IUPAC nomenclature questions (a–n) covering acids, ketones, aldehydes, see <strong>Tutorial 2 → Section 1 → [B1] IUPAC Names</strong>.')}
+      `,
+    },
+  ],
+},
+
+  ],
+};
+
+
+/* ════════════════════════════════════════════════════
+   TO ADD TUTORIAL 3: Copy the block below and fill in
+   ════════════════════════════════════════════════════
+   TUTORIALS['t3'] = {
+     id:'t3', code:'PHD125', tutorialNo:3,
+     topicShort:'Add your topic here',
+     sections:[
+       {
+         id:'sec1', title:'Section Name', shortTitle:'Short Name', icon:'📌',
+         questions:[
+           {
+             id:'t3-q1', num:'Q1', type:'Concept',
+             navLabel:'[Q1] Question label',
+             question:'Your question text here.',
+             searchText:'keywords for search',
+             tags:['reaction'],
+             answerHTML: R.ans('Your answer') + R.note('Additional note'),
+           },
+         ],
+       },
+     ],
+   };
+   ════════════════════════════════════════════════════ */
+
+
+/* ════════════════════════════════════════════════════
+   APP STATE
+════════════════════════════════════════════════════ */
+const state = {
+  currentTutorial: null,
+  filter: 'all',
+  searchQuery: '',
+  done: {},
+  expanded: {},
+  theme: 'light',
+};
+
+/* ════════════════════════════════════════════════════
+   INIT
+════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  loadState();
+  applyTheme();
+  populateSelector();
+  // Auto-load first tutorial
+  const firstId = Object.keys(TUTORIALS)[0];
+  if (firstId) {
+    document.getElementById('tutorial-select').value = firstId;
+    loadTutorial(firstId);
+  }
+  // Register PWA service worker if available
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('data:text/javascript,').catch(()=>{});
+  }
+});
+
+function loadState() {
+  try {
+    const s = JSON.parse(localStorage.getItem('phd125_v2') || '{}');
+    state.done = s.done || {};
+    state.theme = s.theme || 'light';
+    state.expanded = s.expanded || {};
+  } catch(e) {}
+}
+function saveState() {
+  try {
+    localStorage.setItem('phd125_v2', JSON.stringify({
+      done: state.done, theme: state.theme, expanded: state.expanded,
+    }));
+  } catch(e) {}
+}
+
+/* ════════════════════════════════════════════════════
+   TUTORIAL SELECTOR
+════════════════════════════════════════════════════ */
+function populateSelector() {
+  const sel = document.getElementById('tutorial-select');
+  sel.innerHTML = '';
+  Object.values(TUTORIALS).forEach(t => {
+    const o = document.createElement('option');
+    o.value = t.id;
+    o.textContent = `Tutorial ${t.tutorialNo}: ${t.topicShort.substring(0,35)}...`;
+    sel.appendChild(o);
+  });
+}
+
+function loadTutorial(id) {
+  if (!id || !TUTORIALS[id]) return;
+  state.currentTutorial = id;
+  const t = TUTORIALS[id];
+  renderNav(t);
+  renderContent(t);
+  updateProgress();
+}
+
+/* ════════════════════════════════════════════════════
+   NAVIGATION
+════════════════════════════════════════════════════ */
+function renderNav(tutorial) {
+  const tree = document.getElementById('nav-tree');
+  tree.innerHTML = '';
+  tutorial.sections.forEach((sec, si) => {
+    const done = sec.questions.filter(q => state.done[q.id]).length;
+    const wrap = document.createElement('div');
+    wrap.className = 'nav-section';
+    wrap.innerHTML = `
+      <button class="nav-section-btn" onclick="toggleNav(this,'nav-${sec.id}')">
+        <span>${sec.icon||'📚'}</span>
+        <span style="flex:1;text-align:left;">${sec.shortTitle||sec.title}</span>
+        <span style="font-size:10px;opacity:.5;">${done}/${sec.questions.length}</span>
+        <span class="chev">▶</span>
+      </button>
+      <div class="nav-items" id="nav-${sec.id}">
+        ${sec.questions.map(q=>`
+          <button class="nav-item${state.done[q.id]?' done':''}" id="nv-${q.id}"
+            onclick="scrollTo('qc-${q.id}')">
+            <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${q.navLabel||q.id}</span>
+            <span class="dot"></span>
+          </button>`).join('')}
+      </div>`;
+    tree.appendChild(wrap);
+    if (si === 0) {
+      const btn = wrap.querySelector('.nav-section-btn');
+      toggleNav(btn, 'nav-' + sec.id);
+    }
+  });
+}
+
+function toggleNav(btn, id) {
+  document.querySelectorAll('.nav-items').forEach(el => el.classList.remove('open'));
+  document.querySelectorAll('.nav-section-btn').forEach(el => el.classList.remove('open'));
+  const el = document.getElementById(id);
+  if (el && !el.classList.contains('open')) {
+    el.classList.add('open');
+    btn.classList.add('open');
+  }
+}
+
+function scrollTo(id) {
+  closeSidebar();
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* ════════════════════════════════════════════════════
+   RENDER QUESTIONS
+════════════════════════════════════════════════════ */
+function renderContent(tutorial) {
+  document.getElementById('welcome').innerHTML = '';
+  const container = document.getElementById('qcontainer');
+  container.innerHTML = '';
+  document.getElementById('no-results').style.display = 'none';
+  tutorial.sections.forEach(sec => {
+    const wrap = document.createElement('div');
+    wrap.id = 'sec-' + sec.id;
+    wrap.innerHTML = `<div class="sec-head">
+      <div class="sec-icon">${sec.icon||'📚'}</div>
+      <h2>${sec.title}</h2>
+      <span class="qc">${sec.questions.length} questions</span>
+    </div>`;
+    sec.questions.forEach(q => wrap.appendChild(buildCard(q)));
+    container.appendChild(wrap);
+  });
+}
+
+function buildCard(q) {
+  const div = document.createElement('div');
+  div.className = `qcard${state.done[q.id]?' done':''}${state.expanded[q.id]?' open':''}`;
+  div.id = 'qc-' + q.id;
+  div.dataset.tags = (q.tags||[]).join(' ');
+  div.dataset.text = (q.question + ' ' + (q.searchText||'')).toLowerCase();
+  const tags = (q.tags||[]).map(t=>`<span class="qtag tag-${t}">${t}</span>`).join('');
+  const exam = q.examYear ? `<span class="examyr">Exam ${q.examYear}</span>` : '';
+  div.innerHTML = `
+    <div class="qhead" onclick="toggleCard('${q.id}')">
+      <div class="qnum">${q.num||'?'}</div>
+      <div class="qtitle">
+        <div class="qlabel">${q.type||'Question'}</div>
+        <div class="qtext">${q.questionHTML||q.question}</div>
+        <div class="qmeta">${tags}${exam}</div>
+      </div>
+      <div class="qactions">
+        <button class="done-btn" onclick="event.stopPropagation();markDone('${q.id}')" title="Mark done">✓</button>
+        <button class="toggle-btn" onclick="event.stopPropagation();toggleCard('${q.id}')">▾</button>
+      </div>
+    </div>
+    <div class="qanswer"><div class="answer-inner">${q.answerHTML||`<div class="ans-box">${q.answer||'Answer coming soon.'}</div>`}</div></div>`;
+  return div;
+}
+
+/* ════════════════════════════════════════════════════
+   INTERACTIONS
+════════════════════════════════════════════════════ */
+function toggleCard(qId) {
+  const c = document.getElementById('qc-'+qId);
+  const open = !c.classList.contains('open');
+  c.classList.toggle('open', open);
+  state.expanded[qId] = open;
+  saveState();
+}
+
+function markDone(qId) {
+  state.done[qId] = !state.done[qId];
+  document.getElementById('qc-'+qId).classList.toggle('done', !!state.done[qId]);
+  const nv = document.getElementById('nv-'+qId);
+  if (nv) nv.classList.toggle('done', !!state.done[qId]);
+  saveState();
+  updateProgress();
+}
+
+function expandAll() {
+  const allOpen = [...document.querySelectorAll('.qcard')].every(c => c.classList.contains('open'));
+  document.querySelectorAll('.qcard').forEach(c => {
+    const id = c.id.replace('qc-','');
+    c.classList.toggle('open', !allOpen);
+    state.expanded[id] = !allOpen;
+  });
+  saveState();
+}
+
+function resetProg() {
+  if (!confirm('Reset all progress?')) return;
+  const t = TUTORIALS[state.currentTutorial];
+  if (t) t.sections.forEach(s => s.questions.forEach(q => { delete state.done[q.id]; delete state.expanded[q.id]; }));
+  document.querySelectorAll('.qcard.done,.qcard.open').forEach(c => c.classList.remove('done','open'));
+  document.querySelectorAll('.nav-item.done').forEach(c => c.classList.remove('done'));
+  saveState(); updateProgress();
+}
+
+function updateProgress() {
+  const t = TUTORIALS[state.currentTutorial];
+  if (!t) return;
+  const all = t.sections.flatMap(s=>s.questions);
+  const done = all.filter(q=>state.done[q.id]).length;
+  document.getElementById('prog-text').textContent = `${done} / ${all.length}`;
+  document.getElementById('progress-bar-fill').style.width = all.length ? `${Math.round(done/all.length*100)}%` : '0%';
+}
+
+/* ════════════════════════════════════════════════════
+   SEARCH & FILTER
+════════════════════════════════════════════════════ */
+function doSearch(val) {
+  state.searchQuery = val.trim().toLowerCase();
+  document.getElementById('search-clear').style.display = val ? 'flex' : 'none';
+  applyFilters();
+}
+function clearSearch() {
+  document.getElementById('search-input').value = '';
+  doSearch('');
+}
+function setFilter(f, btn) {
+  state.filter = f;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  applyFilters();
+}
+function applyFilters() {
+  let vis = 0;
+  document.querySelectorAll('.qcard').forEach(card => {
+    const id = card.id.replace('qc-','');
+    const tags = card.dataset.tags||'';
+    const text = card.dataset.text||'';
+    let show = true;
+    if (state.searchQuery) show = text.includes(state.searchQuery)||tags.includes(state.searchQuery);
+    if (show && state.filter !== 'all') {
+      if (state.filter==='done') show = !!state.done[id];
+      else if (state.filter==='undone') show = !state.done[id];
+      else if (state.filter.startsWith('tag:')) show = tags.includes(state.filter.replace('tag:',''));
+    }
+    card.style.display = show ? '' : 'none';
+    if (show) vis++;
+  });
+  document.querySelectorAll('[id^="sec-"]').forEach(sec => {
+    const v = [...sec.querySelectorAll('.qcard')].some(c=>c.style.display!=='none');
+    sec.style.display = v ? '' : 'none';
+  });
+  document.getElementById('no-results').style.display = vis===0 ? 'block' : 'none';
+}
+
+/* ════════════════════════════════════════════════════
+   THEME & SIDEBAR
+════════════════════════════════════════════════════ */
+function toggleTheme() {
+  state.theme = state.theme==='light' ? 'dark' : 'light';
+  applyTheme(); saveState();
+}
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', state.theme);
+  document.getElementById('theme-btn').textContent = state.theme==='light' ? '🌙' : '☀️';
+}
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show',
+    document.getElementById('sidebar').classList.contains('open'));
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+function showWelcome() { closeSidebar(); }
+</script>
+</body>
+</html>
