@@ -1184,6 +1184,789 @@ Product: Phenyl-4-aminosalicylate`)}
   ], // end sections
 }; // end TUTORIALS['t2']
 
+
+
+TUTORIALS['t1'] = {
+  id:'t1', code:'PHD125', tutorialNo:1,
+  topicShort:'Alkanes, Alkenes, Alkynes & Alcohols',
+  sections:[
+
+/* ─── SECTION 1: ALKANES, ALKENES & ALKYNES ─── */
+{
+  id:'alk', title:'Alkanes, Alkenes & Alkynes', shortTitle:'Hydrocarbons', icon:'⛽',
+  questions:[
+    {
+      id:'t1-a1', num:'A1', type:'Nomenclature', navLabel:'[A1] IUPAC Names (a–s)',
+      question:'Name compounds a–s using IUPAC nomenclature: branched alkanes, alkenes, alkynes, cycloalkanes, halogenated cycloalkenes.',
+      searchText:'IUPAC name alkane alkene alkyne cycloalkane methylbutane dimethylbutane pentyne hexyne halogenated cyclopentene',
+      tags:['naming','identification'],
+      answerHTML:`
+        ${R.table(['#','Structure','IUPAC Name','Type'],[
+          ['a','CH₃CH₂CH(CH₃)CH₃','<strong>2-methylbutane</strong>','Alkane'],
+          ['b','CH₃CH(CH₃)CH(CH₃)CH₃','<strong>2,3-dimethylbutane</strong>','Alkane'],
+          ['c','4C chain + ethyl + methyl branches','<strong>2-methyl-3-ethylpentane</strong> (verify longest chain = 5C)','Alkane'],
+          ['d','Long chain with propyl group','<strong>4-propylheptane</strong>','Alkane'],
+          ['e','5C chain with OH at C2 (expanded)','<strong>Pentan-2-ol</strong>','Alcohol'],
+          ['f','CH₃CH₂CH₂C≡CCH₂CH₂CH₂CH₃','<strong>4-nonyne</strong>','Alkyne'],
+          ['g','CH₃CH=CHCH₂CH₂CH₃','<strong>Hex-2-ene</strong>','Alkene'],
+          ['h','2,2,3,3-tetramethylbutane (very branched)','<strong>2,2,3,3-tetramethylbutane</strong>','Alkane'],
+          ['i','Branched alkene','<strong>2-methylpent-2-ene</strong>','Alkene'],
+          ['j','Complex cyclic alkene with substituents','Find longest chain + number for lowest locants','Cycloalkene'],
+          ['k','Expanded formula — cyclopentene','<strong>Cyclopentene</strong>','Cycloalkene'],
+          ['l','Expanded formula — methylcyclopentene','<strong>1-methylcyclopentene</strong>','Cycloalkene'],
+          ['m','Long expanded carbon chain','<strong>Octane</strong> (count carefully)','Alkane'],
+          ['n','Cyclopentane + two ethyl + propyl','<strong>1-ethyl-2-methyl-3-propylcyclopentane</strong>','Cycloalkane'],
+          ['o','Cycloheptane + CH₃ + CH₃ + CH₂CH₃','<strong>1,1-dimethyl-2-ethylcycloheptane</strong>','Cycloalkane'],
+          ['p','Cyclohexene + ethyl + CH₃','<strong>1-ethyl-2-methylcyclohex-2-ene</strong>','Cycloalkene'],
+          ['q','Alkene with Br and Cl','<strong>(Z)-1-bromo-1-chlorobut-1-ene</strong>','Halogenated alkene'],
+          ['r','Cyclohexene with ethyl group','<strong>1-ethylcyclohex-2-ene</strong>','Cycloalkene'],
+          ['s','Cyclohexene with Br and ethyl','<strong>3-bromo-1-ethylcyclohex-1-ene</strong>','Halogenated cycloalkene'],
+        ])}
+        ${R.note('<strong>IUPAC Rules Summary:</strong> ① Find longest continuous chain. ② Number from end closest to first substituent. ③ For alkenes/alkynes, number so multiple bond gets lowest locant. ④ For cyclic: add "cyclo-" prefix. ⑤ List substituents alphabetically.')}
+      `,
+    },
+    {
+      id:'t1-a2', num:'A2', type:'Drawing', navLabel:'[A2] Draw Molecules',
+      question:'Draw: 2,2,4-trimethylpentane, 2,3-diethyl-4-propyloctane, 3,4-diethyl-2,2-dimethyl-3-propyldecane, 1,2-dibromo-1-butene, 2-pentyne, 3-methyl-1-pentyne, 2,5,5,6-tetramethyl-3-heptyne, 4-isopropyloctane, isobutylene.',
+      searchText:'draw 2,2,4-trimethylpentane isooctane pentyne trimethylheptyne isobutylene 1,2-dibromo-1-butene',
+      tags:['drawing'],
+      answerHTML:`
+        ${R.table(['Name','Condensed Structural Formula','Key Note'],[
+          ['2,2,4-Trimethylpentane (isooctane)','<span class="chem">(CH₃)₃CCH₂CH(CH₃)CH₃</span>','Petrol octane rating reference (RON 100)'],
+          ['1,2-Dibromo-1-butene','<span class="chem">CHBr=CBrCH₂CH₃</span>','Both Br on C=C carbons'],
+          ['2-Pentyne','<span class="chem">CH₃C≡CCH₂CH₃</span>','Triple bond at C2–C3'],
+          ['3-Methyl-1-pentyne','<span class="chem">HC≡CCH(CH₃)CH₂CH₃</span>','Terminal alkyne; methyl at C3'],
+          ['4-Isopropyloctane','<span class="chem">CH₃CH₂CH₂CH(CH(CH₃)₂)CH₂CH₂CH₂CH₃</span>','Isopropyl group on C4 of octane'],
+          ['Isobutylene','<span class="chem">CH₂=C(CH₃)₂</span> (2-methylpropene)','Used in petrol additive synthesis (MTBE)'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-b1', num:'B1', type:'Properties', navLabel:'[B1] Boiling Point — Alkanes',
+      question:'Arrange in increasing boiling point: a) Nonane, pentane, decane, heptane. b) Pentane, 2-methylbutane, 2,2-dimethylpropane. Explain.',
+      searchText:'alkane boiling point order van der Waals branching nonane decane heptane pentane neopentane isopentane',
+      tags:['reaction','identification'],
+      answerHTML:`
+        ${R.ans('<strong>a) Pentane &lt; Heptane &lt; Nonane &lt; Decane</strong>')}
+        ${R.note('All straight-chain alkanes. Longer chain = greater MW + larger surface area = stronger London dispersion forces = higher BP.')}
+        ${R.ans('<strong>b) 2,2-Dimethylpropane &lt; 2-Methylbutane &lt; Pentane</strong>')}
+        ${R.note('All C₅H₁₂ isomers (same MW). More branching → more spherical shape → smaller surface area → weaker van der Waals forces → lower BP. Pentane (linear) has highest BP; 2,2-dimethylpropane (most spherical/compact) has lowest.')}
+        ${R.table(['Compound','Branching','Approx. BP'],[
+          ['Pentane (n-pentane)','None','36°C'],
+          ['2-Methylbutane (isopentane)','One branch','28°C'],
+          ['2,2-Dimethylpropane (neopentane)','Most branched','10°C'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-b2', num:'B2', type:'Properties', navLabel:'[B2] Alkene Reactivity Order',
+      question:'Explain the order of reactivity for acid-catalysed hydration: (CH₃)₂C=CH₂ > CH₃CH=CH₂ > CH₂=CH₂.',
+      searchText:'alkene reactivity acid catalysed hydration substituted electron density carbocation stability',
+      tags:['reaction'],
+      answerHTML:`
+        ${R.ans('<strong>Most → Least reactive: (CH₃)₂C=CH₂ > CH₃CH=CH₂ > CH₂=CH₂</strong>')}
+        ${R.note('More substituted alkenes react faster in acid-catalysed hydration because:<br>① Alkyl groups donate electrons (+I) → increase electron density on C=C → more reactive toward H⁺ (electrophile)<br>② More substituted carbocation intermediate formed → more stable → lower activation energy → faster reaction')}
+        ${R.table(['Alkene','Carbocation Formed','Stability','Reactivity'],[
+          ['(CH₃)₂C=CH₂','(CH₃)₃C⁺ (tertiary)','Most stable','Most reactive'],
+          ['CH₃CH=CH₂','CH₃CH⁺CH₃ (secondary)','Intermediate','Intermediate'],
+          ['CH₂=CH₂','CH₃CH₂⁺ (primary)','Least stable','Least reactive'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-c1', num:'C1', type:'Reactions', navLabel:'[C1] Identify Reaction Types (a–e)',
+      question:'Identify reaction types: a) CH₃CH₂CH=CH₂ + Br₂/CCl₄ → dibromide, b) alcohol + H⁺/heat → alkene + H₂O, c) alcohol + HCl/Zn → alkyl chloride, d) benzene + CH₃Cl/AlCl₃ → toluene, e) alkene → structural isomer alkene.',
+      searchText:'reaction type addition elimination substitution rearrangement Friedel Crafts alkylation dehydration',
+      tags:['reaction','identification'],
+      answerHTML:`
+        ${R.table(['#','Reaction','Type'],[
+          ['a','CH₃CH₂CH=CH₂ + Br₂/CCl₄ → CH₃CH₂CHBrCH₂Br','<strong>Addition (electrophilic)</strong> — Br₂ adds across C=C'],
+          ['b','CH₃CH(OH)CH₃ + H⁺/heat → CH₃CH=CH₂ + H₂O','<strong>Elimination (dehydration)</strong> — H₂O removed; C=C forms'],
+          ['c','CH₃CH₂OH + HCl/Zn → CH₃CH₂Cl + H₂O','<strong>Substitution (nucleophilic)</strong> — OH replaced by Cl'],
+          ['d','C₆H₆ + CH₃Cl/AlCl₃ → C₆H₅CH₃ + HCl','<strong>Substitution (electrophilic aromatic — Friedel-Crafts alkylation)</strong>'],
+          ['e','CH₃CH₂CH=CH₂ → CH₃CH=CHCH₃','<strong>Rearrangement (isomerisation)</strong> — same formula, different structure'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-c2', num:'C2', type:'Reactions', navLabel:'[C2] Carbocation Classification',
+      question:'Carbocations from: CH₃C(CH₃)–CHCH₃ rearrangement. a) Classify the carbocations. b) Relative stability. c) Type of reaction.',
+      searchText:'carbocation classify primary secondary tertiary stability electrophilic addition',
+      tags:['reaction','mechanism'],
+      answerHTML:`
+        ${R.ans('Both carbocations shown are <strong>Tertiary (3°)</strong> — the positive carbon is bonded to 3 other carbon groups.')}
+        ${R.note('<strong>Stability order:</strong> 3° (tertiary) > 2° (secondary) > 1° (primary) > methyl carbocation<br>More alkyl groups → donate electrons by induction (+I) → stabilise the positive charge → more stable.')}
+        ${R.ans('<strong>c) Reaction type: Electrophilic Addition</strong> — H⁺ (electrophile) adds to the C=C to form a carbocation intermediate.')}
+      `,
+    },
+    {
+      id:'t1-c3', num:'C3', type:'Definitions', navLabel:'[C3] Define 4 Reaction Types',
+      question:'Define: a) Rearrangement, b) Substitution, c) Addition, d) Elimination.',
+      searchText:'define rearrangement substitution addition elimination organic reaction types meaning',
+      tags:['identification'],
+      answerHTML:`
+        ${R.table(['Term','Definition','Example'],[
+          ['a) Rearrangement','Atoms within a molecule reorganise to give a structural isomer; same molecular formula, different connectivity','1-butene → 2-butene'],
+          ['b) Substitution','One atom or group in a molecule is replaced by another atom or group','CH₄ + Cl₂ → CH₃Cl + HCl'],
+          ['c) Addition','Two reactants combine to form a single product by breaking a π bond (C=C or C≡C)','CH₂=CH₂ + HBr → CH₃CH₂Br'],
+          ['d) Elimination','A small molecule (HX, H₂O) is lost from a substrate, forming a π bond (C=C); reverse of addition','CH₃CH₂OH → CH₂=CH₂ + H₂O'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-c4', num:'C4', type:'Identification', navLabel:'[C4] Classify Reactive Species',
+      question:'Classify as free radical, carbonium ion, carbanion, electrophile or nucleophile: a) (CH₃)₂CH⁻, b) CH₃CH₂·, c) CH₃O⁻, d) NO₂⁺, e) (CH₃)₃C⁺.',
+      searchText:'free radical carbocation carbanion electrophile nucleophile classify species',
+      tags:['identification'],
+      answerHTML:`
+        ${R.table(['Species','Classification','Reason'],[
+          ['a) (CH₃)₂CH⁻','<strong>Carbanion</strong>','Carbon with negative charge; electron-rich; acts as nucleophile'],
+          ['b) CH₃CH₂·','<strong>Free radical</strong>','Unpaired electron (dot notation); highly reactive'],
+          ['c) CH₃O⁻','<strong>Nucleophile (methoxide ion)</strong>','Negative charge + lone pairs on O; donates electrons to electrophiles'],
+          ['d) NO₂⁺','<strong>Electrophile (nitronium ion)</strong>','Positive charge; attacks electron-rich rings in aromatic nitration'],
+          ['e) (CH₃)₃C⁺','<strong>Carbonium ion (tertiary carbocation)</strong>','Positive charge on C; electron-deficient; acts as electrophile'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-d1', num:'D1', type:'Reactions', navLabel:'[D1] Combustion Reactions',
+      question:'Write balanced combustion reactions for: a) C₇H₁₆, b) C₄H₁₀, c) But-2-ene, d) But-1-yne, e) 2-methylpropane, f) 2,4-diethylhexane.',
+      searchText:'combustion balanced equation alkane alkene alkyne heptane butane oxygen CO2 H2O methylpropane',
+      tags:['reaction'],
+      answerHTML:`
+        ${R.note('<strong>Formula:</strong> Alkane CₙH₂ₙ₊₂: CₙH₂ₙ₊₂ + (3n+1)/2 O₂ → nCO₂ + (n+1)H₂O &nbsp;|&nbsp; Alkene CₙH₂ₙ: + 3n/2 O₂ → nCO₂ + nH₂O &nbsp;|&nbsp; Alkyne CₙH₂ₙ₋₂: + (3n-1)/2 O₂ → nCO₂ + (n-1)H₂O')}
+        ${R.eq(`a) C₇H₁₆ + 11O₂  →  7CO₂ + 8H₂O
+
+b) 2C₄H₁₀ + 13O₂  →  8CO₂ + 10H₂O
+
+c) But-2-ene (C₄H₈): C₄H₈ + 6O₂  →  4CO₂ + 4H₂O
+
+d) But-1-yne (C₄H₆): 2C₄H₆ + 11O₂  →  8CO₂ + 6H₂O
+
+e) 2-Methylpropane (C₄H₁₀): 2C₄H₁₀ + 13O₂  →  8CO₂ + 10H₂O
+
+f) 2,4-Diethylhexane (C₁₀H₂₂): 2C₁₀H₂₂ + 31O₂  →  20CO₂ + 22H₂O`)}
+      `,
+    },
+    {
+      id:'t1-d2', num:'D2', type:'Reactions', navLabel:'[D2] Free Radical Halogenation of 2-Methylpentane',
+      question:'2-Methylpentane + Br₂/sunlight: a) Reaction type. b) Name 4 possible monobrominated products. c) Mechanism for major product. d) What happens in the dark?',
+      searchText:'free radical bromination 2-methylpentane sunlight mechanism initiation propagation termination major product',
+      tags:['reaction','mechanism'],
+      answerHTML:`
+        ${R.ans('<strong>a) Free Radical Substitution (photochemical bromination)</strong>')}
+        <strong>b) Four monobrominated products of (CH₃)₂CHCH₂CH₂CH₃:</strong>
+        ${R.table(['Product','IUPAC Name','C-type'],[
+          ['<span class="chem">(CH₃)₂CBrCH₂CH₂CH₃</span>','<strong>2-bromo-2-methylpentane</strong> (MAJOR)','3° C — most stable radical'],
+          ['<span class="chem">(CH₃)₂CHCH(Br)CH₂CH₃</span>','<strong>3-bromo-2-methylpentane</strong>','2° C'],
+          ['<span class="chem">(CH₃)₂CHCH₂CH(Br)CH₃</span>','<strong>4-bromo-2-methylpentane</strong>','2° C'],
+          ['<span class="chem">(CH₃)₂CHCH₂CH₂CH₂Br</span>','<strong>1-bromo-4-methylpentane</strong>','1° C'],
+        ])}
+        ${R.mech([
+          '<strong>Initiation:</strong> Br₂ + hν → 2Br· (UV light cleaves Br–Br homolytically)',
+          '<strong>Propagation 1:</strong> Br· + (CH₃)₂CHCH₂CH₂CH₃ → (CH₃)₂C·CH₂CH₂CH₃ + HBr (H abstracted from 3° C — most stable radical)',
+          '<strong>Propagation 2:</strong> (CH₃)₂C·CH₂CH₂CH₃ + Br₂ → (CH₃)₂CBrCH₂CH₂CH₃ + Br· (chain continues)',
+          '<strong>Termination:</strong> Br· + Br· → Br₂ (or any two radicals combine)',
+        ])}
+        ${R.ans('<strong>d) In the dark:</strong> No reaction. Free radical halogenation requires UV light (hν) or heat to initiate. Without light, Br₂ does not react with alkanes at room temperature.')}
+      `,
+    },
+    {
+      id:'t1-d3', num:'D3', type:'Mechanism', navLabel:'[D3] Monochlorination of Propane Mechanism',
+      question:'Write the stepwise mechanism for monochlorination of propane (CH₃CH₂CH₃ + Cl₂ → products).',
+      searchText:'monochlorination propane mechanism free radical initiation propagation termination 1-chloropropane 2-chloropropane',
+      tags:['mechanism','reaction'],
+      answerHTML:`
+        ${R.eq(`CH₃CH₂CH₃ + Cl₂  →[hν]→  CH₃CH₂CH₂Cl (1-chloropropane, minor) + CH₃CHClCH₃ (2-chloropropane, major) + HCl`)}
+        ${R.mech([
+          '<strong>Initiation:</strong> Cl₂ + hν → 2Cl· (UV light; homolytic cleavage)',
+          '<strong>Propagation 1a:</strong> Cl· + CH₃CH₂CH₃ → CH₃CH·CH₃ + HCl (H abstracted from C2 → 2° radical, more stable — gives MAJOR product)',
+          '<strong>Propagation 1b:</strong> Cl· + CH₃CH₂CH₃ → CH₃CH₂CH₂· + HCl (H abstracted from C1 → 1° radical → minor product)',
+          '<strong>Propagation 2:</strong> CH₃CH·CH₃ + Cl₂ → CH₃CHClCH₃ + Cl· (radical reacts with Cl₂; Cl· regenerated; chain continues)',
+          '<strong>Termination:</strong> Cl· + Cl· → Cl₂ OR Cl· + CH₃CH·CH₃ → CH₃CHClCH₃ (two radicals combine; chain ends)',
+        ])}
+        ${R.note('Major product = 2-chloropropane (via more stable 2° radical intermediate). Unlike Br₂, Cl₂ is less selective — it attacks both 1° and 2° C–H bonds, so both products form.')}
+      `,
+    },
+    {
+      id:'t1-d4', num:'D4', type:'Reactions', navLabel:'[D4] 2-Butene + 6 Reagents',
+      question:'Write and name organic products when 2-butene (CH₃CH=CHCH₃) reacts with: a) H₂/Ni, b) HCl, c) H₂O/H₂SO₄, d) acidified KMnO₄, e) Br₂/CH₂Cl₂, f) Br₂/H₂O.',
+      searchText:'2-butene reactions hydrogenation HCl Markovnikov water hydration KMnO4 oxidation bromine bromohydrin products',
+      tags:['reaction'],
+      answerHTML:`
+        ${R.table(['Reagent','Product','Reaction'],[
+          ['a) H₂/Ni','<span class="chem">CH₃CH₂CH₂CH₃</span> — <strong>Butane</strong>','Hydrogenation — catalytic reduction'],
+          ['b) HCl','<span class="chem">CH₃CH₂CHClCH₃</span> — <strong>2-Chlorobutane</strong> (Markovnikov, major)','Electrophilic addition — H to less substituted C'],
+          ['c) H₂O/H₂SO₄','<span class="chem">CH₃CH₂CH(OH)CH₃</span> — <strong>Butan-2-ol</strong>','Acid-catalysed hydration — Markovnikov'],
+          ['d) KMnO₄/H⁺','<span class="chem">2 × CH₃COOH</span> — <strong>2 mol ethanoic acid</strong>','Oxidative cleavage of C=C'],
+          ['e) Br₂/CH₂Cl₂','<span class="chem">CH₃CHBrCHBrCH₃</span> — <strong>2,3-Dibromobutane</strong>','Electrophilic addition — anti addition via bromonium ion'],
+          ['f) Br₂/H₂O','<span class="chem">CH₃CH(OH)CHBrCH₃</span> — <strong>3-Bromo-2-butanol</strong>','Bromohydrin formation — OH and Br add anti'],
+        ])}
+        ${R.note('<strong>Markovnikov\'s Rule:</strong> In HX addition to unsymmetrical alkene, H adds to carbon with MORE H atoms; X adds to carbon with FEWER H atoms (more substituted). Based on stability of carbocation intermediate.')}
+      `,
+    },
+    {
+      id:'t1-d5', num:'D5', type:'Reactions', navLabel:'[D5] Markovnikov vs Anti-Markovnikov',
+      question:'a) Distinguish Markovnikov and anti-Markovnikov. b) Equation: 2-methylpropene + HBr. c) Reaction type. d) Mechanism.',
+      searchText:'Markovnikov anti-Markovnikov 2-methylpropene HBr mechanism electrophilic addition peroxide radical carbocation',
+      tags:['reaction','mechanism'],
+      answerHTML:`
+        ${R.table(['','Markovnikov','Anti-Markovnikov'],[
+          ['Conditions','HX without peroxide (ionic)','HBr with peroxide ROOR (radical)'],
+          ['H adds to...','C with MORE H (less substituted)','C with LESS H (more substituted)'],
+          ['X adds to...','More substituted C','Less substituted C'],
+          ['Intermediate','Carbocation (more stable = more substituted)','Free radical (more stable = more substituted)'],
+        ])}
+        ${R.eq(`b) 2-Methylpropene + HBr (no peroxide — Markovnikov):
+(CH₃)₂C=CH₂ + HBr  →  (CH₃)₂CBrCH₃
+Product: 2-bromo-2-methylpropane (tert-butyl bromide, MAJOR)
+[With peroxide: (CH₃)₂C=CH₂ + HBr/ROOR → (CH₃)₂CHCH₂Br — 1-bromo-2-methylpropane (anti-Markovnikov)]`)}
+        ${R.ans('<strong>c) Electrophilic Addition</strong>')}
+        ${R.mech([
+          'H⁺ from HBr adds to CH₂ (less substituted C) → forms tertiary carbocation (CH₃)₃C⁺ (more stable)',
+          'Br⁻ (nucleophile) attacks the tertiary C⁺ → (CH₃)₃CBr (2-bromo-2-methylpropane)',
+          'Markovnikov selectivity: tertiary carbocation (CH₃)₃C⁺ is much more stable than primary CH₂⁺; lower activation energy → major product',
+        ])}
+      `,
+    },
+    {
+      id:'t1-d6', num:'D6', type:'Reactions', navLabel:'[D6] Reagents for Cycloalkene Conversions',
+      question:'Identify reagents for converting methylenecyclohexane to: a) methylcyclohexane, b) bromomethylcyclohexane, c) 1-methylcyclohexan-1-ol, d) 1-chloro product (major), e) 1,1-dichloride, f) chlorohydrin.',
+      searchText:'methylenecyclohexane reagents H2 HBr HCl water H2SO4 Cl2 bromine halogenation cyclohexane',
+      tags:['reaction'],
+      answerHTML:`
+        ${R.table(['Target','Reagents & Conditions'],[
+          ['a) Reduce C=C → CH₂ (methylcyclohexane)','<strong>H₂/Ni (or Pt, Pd)</strong> — catalytic hydrogenation'],
+          ['b) Br on exo-CH₂ (Markovnikov: Br on ring C)','<strong>HBr</strong> (no peroxide) — electrophilic addition; Markovnikov → Br at more substituted ring C'],
+          ['c) OH on ring C (tertiary alcohol)','<strong>H₂O/conc. H₂SO₄</strong> — acid-catalysed hydration; Markovnikov → OH at tertiary C'],
+          ['d) Cl on ring C (major)','<strong>HCl</strong> — electrophilic addition; Markovnikov'],
+          ['e) 1,1-Dichloride (gem-dichloride)','<strong>Cl₂/CCl₄</strong> (or CH₂Cl₂) — addition across C=C'],
+          ['f) Chlorohydrin','<strong>Cl₂/H₂O</strong> — chlorohydrin formation; Cl and OH add anti'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-d7', num:'D7', type:'Reactions', navLabel:'[D7] Reactions with Mechanisms',
+      question:'Predict products + mechanisms: a) 2-pentyne + excess H₂/Pd, b) 2-methylbut-2-ene + H₂/Pt, c) 2-methylbut-2-ene + Cl₂/CCl₄, d) 2-pentyne + O₃.',
+      searchText:'2-pentyne excess hydrogen hydrogenation 2-methylbut-2-ene chlorine ozonolysis products mechanism',
+      tags:['reaction','mechanism'],
+      answerHTML:`
+        ${R.eq(`a) 2-Pentyne + excess H₂/Pd:
+CH₃C≡CCH₂CH₃ + 2H₂ →[Pd, excess H₂]→ CH₃CH₂CH₂CH₂CH₃ (pentane)
+Alkyne fully reduced to alkane (via alkene intermediate)
+
+b) 2-Methylbut-2-ene + H₂/Pt:
+(CH₃)₂C=CHCH₃ + H₂ →[Pt]→ (CH₃)₂CHCH₂CH₃ (2-methylbutane)
+Syn addition (both H add to same face)
+
+c) 2-Methylbut-2-ene + Cl₂/CCl₄:
+(CH₃)₂C=CHCH₃ + Cl₂ → (CH₃)₂CClCHClCH₃ (2,3-dichloro-2-methylbutane)
+Anti addition via cyclic chloronium ion; vicinal dichloride
+
+d) 2-Pentyne + O₃ (ozonolysis):
+CH₃C≡CCH₂CH₃ + O₃ →[H₂O]→ CH₃COOH + CH₃CH₂COOH
+(Triple bond cleaved: ethanoic acid + propanoic acid)`)}
+      `,
+    },
+    {
+      id:'t1-exam-mar2016', num:'EX1', type:'Exam Question', navLabel:'[Exam Mar 2016] Isomers & Markovnikov Mechanism',
+      question:'a) List 4 structural isomers of C₆H₁₄. b) Rank in increasing BP. c) Draw trans-2-pentene, isobutylcyclohexane, 2,2-dimethylpentane. d) Explain Markovnikov\'s rule. e) Mechanism for acid-catalysed hydration of 2-methylbut-2-ene. (4+2+6+2+4 marks)',
+      searchText:'C6H14 isomers hexane methylpentane dimethylbutane boiling point Markovnikov hydration mechanism 2-methylbut-2-ene',
+      tags:['naming','reaction','mechanism','exam'], examYear:'2016',
+      answerHTML:`
+        <strong>a) Four structural isomers of C₆H₁₄:</strong>
+        ${R.table(['#','Name','Formula'],[
+          ['1','Hexane','CH₃CH₂CH₂CH₂CH₂CH₃'],
+          ['2','2-Methylpentane','CH₃CH(CH₃)CH₂CH₂CH₃'],
+          ['3','3-Methylpentane','CH₃CH₂CH(CH₃)CH₂CH₃'],
+          ['4','2,2-Dimethylbutane','(CH₃)₃CCH₂CH₃'],
+        ])}
+        ${R.note('Total 5 isomers exist for C₆H₁₄; 2,3-dimethylbutane is the 5th.')}
+        <strong>b) Increasing BP: 2,2-Dimethylbutane &lt; 2-Methylpentane &lt; 3-Methylpentane &lt; Hexane</strong><br>
+        <em>More branching → lower BP. Hexane (unbranched) has highest BP.</em>
+        <strong>c) Structures:</strong>
+        ${R.grid3([
+          R.lbl('trans-2-Pentene','CH₃CH=CHCH₂CH₃ (trans: CH₃ groups on opposite sides of C=C)'),
+          R.lbl('Isobutylcyclohexane','Cyclohexane ring with –CH₂CH(CH₃)₂ at C1'),
+          R.lbl('2,2-Dimethylpentane','(CH₃)₃CCH₂CH₂CH₃'),
+        ])}
+        ${R.ans('<strong>d) Markovnikov\'s Rule:</strong> When HX adds to an asymmetric alkene, H adds to the carbon bearing more H atoms (less substituted), and X adds to the carbon bearing fewer H atoms (more substituted). This occurs because the more substituted carbocation is more stable (more alkyl groups donate electrons).')}
+        <strong>e) Mechanism — Acid-catalysed hydration of 2-methylbut-2-ene:</strong>
+        ${R.mech([
+          '<strong>Step 1 — Protonation:</strong> H⁺ (from H₂SO₄) adds to less substituted C (=CHCH₃ end) → tertiary carbocation forms: (CH₃)₂C⁺CH₂CH₃',
+          '<strong>Step 2 — Water attack:</strong> H₂O (nucleophile) attacks the tertiary carbocation → protonated alcohol (oxonium ion): (CH₃)₂C(OH₂⁺)CH₂CH₃',
+          '<strong>Step 3 — Deprotonation:</strong> H₂O removes H⁺ from oxonium ion → 2-methylbutan-2-ol (tertiary alcohol): (CH₃)₂C(OH)CH₂CH₃',
+        ])}
+      `,
+    },
+    {
+      id:'t1-exam-oct2016', num:'EX2', type:'Exam Question', navLabel:'[Exam Oct 2016] Sigma/Pi Bonds & HBr Reactions',
+      question:'a) Draw condensed structures: i) 1,3,5-trichloropentyne, ii) cis-1,2-dimethylcyclopropane. b) Count σ and π bonds in 5-isopropyl-2-octen-6-yne. c) IUPAC names. d) HBr + peroxide (X) and HBr without peroxide (Y) products. e) Increasing BP: hexane, 1-pentanol, pentane, 1,2-hexanediol. (Oct 2016)',
+      searchText:'sigma pi bonds trichloropentyne cis dimethylcyclopropane HBr peroxide anti-Markovnikov boiling point hexanediol pentanol',
+      tags:['naming','reaction','mechanism','exam'], examYear:'2016',
+      answerHTML:`
+        ${R.grid2([
+          R.lbl('a-i) 1,3,5-Trichloropentyne','<span class="chem">ClCH₂C≡CCHClCH₂Cl</span><br>(Cl at C1, C3, C5; triple bond C2–C3)'),
+          R.lbl('a-ii) cis-1,2-Dimethylcyclopropane','Cyclopropane (triangle ring) with both CH₃ groups on the SAME side (cis = same face)'),
+        ])}
+        <strong>b) σ and π bonds in 5-isopropyl-2-octen-6-yne:</strong>
+        ${R.eq(`Structure: CH₃-CH=CH-CH₂-CH(CH(CH₃)₂)-C≡C-CH₃
+C=C double bond contributes: 1σ + 1π
+C≡C triple bond contributes: 1σ + 2π
+All C–C and C–H single bonds = σ bonds only
+Total π bonds = 3 (1 from C=C and 2 from C≡C)`)}
+        <strong>d) HBr reactions:</strong>
+        ${R.eq(`Cyclobutyl-CH₂ (methylenecyclobutane) + HBr + peroxide (anti-Markovnikov):
+X = BrCH₂–cyclobutane (Br on terminal CH₂; anti-Markovnikov)
+
+CH₃CH₂=C(CH₃)₂ (2-methylbut-2-ene) + HBr without peroxide (Markovnikov):
+Y = CH₃CH₂CBr(CH₃)₂ = 2-bromo-2-methylbutane (Br on most substituted C)`)}
+        <strong>e) Increasing BP: Pentane &lt; Hexane &lt; 1-Pentanol &lt; 1,2-Hexanediol</strong>
+        ${R.note('Pentane/hexane — van der Waals only. 1-Pentanol — one O–H H-bond. 1,2-Hexanediol — TWO O–H groups → more H-bonds → highest BP.')}
+      `,
+    },
+    {
+      id:'t1-exam-sep2014', num:'EX3', type:'Exam Question', navLabel:'[Exam Sept 2014] Naming + Ozonolysis + Free Radical',
+      question:'a) Name three structures by IUPAC. b) Draw: alkane with 1° and 4° C; alkyl halide with 2° halide. c) Products: i) ozonolysis, ii) Cl₂/UV, iii) 1-bromobutane + Mg/H₂O. d) Mechanism for chloromethane production. (6+3+6+4 marks)',
+      searchText:'IUPAC name September 2014 ozonolysis Cl2 UV free radical chloromethane 1-bromobutane Grignard Mg',
+      tags:['naming','reaction','mechanism','exam'], examYear:'2014',
+      answerHTML:`
+        <strong>a) IUPAC names from structures:</strong>
+        ${R.table(['Description','IUPAC Name'],[
+          ['Branched chain with Cl (skeletal formula)','<strong>4-chloro-2,3-dimethylpentane</strong> (or as read from actual structure)'],
+          ['Cyclopentane ring with Br and methyl','<strong>1-bromo-2-methylcyclopentane</strong>'],
+          ['Cyclobutane with attached alkyne','<strong>Ethynylcyclobutane</strong> (cyclobutylacetylene)'],
+        ])}
+        <strong>b) Structures:</strong>
+        ${R.grid2([
+          R.lbl('Alkane with 1° and 4° carbon','<span class="chem">(CH₃)₄C</span> = neopentane. Central C is quaternary (4°); each CH₃ C is primary (1°).'),
+          R.lbl('Alkyl halide with 2° halide','<span class="chem">CH₃CHBrCH₃</span> = 2-bromopropane. Br on C2 = secondary carbon.'),
+        ])}
+        <strong>c) Products:</strong>
+        ${R.eq(`i) Ozonolysis (O₃ then (CH₃)₂S or Zn/H₂O):
+Alkene cleaved at C=C; each C of double bond → carbonyl compound
+e.g. (CH₃)₂C=C(CH₃)₂ + O₃ + (CH₃)₂S → 2 × CH₃COCH₃ (acetone)
+
+ii) Cl₂/UV (free radical photochlorination of branched alkane):
+Multiple monosubstituted products (at each C–H); mixture of constitutional isomers
+
+iii) CH₃CH₂CH₂CH₂Br + Mg/H₂O:
+Step 1: + Mg/dry ether → CH₃CH₂CH₂CH₂MgBr (Grignard reagent)
+Step 2: + H₂O → CH₃CH₂CH₂CH₃ + Mg(OH)Br
+Product: Butane (Grignard hydrolysis)`)}
+        <strong>d) Free radical mechanism for chloromethane (CH₄ + Cl₂):</strong>
+        ${R.mech([
+          '<strong>Initiation:</strong> Cl₂ + hν → 2Cl· (UV light; homolytic cleavage)',
+          '<strong>Propagation 1:</strong> Cl· + CH₄ → CH₃· + HCl (H abstracted from methane)',
+          '<strong>Propagation 2:</strong> CH₃· + Cl₂ → CH₃Cl + Cl· (Cl· regenerated; chain continues)',
+          '<strong>Termination:</strong> Cl· + Cl· → Cl₂ OR CH₃· + Cl· → CH₃Cl OR CH₃· + CH₃· → C₂H₆',
+        ])}
+      `,
+    },
+  ],
+},
+
+/* ─── SECTION 2: ALCOHOL & PHENOL ─── */
+{
+  id:'alc', title:'Alcohol & Phenol', shortTitle:'Alcohol & Phenol', icon:'🍶',
+  questions:[
+    {
+      id:'t1-alc-a1', num:'A1', type:'Nomenclature', navLabel:'[A1] IUPAC Names — Alcohols (a–n)',
+      question:'Give IUPAC names for 14 alcohol structures (a–n) including cyclic alcohols, phenols, diols, and aromatic alcohols.',
+      searchText:'alcohol IUPAC name cyclopentanol methylpropanol phenol diol propanol hexanol butanol glycerol hydroxyl naming',
+      tags:['naming','identification'],
+      answerHTML:`
+        ${R.table(['#','Structure/Description','IUPAC Name','Class'],[
+          ['a','CH₃CH₂CH(OH)CH₂CH₂CH₃','<strong>Hexan-3-ol</strong>','2° alcohol'],
+          ['b','Cyclopentane + OH','<strong>Cyclopentanol</strong>','2° cyclic'],
+          ['c','(CH₃)₂CHCH₂OH','<strong>2-Methylpropan-1-ol</strong>','1° alcohol'],
+          ['d','Benzene ring + OH','<strong>Phenol</strong>','Phenol'],
+          ['e','CH₃CH₂CH₂OH','<strong>Propan-1-ol</strong>','1° alcohol'],
+          ['f','CH₂=CHCH(OH)CH₂CH₂CH₃','<strong>Hex-5-en-3-ol</strong>','Unsaturated 2° alcohol'],
+          ['g','Benzene + CH=CH–C(CH₃)₂OH','Complex aromatic tertiary alcohol','3° alcohol'],
+          ['h','HOCH₂CH(OH)CH₂OH (glycerol expanded)','<strong>Propane-1,2,3-triol</strong> (glycerol)','Triol'],
+          ['i','HCH=CHC(OH)Br₂ type structure','<strong>Bromo-propenol derivative</strong>','Halogenated alcohol'],
+          ['k','H₂C=CHCH(OH)CH₂CH₂CH₃','<strong>Hex-1-en-3-ol</strong>','Unsaturated 2°'],
+          ['l','Benzene + CH=CH–C(CH₃)(OH) chain','<strong>2-methyl-1-phenylprop-2-en-1-ol</strong>','Allylic 2°'],
+          ['m','Propane-1,2,3-triol (glycerol)','<strong>Propane-1,2,3-triol</strong>','Triol'],
+          ['n','Dibromo-propenol','<strong>1,1-Dibromoprop-2-en-1-ol</strong>','Halogenated alcohol'],
+        ])}
+        ${R.pharma('<strong>Glycerol</strong> (propane-1,2,3-triol) is a key pharmaceutical excipient in Malaysian medicines — used as a solvent, humectant, and sweetening agent in syrups and skin formulations. Also the backbone of triglyceride fats.')}
+      `,
+    },
+    {
+      id:'t1-alc-a2', num:'A2', type:'Drawing', navLabel:'[A2] Draw Alcohol Structures',
+      question:'Draw: sec-butyl alcohol, 2,3-dichloro-4-methyl-4-octanol, 3-heptanol, 1-cyclopropylethanol, 1-methylcyclohexanol, 2,4-dinitrophenol, 2-ethyl-2-pentanol, o-bromophenol, 2,4,6-trifluorophenol, 1,4-butandiol.',
+      searchText:'draw alcohol sec-butyl 3-heptanol cyclopropylethanol methylcyclohexanol dinitrophenol bromophenol trifluorophenol butandiol',
+      tags:['drawing'],
+      answerHTML:`
+        ${R.table(['Name','Structural Formula','Type'],[
+          ['sec-Butyl alcohol','<span class="chem">CH₃CH(OH)CH₂CH₃</span> (butan-2-ol)','2° alcohol'],
+          ['3-Heptanol','<span class="chem">CH₃CH₂CH(OH)CH₂CH₂CH₂CH₃</span>','2° alcohol'],
+          ['1-Cyclopropylethanol','Cyclopropyl ring–CH(OH)CH₃','2° alcohol with cyclopropyl group'],
+          ['1-Methylcyclohexanol','Cyclohexane ring: C1 has both –CH₃ and –OH','3° alcohol'],
+          ['2,4-Dinitrophenol','Benzene: OH at C1, NO₂ at C2 and C4','Phenol — very acidic'],
+          ['2-Ethyl-2-pentanol','<span class="chem">CH₃CH₂CH₂C(OH)(CH₂CH₃)CH₃... </span> (3° alcohol at C2 of pentane)','3° alcohol'],
+          ['o-Bromophenol','Benzene: OH at C1, Br at C2','Ortho-substituted phenol'],
+          ['2,4,6-Trifluorophenol','Benzene: OH at C1, F at C2, C4, C6','Highly acidic phenol'],
+          ['1,4-Butandiol','<span class="chem">HOCH₂CH₂CH₂CH₂OH</span>','Diol (both ends)'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-alc-b1', num:'B1', type:'Properties', navLabel:'[B1] H-Bonding in Methanol',
+      question:'Draw several methanol (CH₃OH) molecules illustrating hydrogen bonding between them.',
+      searchText:'methanol hydrogen bonding intermolecular O-H dipole partial charge alcohol solubility',
+      tags:['identification'],
+      answerHTML:`
+        <div style="text-align:center;margin:8px 0;padding:12px;background:var(--surface2);border-radius:6px;">
+          <svg viewBox="0 0 280 100" width="260" height="92">
+            <text x="8" y="42" font-family="Arial" font-size="11" fill="#555">CH₃</text>
+            <line x1="30" y1="38" x2="52" y2="38" stroke="#333" stroke-width="1.5"/>
+            <text x="50" y="42" font-family="Arial" font-size="13" fill="#C62828">O</text>
+            <line x1="60" y1="36" x2="75" y2="26" stroke="#333" stroke-width="1.5"/>
+            <text x="73" y="22" font-family="Arial" font-size="11" fill="#777">H···</text>
+            <line x1="98" y1="22" x2="112" y2="38" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <text x="105" y="65" font-family="Arial" font-size="11" fill="#555">CH₃</text>
+            <line x1="127" y1="62" x2="148" y2="62" stroke="#333" stroke-width="1.5"/>
+            <text x="146" y="66" font-family="Arial" font-size="13" fill="#C62828">O</text>
+            <line x1="156" y1="60" x2="170" y2="50" stroke="#333" stroke-width="1.5"/>
+            <text x="168" y="46" font-family="Arial" font-size="11" fill="#777">H···</text>
+            <line x1="192" y1="46" x2="208" y2="62" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <text x="202" y="88" font-family="Arial" font-size="11" fill="#555">CH₃</text>
+            <line x1="222" y1="85" x2="245" y2="85" stroke="#333" stroke-width="1.5"/>
+            <text x="243" y="89" font-family="Arial" font-size="13" fill="#C62828">O</text>
+            <line x1="253" y1="83" x2="268" y2="73" stroke="#333" stroke-width="1.5"/>
+            <text x="266" y="69" font-family="Arial" font-size="11" fill="#777">H</text>
+            <text x="92" y="18" font-family="Arial" font-size="8" fill="#1565C0" font-style="italic">H-bond</text>
+            <text x="188" y="42" font-family="Arial" font-size="8" fill="#1565C0" font-style="italic">H-bond</text>
+          </svg>
+        </div>
+        ${R.ans('Each methanol has one O–H donor and two lone pairs on O as acceptors → forms a chain/network of H-bonds.')}
+        ${R.note('<strong>H-bond requirements:</strong> (1) X–H where X = O, N, or F (donor), (2) Lone pair on O, N, or F (acceptor), (3) Proximity. Strength ~20 kJ/mol — much weaker than covalent but stronger than van der Waals.')}
+      `,
+    },
+    {
+      id:'t1-alc-b2', num:'B2', type:'Properties', navLabel:'[B2] Boiling Point Orders',
+      question:'a) Descending BP: propanol, decanol, heptanol. b) Descending BP: propane, propenol, pentanol. c) Increasing BP: 2-propanol, cyclohexanol, methanol, 1-propanol. d) Increasing BP: benzyl alcohol, ethanol, ethylene glycol, 1-propanol.',
+      searchText:'boiling point alcohol descending increasing order chain length intermolecular hydrogen bond diol glycol',
+      tags:['reaction'],
+      answerHTML:`
+        ${R.ans('<strong>a) Descending BP: Decanol &gt; Heptanol &gt; Propanol</strong> — all have –OH; longer chain = more vdW forces.')}
+        ${R.ans('<strong>b) Descending BP: Pentanol &gt; Propenol &gt; Propane</strong> — pentanol has H-bond + longest chain; propane has no H-bond (non-polar).')}
+        ${R.ans('<strong>c) Increasing BP: CH₃OH &lt; CH₃CH(OH)CH₃ &lt; CH₂CH₂CH₂OH &lt; C₆H₁₁OH</strong> — methanol smallest; cyclohexanol largest (ring + H-bond).')}
+        ${R.ans('<strong>d) Increasing BP: CH₃CH₂OH &lt; CH₃CH₂CH₂OH &lt; C₆H₅CH₂OH &lt; HOCH₂CH₂OH</strong>')}
+        ${R.note('Ethylene glycol (HOCH₂CH₂OH) has TWO –OH groups → more H-bonds per molecule → highest BP despite lower MW than benzyl alcohol.')}
+      `,
+    },
+    {
+      id:'t1-alc-b3', num:'B3', type:'Properties', navLabel:'[B3] Water Solubility & Phenoxide Resonance',
+      question:'4. From each pair, select the more water-soluble compound: a) CH₃OH or CH₃CH₂CH₂CH₂OH, b) CH₃CH₂OCH₃ or CH₃CH₂CH₂OH. 5. Write 4 resonance structures of phenoxide ion.',
+      searchText:'water solubility alcohol ether methanol butanol propanol hydrophilic phenoxide resonance structures',
+      tags:['identification'],
+      answerHTML:`
+        ${R.grid2([
+          `${R.lbl('a) More soluble: CH₃OH (methanol)','Methanol has only 1C — small hydrophobic part; OH dominates. 1-Butanol (4C) has larger hydrophobic chain → less soluble in water.')}`,
+          `${R.lbl('b) More soluble: CH₃CH₂CH₂OH (1-propanol)','Propanol has –OH group (donates AND accepts H-bonds with water). Methyl ethyl ether can only accept H-bonds — less soluble.')}`,
+        ])}
+        <strong>5. Resonance structures of phenoxide ion (C₆H₅O⁻):</strong>
+        ${R.note('The negative charge is delocalised from O into the ring ortho and para positions via resonance — this stabilises the phenoxide ion and explains why phenol is more acidic than aliphatic alcohols.')}
+        ${R.eq(`Structure 1: C₆H₅–O⁻  (main — negative charge on O)
+Structure 2: ⁻C₆H₄=O  (negative charge at ortho C2; C=O double bond)
+Structure 3: ⁻C₆H₄=O  (negative charge at ortho C6; C=O double bond)
+Structure 4: ⁻C₆H₄=O  (negative charge at para C4; C=O double bond)
+Order of acidity: Phenol > H₂O > Alcohol (phenoxide most stable → phenol most acidic)`)}
+      `,
+    },
+    {
+      id:'t1-alc-c1', num:'C1', type:'Reactions', navLabel:'[C1] 2-Bromopropane + KOH(aq)',
+      question:'Determine the product when 2-bromopropane is heated with aqueous KOH. Write the equation.',
+      searchText:'2-bromopropane KOH aqueous nucleophilic substitution SN2 propan-2-ol product',
+      tags:['reaction'],
+      answerHTML:`
+        ${R.eq(`CH₃CHBrCH₃ + KOH(aq)  →[heat/reflux]→  CH₃CH(OH)CH₃ + KBr
+Product: Propan-2-ol (2-propanol / isopropanol)`)}
+        ${R.ans('<strong>Reaction type: Nucleophilic Substitution (SN2)</strong> — OH⁻ (from aqueous KOH) attacks C bearing Br; Br⁻ departs as leaving group.')}
+        ${R.note('<strong>Key distinction:</strong> Aqueous KOH → substitution (gives alcohol). Ethanolic KOH → elimination (gives propene). Temperature also matters: lower temperature favours substitution.')}
+        ${R.pharma('<strong>Isopropanol (propan-2-ol)</strong> = active ingredient in hand sanitisers (70% v/v) used widely in Malaysia. Pharmacists advise patients on effective use and flammability precautions.')}
+      `,
+    },
+    {
+      id:'t1-alc-c2', num:'C2', type:'Synthesis', navLabel:'[C2] Prepare Alcohols from Alkenes/Haloalkanes',
+      question:'Write equations for: a) 2-methyl-2-propanol from 2-methylpropene. b) Cyclohexanol from a suitable haloalkane.',
+      searchText:'2-methyl-2-propanol 2-methylpropene hydration cyclohexanol haloalkane SN2 tertiary alcohol',
+      tags:['reaction','synthesis'],
+      answerHTML:`
+        ${R.eq(`a) 2-Methyl-2-propanol from 2-methylpropene (acid-catalysed hydration):
+(CH₃)₂C=CH₂ + H₂O  →[conc. H₂SO₄, heat]→  (CH₃)₃COH
+Reagents: Conc. H₂SO₄ + H₂O; Markovnikov → OH on tertiary C
+Product: 2-Methylpropan-2-ol (tert-butanol) — 3° alcohol
+
+b) Cyclohexanol from cyclohexyl bromide:
+C₆H₁₁Br + KOH(aq)  →[reflux]→  C₆H₁₁OH + KBr
+Reagents: Aqueous KOH (or NaOH/H₂O); SN2 substitution; Br → OH`)}
+      `,
+    },
+    {
+      id:'t1-alc-c3', num:'C3', type:'Synthesis', navLabel:'[C3] Synthesis from Alcohols',
+      question:'Show synthesis from alcohols: a) propanoic acid, b) propanone, c) propanal.',
+      searchText:'synthesis propanoic acid propanone propanal from alcohol oxidation KMnO4 K2Cr2O7 PCC secondary primary',
+      tags:['reaction','synthesis'],
+      answerHTML:`
+        ${R.eq(`a) Propanoic acid from 1-propanol (excess oxidation):
+CH₃CH₂CH₂OH + K₂Cr₂O₇/H₂SO₄ (excess, heat)  →  CH₃CH₂COOH
+
+b) Propanone from 2-propanol (secondary alcohol → ketone):
+CH₃CH(OH)CH₃ + K₂Cr₂O₇/H₂SO₄  →  CH₃COCH₃ + H₂O
+
+c) Propanal from 1-propanol (controlled mild oxidation):
+CH₃CH₂CH₂OH + PCC/CH₂Cl₂  →  CH₃CH₂CHO (propanal)
+[Use PCC or K₂Cr₂O₇/H₂SO₄ with immediate distillation to stop at aldehyde]`)}
+        ${R.note('<strong>Oxidation levels:</strong> 1° alcohol → aldehyde → carboxylic acid. 2° alcohol → ketone (stops here). 3° alcohol → NOT oxidised normally. PCC is selective for 1° alcohol → aldehyde only.')}
+      `,
+    },
+    {
+      id:'t1-alc-c4', num:'C4', type:'Reaction Scheme', navLabel:'[C4] 2-Butanol Reaction Scheme (A→E)',
+      question:'2-Butanol diagram: A →[KOH(aq)]→ 2-butanol →[Al₂O₃/350°C]→ B + C (main). Also: →[KMnO₄]→ D and →[HCOOH/H₂SO₄]→ E. a) Suggest A. b) Draw B and C. c) Name D. d) Name E and write equation.',
+      searchText:'2-butanol reaction scheme KOH Al2O3 dehydration Zaitsev KMnO4 oxidation butanone HCOOH esterification sec-butyl methanoate',
+      tags:['reaction','synthesis'],
+      answerHTML:`
+        ${R.grid2([
+          R.lbl('A (starting material)','<strong>2-Bromobutane</strong> (CH₃CHBrCH₂CH₃)<br>KOH(aq)/reflux → 2-Butanol by SN2'),
+          R.lbl('D (KMnO₄ oxidation of 2-butanol)','<strong>Butanone (2-butanone, CH₃COCH₂CH₃)</strong><br>2° alcohol → ketone'),
+        ])}
+        ${R.eq(`b) B and C from Al₂O₃/350°C (dehydration — Zaitsev):
+CH₃CH(OH)CH₂CH₃ →[Al₂O₃/350°C]→ CH₃CH=CHCH₃ (B: but-2-ene, MAJOR) + CH₃CH₂CH=CH₂ (C: but-1-ene, minor)
+B is major (Zaitsev — more substituted alkene more stable)
+
+d) E — Esterification with methanoic acid:
+CH₃CH(OH)CH₂CH₃ + HCOOH →[H₂SO₄ cat., heat]→ HCOOCH(CH₃)CH₂CH₃ + H₂O
+E = sec-Butyl methanoate (sec-butyl formate) — Fischer esterification`)}
+      `,
+    },
+    {
+      id:'t1-alc-c5', num:'C5', type:'Reactions', navLabel:'[C5] 1-Butanol + PBr₃',
+      question:'Draw the organic product when CH₃CH₂CH₂CH₂OH is treated with PBr₃.',
+      searchText:'1-butanol PBr3 phosphorus tribromide 1-bromobutane product nucleophilic substitution',
+      tags:['reaction'],
+      answerHTML:`
+        ${R.eq(`3 CH₃CH₂CH₂CH₂OH + PBr₃  →  3 CH₃CH₂CH₂CH₂Br + H₃PO₃
+Product: 1-Bromobutane (n-butyl bromide)`)}
+        ${R.ans('<strong>Reaction type: Nucleophilic Substitution</strong> — PBr₃ activates –OH (forms good leaving group); Br⁻ attacks C by SN2 → inversion of configuration. Clean, high-yield method for converting 1° and 2° alcohols to alkyl bromides.')}
+      `,
+    },
+    {
+      id:'t1-alc-c6', num:'C6', type:'Reactions', navLabel:'[C6] Dehydration of 2,2-Dimethylcyclopentanol',
+      question:'2,2-Dimethylcyclopentanol + conc. H₂SO₄ → F (major). a) Draw F. b) Draw minor products. c) Rule determining major. d) Mechanism.',
+      searchText:'dehydration 2,2-dimethylcyclopentanol H2SO4 Zaitsev major minor alkene carbocation mechanism',
+      tags:['reaction','mechanism'],
+      answerHTML:`
+        ${R.ans('<strong>F (major product): 1,2-Dimethylcyclopentene</strong> — most substituted alkene; Zaitsev\'s rule')}
+        ${R.note('<strong>Minor product:</strong> Rearrangement may give 1-methylcyclopentene or methylenecyclopentane (if methyl group migrates from C1 to give more stable carbocation).')}
+        ${R.ans('<strong>c) Zaitsev\'s Rule:</strong> In elimination, the major product is the most thermodynamically stable (most substituted) alkene.')}
+        ${R.mech([
+          '<strong>Protonation:</strong> H⁺ protonates –OH → –OH₂⁺ (good leaving group)',
+          '<strong>Carbocation:</strong> H₂O departs → tertiary carbocation at ring C1',
+          '<strong>Deprotonation:</strong> Base (HSO₄⁻) abstracts β-H → C=C forms; more substituted product = major (Zaitsev)',
+        ])}
+      `,
+    },
+    {
+      id:'t1-alc-c7', num:'C7', type:'Reactions', navLabel:'[C7] C₅H₁₁Br Isomers (G, H, I Scheme)',
+      question:'G, H, I are optically active isomers of C₅H₁₁Br. G + KOH/ethanol → J. J + O₃/Zn/H₂O → propanal. H + aq.NaOH → K (positive iodoform). a) Predict G, H, I, J, K. b) Cis-trans of J. c) Propanal from G via J.',
+      searchText:'C5H11Br optically active isomers KOH ethanol ozonolysis propanal iodoform sodium hydroxide chiral stereocentre',
+      tags:['reaction','synthesis'],
+      answerHTML:`
+        ${R.table(['Compound','Identity','Reasoning'],[
+          ['G','<strong>2-Bromopentane</strong> (CH₃CHBrCH₂CH₂CH₃)','Chiral at C2; KOH/ethanol → pent-2-ene (J) by E2'],
+          ['J','<strong>Pent-2-ene</strong> (CH₃CH=CHCH₂CH₃)','Ozonolysis of pent-2-ene → propanal (CH₃CH₂CHO) + ethanal (CH₃CHO)'],
+          ['H','<strong>3-Bromo-2-methylbutane</strong> ((CH₃)₂CHCH(Br)CH₃)','Chiral; SN2 with NaOH(aq) → 3-methyl-2-butanol (K)'],
+          ['K','<strong>3-Methyl-2-butanol</strong> ((CH₃)₂CHCH(OH)CH₃)','Contains CH₃CH(OH)– → oxidised to CH₃CO– → positive iodoform'],
+          ['I','<strong>1-Bromo-3-methylbutane</strong> ((CH₃)₂CHCH₂CH₂Br)','Third optically active C₅H₁₁Br isomer'],
+        ])}
+        ${R.eq(`b) Cis-trans isomers of J (pent-2-ene):
+cis-Pent-2-ene: CH₃ and CH₂CH₂CH₃ on SAME side of C=C
+trans-Pent-2-ene: CH₃ and CH₂CH₂CH₃ on OPPOSITE sides of C=C
+
+c) Propanal preparation:
+Step 1: G (2-bromopentane) + KOH/ethanol →[E2]→ J (pent-2-ene)
+Step 2: J (pent-2-ene) + O₃; then Zn/H₂O → CH₃CH₂CHO (propanal) + CH₃CHO (ethanal)`)}
+      `,
+    },
+    {
+      id:'t1-alc-c8', num:'C8', type:'Reactions', navLabel:'[C8] Alkyl Halides from Alcohols (March 2014)',
+      question:'Draw alkyl halides from: a) cyclobutanol + HCl (25°C), b) tertiary branched alcohol + NaBr/H₂SO₄. (March 2014)',
+      searchText:'alkyl halide cyclobutanol HCl chlorocyclobutane tertiary alcohol NaBr H2SO4 SN1',
+      tags:['reaction','exam'], examYear:'2014',
+      answerHTML:`
+        ${R.grid2([
+          R.lbl('a) Cyclobutanol + HCl → Chlorocyclobutane','<span class="chem">Cyclobutyl–Cl</span><br>SN1 (secondary cyclic → cyclobutyl carbocation → Cl⁻ attacks)'),
+          R.lbl('b) Tertiary alcohol + NaBr/H₂SO₄ → Tertiary bromide','Br replaces tertiary –OH via SN1 (stable 3° carbocation intermediate)'),
+        ])}
+        ${R.note('<strong>SN1 vs SN2:</strong> Tertiary → SN1 (via carbocation; racemisation). Primary → SN2 (backside attack; inversion). ZnCl₂/HCl or NaBr/H₂SO₄ are classic reagents for converting alcohols to alkyl halides.')}
+      `,
+    },
+    {
+      id:'t1-alc-c9', num:'C9', type:'Synthesis', navLabel:'[C9] Suggest Starting Alcohols (March 2014)',
+      question:'Suggest appropriate starting alcohol for: a) 2,3-dimethylhexene, b) cyclopentanone, c) ortho-nitrophenol. (March 2014)',
+      searchText:'starting alcohol 2,3-dimethylhexene cyclopentanone ortho-nitrophenol dehydration oxidation nitration',
+      tags:['reaction','synthesis','exam'], examYear:'2014',
+      answerHTML:`
+        ${R.table(['Target','Starting Alcohol','Reagents/Method'],[
+          ['a) 2,3-Dimethylhexene','<strong>2,3-Dimethylhexan-2-ol</strong> (3° alcohol)','Dehydration: conc. H₂SO₄/heat or Al₂O₃/350°C → elimination of H₂O'],
+          ['b) Cyclopentanone','<strong>Cyclopentanol</strong> (2° cyclic alcohol)','Oxidation: K₂Cr₂O₇/H₂SO₄ or KMnO₄/H₂SO₄ → 2° alcohol → ketone'],
+          ['c) o-Nitrophenol','<strong>Phenol</strong> (C₆H₅OH)','Nitration: conc. HNO₃/H₂SO₄, 0°C → EAS; ortho (+ para) products'],
+        ])}
+      `,
+    },
+    {
+      id:'t1-alc-c10', num:'C10', type:'Mechanism', navLabel:'[C10] Ether Formation Mechanism',
+      question:'Write the mechanism for acid-catalysed dehydration of ethanol to give diethyl ether (140°C).',
+      searchText:'dehydration ethanol diethyl ether mechanism acid-catalysed 140 degrees H2SO4 SN2 intermolecular',
+      tags:['mechanism','reaction'],
+      answerHTML:`
+        ${R.mech([
+          '<strong>Step 1 — Protonation:</strong> H⁺ (conc. H₂SO₄) protonates O of ethanol → ethyloxonium ion: CH₃CH₂OH₂⁺ (OH becomes a good leaving group)',
+          '<strong>Step 2 — Nucleophilic attack:</strong> A second ethanol molecule (nucleophile) attacks the activated carbon of CH₃CH₂OH₂⁺ via SN2, displacing H₂O → protonated diethyl ether: CH₃CH₂–O⁺(H)–CH₂CH₃',
+          '<strong>Step 3 — Deprotonation:</strong> Base (HSO₄⁻ or H₂O) removes H⁺ → diethyl ether: CH₃CH₂–O–CH₂CH₃ + H⁺ (catalyst regenerated)',
+        ])}
+        ${R.eq(`Overall: 2CH₃CH₂OH  →[conc. H₂SO₄, 140°C]→  CH₃CH₂OCH₂CH₃ + H₂O
+At 170°C: intramolecular elimination → ethene (not ether)`)}
+        ${R.pharma('<strong>Diethyl ether</strong> — historically the first general anaesthetic (1846). Now replaced by safer agents but still used as a pharmaceutical extraction solvent. Highly flammable — stored away from ignition sources in Malaysian pharmacy labs.')}
+      `,
+    },
+    {
+      id:'t1-alc-c11', num:'C11', type:'Reactions', navLabel:'[C11] 2-Methyl-2-butanol Dehydration Products (March 2014)',
+      question:'Show the two products formed when 2-methyl-2-butanol reacts with acid. (March 2014)',
+      searchText:'2-methyl-2-butanol dehydration acid two products Zaitsev major minor 2-methylbut-2-ene 2-methylbut-1-ene',
+      tags:['reaction','exam'], examYear:'2014',
+      answerHTML:`
+        ${R.eq(`(CH₃)₂C(OH)CH₂CH₃  →[conc. H₂SO₄/Δ]→`)}
+        ${R.grid2([
+          R.lbl('Major product: 2-Methylbut-2-ene','(CH₃)₂C=CHCH₃<br>More substituted C=C (3 alkyl groups) = more stable = major (Zaitsev)'),
+          R.lbl('Minor product: 2-Methylbut-1-ene','CH₂=C(CH₃)CH₂CH₃<br>Less substituted C=C (2 alkyl groups) = less stable = minor'),
+        ])}
+        ${R.note('Mechanism: H⁺ protonates –OH → H₂O leaves → 3° carbocation (CH₃)₂C⁺CH₂CH₃ forms → two possible β-H removals give two different alkenes. Zaitsev → more substituted alkene (2-methylbut-2-ene) is major.')}
+      `,
+    },
+    {
+      id:'t1-alc-exam-sep2014', num:'EX4', type:'Exam Question', navLabel:'[Exam Sept 2014] Ethanol + 3 Reagents + Grignard',
+      question:'b) Products when ethanol treated with: i) HBr, ii) H₂SO₄, iii) NaCr₂O₄/H₂SO₄. d) Grignard synthesis of: i) 2-pentanol, ii) 1-butanol, iii) 1-phenylcyclohexanol. (Sept 2014)',
+      searchText:'ethanol HBr H2SO4 NaCr2O4 products bromoethane ether ethene Grignard 2-pentanol 1-butanol 1-phenylcyclohexanol',
+      tags:['reaction','synthesis','exam'], examYear:'2014',
+      answerHTML:`
+        ${R.table(['Reagent','Conditions','Product'],[
+          ['i) HBr','RT','<strong>Bromoethane (CH₃CH₂Br) + H₂O</strong> — nucleophilic substitution'],
+          ['ii) H₂SO₄ (conc.)','140°C','<strong>Diethyl ether</strong> (intermolecular dehydration)'],
+          ['ii) H₂SO₄ (conc.)','170°C','<strong>Ethene + H₂O</strong> (intramolecular dehydration)'],
+          ['iii) NaCr₂O₄/H₂SO₄','Heat','<strong>Ethanoic acid (CH₃COOH)</strong> with excess — full oxidation of 1° alcohol'],
+        ])}
+        <strong>Grignard synthesis:</strong>
+        ${R.eq(`i) 2-Pentanol: CH₃CHO (ethanal) + CH₃CH₂CH₂MgBr →[H₃O⁺]→ CH₃CH(OH)CH₂CH₂CH₃ (2° alcohol)
+   OR: CH₃CH₂CH₂CHO (butanal) + CH₃MgBr →[H₃O⁺]→ same product
+
+ii) 1-Butanol: HCHO (formaldehyde) + CH₃CH₂CH₂MgBr →[H₃O⁺]→ CH₃CH₂CH₂CH₂OH (1° alcohol)
+
+iii) 1-Phenylcyclohexanol: Cyclohexanone + C₆H₅MgBr →[H₃O⁺]→ 1-phenylcyclohexanol (3° alcohol)`)}
+        ${R.note('<strong>Grignard rule:</strong> Formaldehyde (HCHO) → 1° alcohol. Other aldehydes → 2° alcohol. Ketones → 3° alcohol.')}
+      `,
+    },
+    {
+      id:'t1-alc-exam-mar2016', num:'EX5', type:'Exam Question', navLabel:'[Exam Mar 2016] Classify + Correct Names + Reactions + Mechanism',
+      question:'a) Classify as 1°, 2°, 3°. b) Correct wrong IUPAC names. c) Products: i) 2-butanol + KMnO₄, ii) 2-propanol + conc. H₂SO₄, iii) ethanol + ethanoic acid. d) Stepwise dehydration mechanism of ethanol. (March 2016)',
+      searchText:'classify primary secondary tertiary alcohol 4-butanol 1,1-dimethyl-2-cyclopentanol 7-chloro-4-heptanol KMnO4 H2SO4 esterification ethanol dehydration mechanism',
+      tags:['reaction','mechanism','exam'], examYear:'2016',
+      answerHTML:`
+        <strong>a) Classify:</strong>
+        ${R.grid2([
+          R.lbl('i) 4-Nitrocyclohexanol (O₂N-ring-OH)','<strong>Secondary (2°)</strong> — OH on ring C bonded to 2 other carbons'),
+          R.lbl('ii) 1-Methylcyclopentanol (ring + CH₃ + OH on same C)','<strong>Tertiary (3°)</strong> — OH-bearing C bonded to 3 carbon groups'),
+        ])}
+        <strong>b) Correct IUPAC names:</strong>
+        ${R.table(['Wrong Name','Correct Name','Reason'],[
+          ['4-Butanol','<strong>Butan-2-ol</strong>','4C chain; number from nearest end to OH → C2 (not C4)'],
+          ['1,1-Dimethyl-2-cyclopentanol','<strong>1,2-Dimethylcyclopentan-1-ol</strong>','OH at C1; CH₃ groups at C1 and C2'],
+          ['7-Chloro-4-heptanol','<strong>1-Chloroheptan-4-ol</strong>','Renumber from Cl end to give lower locant to OH'],
+        ])}
+        <strong>c) Products:</strong>
+        ${R.eq(`i) 2-Butanol + KMnO₄/H⁺ → CH₃COCH₂CH₃ (butanone, 2° alcohol → ketone)
+ii) 2-Propanol + conc. H₂SO₄ → CH₃CH=CH₂ + H₂O (propene; dehydration)
+iii) Ethanol + ethanoic acid → CH₃COOC₂H₅ + H₂O (ethyl ethanoate; Fischer esterification)`)}
+        <strong>d) Mechanism for dehydration of ethanol → ethene:</strong>
+        ${R.mech([
+          '<strong>Step 1 — Protonation:</strong> H⁺ (H₂SO₄) protonates O of ethanol → CH₃CH₂OH₂⁺ (oxonium ion; –OH becomes good leaving group)',
+          '<strong>Step 2 — Carbocation:</strong> H₂O departs → CH₃CH₂⁺ (primary carbocation) — or concerted with step 3',
+          '<strong>Step 3 — Deprotonation:</strong> Base (HSO₄⁻) abstracts β-H from CH₃ group → electrons form C=C π bond → CH₂=CH₂ (ethene) + H₂SO₄ (regenerated)',
+        ])}
+      `,
+    },
+    {
+      id:'t1-alc-exam-oct2016', num:'EX6', type:'Exam Question', navLabel:'[Exam Oct 2016] 2-Phenylethanol & Conversions',
+      question:'For 2-phenylethanol (PhCH₂CH₂OH): a) Products with i) HBr, ii) SOCl₂. b) Reactions: i) pentanol → pentanal, ii) 2-methyl-2-butanol → 2-methyl-2-butene. (Oct 2016)',
+      searchText:'2-phenylethanol HBr SOCl2 bromoethylbenzene chloroethylbenzene pentanol pentanal PCC oxidation 2-methyl-2-butanol dehydration',
+      tags:['reaction','synthesis','exam'], examYear:'2016',
+      answerHTML:`
+        ${R.eq(`a-i) C₆H₅CH₂CH₂OH + HBr  →  C₆H₅CH₂CH₂Br + H₂O
+Product: (2-Bromoethyl)benzene — nucleophilic substitution (SN2); Br replaces OH
+
+a-ii) C₆H₅CH₂CH₂OH + SOCl₂  →  C₆H₅CH₂CH₂Cl + SO₂↑ + HCl↑
+Product: (2-Chloroethyl)benzene — SOCl₂ is an excellent reagent for converting –OH to –Cl cleanly
+
+b-i) 1-Pentanol → Pentanal:
+CH₃CH₂CH₂CH₂CH₂OH + PCC/CH₂Cl₂  →  CH₃CH₂CH₂CH₂CHO (pentanal)
+[PCC = selective oxidant for 1° alcohol → aldehyde; prevents over-oxidation to acid]
+
+b-ii) 2-Methyl-2-butanol → 2-Methyl-2-butene:
+(CH₃)₂C(OH)CH₂CH₃ + conc. H₂SO₄/Δ  →  (CH₃)₂C=CHCH₃ + H₂O (major, Zaitsev)
+[Tertiary alcohol readily dehydrated; major product is most substituted alkene]`)}
+      `,
+    },
+  ],
+},
+
+/* ─── SECTION 3: CARBONYL OVERVIEW ─── */
+{
+  id:'cc-t1', title:'Carbonyl Compounds — Overview', shortTitle:'Carbonyl Overview', icon:'⚗️',
+  questions:[
+    {
+      id:'t1-cc-a', num:'CC-A', type:'Identification', navLabel:'[CC-A] Identify 6 Carbonyl Compounds',
+      question:'Identify as carboxylic acid, ketone or aldehyde: CH₃CH₂CHO, cyclohexane–COOH, CH₃–C(=O)–Ph, cyclohexanone, (CH₃)₂CHCOOH, CH₃CH₂–C(=O)–CH₃.',
+      searchText:'identify carbonyl aldehyde ketone carboxylic acid propanal cyclohexanone acetophenone butanone COOH CHO',
+      tags:['identification','aldehyde','ketone','acid'],
+      answerHTML:`
+        ${R.table(['Compound','Name','Class','Key Feature'],[
+          ['CH₃CH₂CHO','Propanal','<span class="qtag tag-aldehyde">Aldehyde</span>','–CHO: C=O with H on carbonyl C'],
+          ['Cyclohexane–COOH','Cyclohexanecarboxylic acid','<span class="qtag tag-acid">Carboxylic acid</span>','–COOH: both C=O and –OH on same C'],
+          ['CH₃–C(=O)–Ph (acetophenone)','Acetophenone','<span class="qtag tag-ketone">Ketone</span>','C=O flanked by two C groups (Ph and CH₃); no H on carbonyl C'],
+          ['Cyclohexanone (ring with C=O)','Cyclohexanone','<span class="qtag tag-ketone">Ketone</span>','Cyclic ketone; C=O within ring'],
+          ['(CH₃)₂CHCOOH','2-Methylpropanoic acid','<span class="qtag tag-acid">Carboxylic acid</span>','–COOH group'],
+          ['CH₃CH₂COCH₃ (butanone)','Butanone (2-Butanone)','<span class="qtag tag-ketone">Ketone</span>','C=O flanked by two C groups; no H'],
+        ])}
+        ${R.note('For complete Tutorial 2 carbonyl questions with SVG diagrams, select <strong>Tutorial 2 → Section 1</strong>.')}
+      `,
+    },
+    {
+      id:'t1-cc-b', num:'CC-B', type:'Nomenclature', navLabel:'[CC-B] Name Carbonyl Compounds (a–d)',
+      question:'Name: a) CH₃CH₂CH₂COOH, b) H₃C–C(=O)–OH, c) 4-methylpentanoic acid structure, d) cyclohexanecarboxylic acid structure.',
+      searchText:'butanoic ethanoic 4-methylpentanoic cyclohexanecarboxylic acid name carbonyl',
+      tags:['naming','acid'],
+      answerHTML:`
+        ${R.grid2([
+          R.lbl('a) CH₃CH₂CH₂COOH','<strong>Butanoic acid</strong> (4C chain ending in COOH)'),
+          R.lbl('b) H₃C–C(=O)–OH','<strong>Ethanoic acid</strong> (acetic acid; 2C)'),
+          R.lbl('c) Branched 4-methylpentanoic acid structure','<strong>4-Methylpentanoic acid</strong> (5C + CH₃ at C4)'),
+          R.lbl('d) Cyclohexane ring + COOH','<strong>Cyclohexanecarboxylic acid</strong>'),
+        ])}
+        ${R.note('For all 14 IUPAC nomenclature questions (a–n) covering acids, ketones, aldehydes, see <strong>Tutorial 2 → Section 1 → [B1] IUPAC Names</strong>.')}
+      `,
+    },
+  ],
+},
+
+  ],
+};
+
+
 /* ════════════════════════════════════════════════════
    TO ADD TUTORIAL 3: Copy the block below and fill in
    ════════════════════════════════════════════════════
